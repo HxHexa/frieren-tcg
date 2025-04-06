@@ -11,19 +11,24 @@ export const sendInfoMessage = async (
   interaction: ChatInputCommandInteraction,
   embed: EmbedBuilder,
   components?: ActionRowBuilder<StringSelectMenuBuilder>[],
-  dm?: boolean,
+  dm?: boolean
 ) => {
   if (interaction.channel?.type === ChannelType.DM || dm) {
     await interaction.reply({
       content: `Sending DM...`,
       flags: MessageFlags.Ephemeral,
     });
+    if (!interaction.user.dmChannel) {
+      return await interaction.editReply({
+        content: `You have DMs disabled`,
+      });
+    }
     return await interaction.user
       .send({ embeds: [embed], components: components })
       .catch(async (error) => {
         console.log(error);
         await interaction.editReply({
-          content: `Failed to send DM. Please check if you have DMs enabled.`,
+          content: `Failed to send DM.`,
         });
       });
   } else {
