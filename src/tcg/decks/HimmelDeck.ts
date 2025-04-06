@@ -350,7 +350,7 @@ const quickBlock = new Card({
   cardAction: function (this: Card, game, characterIndex, messageCache) {
     const character = game.characters[characterIndex];
     messageCache.push(
-      `${character.name} swiftly readied ${character.cosmetic.pronouns.possessive} sword to prepare for the opponenet's attack!`,
+      `${character.name} swiftly readied ${character.cosmetic.pronouns.possessive} sword to prepare for the opponent's attack!`,
       TCGThread.Gameroom,
     );
 
@@ -412,15 +412,15 @@ export const a_extremeSpeed = new Card({
   },
 });
 
-export const a_heavySlash = new Card({
-  title: "Heavy Slash",
+export const a_realHeroSwing = new Card({
+  title: "A Real Hero's Swing",
   description: ([dmg]) => `HP-12. DMG ${dmg}`,
   emoji: CardEmoji.HIMMEL_CARD,
   effects: [20],
   cardAction: function (this: Card, game, characterIndex, messageCache) {
     const character = game.getCharacter(characterIndex);
     messageCache.push(
-      `${character.name} heaved his sword!`,
+      `The Hero ${character.name} heaved his sword!`,
       TCGThread.Gameroom,
     );
 
@@ -441,5 +441,5 @@ export const himmelDeck = [
   { card: quickBlock, count: 1 },
   { card: rally, count: 2 },
   { card: a_extremeSpeed, count: 2 },
-  { card: a_heavySlash, count: 2 },
+  { card: a_realHeroSwing, count: 2 },
 ];
