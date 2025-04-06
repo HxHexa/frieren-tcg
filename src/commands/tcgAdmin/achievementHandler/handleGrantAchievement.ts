@@ -2,11 +2,11 @@ import { ChatInputCommandInteraction } from "discord.js";
 import prismaClient from "@prismaClient";
 
 export default async function handleGrantAchievement(
-  interaction: ChatInputCommandInteraction
+  interaction: ChatInputCommandInteraction,
 ) {
   const discordUserId = interaction.options.getUser("user", true).id;
   const achievementId = parseInt(
-    interaction.options.getString("achievement", true)
+    interaction.options.getString("achievement", true),
   );
 
   await prismaClient.$transaction(async (tx) => {

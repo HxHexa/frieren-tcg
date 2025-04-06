@@ -5,7 +5,7 @@ const logReqsExt = Prisma.defineExtension({
     $allModels: {
       $allOperations({ model, operation, args, query }) {
         console.log(
-          `Model:\n${model}\nOperation:\n${operation}\nArgs:\n${JSON.stringify(args)}`
+          `Model:\n${model}\nOperation:\n${operation}\nArgs:\n${JSON.stringify(args)}`,
         );
         return query(args);
       },

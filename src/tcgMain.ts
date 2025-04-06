@@ -199,7 +199,7 @@ export const tcgMain = async (
 
           let draws: string[] = [];
           // let vpollOptionsList = "";
-          const optionsCount = Object.keys(currUsableCards).length;
+          // const optionsCount = Object.keys(currUsableCards).length;
 
           Object.keys(currUsableCards).forEach((key: string) => {
             const currCard = currUsableCards[key];

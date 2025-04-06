@@ -49,7 +49,7 @@ export type PlayerRankedStats = Prisma.PlayerGetPayload<
 >;
 
 export default async function handlePlayerStats(
-  interaction: ChatInputCommandInteraction
+  interaction: ChatInputCommandInteraction,
 ) {
   const targetPlayer = interaction.options.getUser("user") || interaction.user;
 
@@ -58,7 +58,7 @@ export default async function handlePlayerStats(
   });
 
   const player: PlayerRankedStats | null = await prismaClient.player.findUnique(
-    playerRankedStats(targetPlayer.id)
+    playerRankedStats(targetPlayer.id),
   );
 
   if (!player) {
@@ -80,9 +80,9 @@ export default async function handlePlayerStats(
           map.has(rank.ladderReset.ladder.name)
             ? map
             : map.set(rank.ladderReset.ladder.name, rank),
-        new Map()
+        new Map(),
       )
-      .values()
+      .values(),
   );
 
   // yes, all that typescript earlier was just to move it to another function 😭

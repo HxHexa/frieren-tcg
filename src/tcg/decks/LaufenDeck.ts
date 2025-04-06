@@ -77,7 +77,7 @@ export const hide = new Card({
   description: ([spd, spdBuff, hp]) =>
     `SPD+${spd}. Increases SPD by an additional ${spdBuff} until the end of the turn. Heal ${hp} HP.`,
   emoji: CardEmoji.LAUFEN_CARD,
-  effects: [3, 20, 10],
+  effects: [3, 7, 12],
   cardAction: function (this: Card, game, characterIndex, messageCache) {
     const character = game.getCharacter(characterIndex);
     messageCache.push(

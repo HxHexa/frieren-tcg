@@ -23,8 +23,8 @@ export const command: Command<ChatInputCommandInteraction> = {
         .addUserOption((option) =>
           option
             .setName("user")
-            .setDescription("The user to get ranked stats for")
-        )
+            .setDescription("The user to get ranked stats for"),
+        ),
     ),
 
   async execute(interaction: ChatInputCommandInteraction) {

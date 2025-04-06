@@ -9,6 +9,7 @@ Discord bot for the Frieren TCG
 ## Docker
 
 `docker-compose up --build -d` to rebuild and restart every container
+`docker-compose logs -f app` for the log
 `docker-compose restart app` to quick restart app (but keep the database and prisma studio running)
 `docker-compose down` to take down the container
 `docker-compose exec app npx prisma migrate dev` to create new migrations in dev

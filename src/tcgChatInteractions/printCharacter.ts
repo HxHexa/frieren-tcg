@@ -1,6 +1,6 @@
 import Character from "../tcg/character";
 import { statDetails } from "../tcg/formatting/emojis";
-import percentBar from "../tcg/formatting/percentBar";
+import percentBar, { ProgressBarBuilder } from "../tcg/formatting/percentBar";
 import { StatsEnum } from "../tcg/stats";
 
 export const printCharacter = (
@@ -13,7 +13,12 @@ export const printCharacter = (
   if (character.additionalMetadata.manaSuppressed && obfuscateInformation) {
     hpInfo = "?? / ??";
   } else {
-    hpInfo = `${charStat.HP}/${character.initialStats.stats.HP} ${percentBar(charStat.HP, character.initialStats.stats.HP)}`;
+    const healthbar = new ProgressBarBuilder()
+      .setValue(charStat.HP)
+      .setMaxValue(character.initialStats.stats.HP)
+      .setLength(10)
+      .build();
+    hpInfo = `${charStat.HP}/${character.initialStats.stats.HP} ${healthbar.barString}`;
   }
   const lines = [
     `# ${character.name} (${character.characterUser.username}) [⠀](${character.cosmetic.imageUrl})`,

@@ -1,9 +1,9 @@
 import { Client, CommandInteraction, MessageFlags } from "discord.js";
 import { Command } from "./types/command";
-
+import { Interaction } from "discord.js";
 export const setupInteractions = async (
   client: Client,
-  commands: Record<string, Command<CommandInteraction>>
+  commands: Record<string, Command<CommandInteraction>>,
 ) => {
   // Set up command handling
   client.on("interactionCreate", async (interaction) => {
@@ -11,7 +11,7 @@ export const setupInteractions = async (
       const command = commands[interaction.commandName];
       if (!command) {
         console.error(
-          `Command not found: ${interaction.commandName}\nInteraction: ${interaction}`
+          `Command not found: ${interaction.commandName}\nInteraction: ${interaction}`,
         );
         interaction.reply({
           content: "Command not found.",
@@ -31,7 +31,7 @@ export const setupInteractions = async (
       const command = commands[interaction.commandName];
       if (!command || !command.autocomplete) {
         console.error(
-          `Command not found or autocomplete not defined: ${interaction.commandName}\nInteraction: ${interaction}`
+          `Command not found or autocomplete not defined: ${interaction.commandName}\nInteraction: ${interaction}`,
         );
         return await interaction.respond([]);
       }
@@ -43,15 +43,7 @@ export const setupInteractions = async (
         await interaction.respond([]);
       }
     } else {
-      console.error(
-        `Unhandled interaction type: ${interaction.type}\nInteraction: ${interaction}`
-      );
-      if (interaction.isRepliable()) {
-        return await interaction.reply({
-          content: "Interaction not recognized.",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
+      return;
     }
   });
 };

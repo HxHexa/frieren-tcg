@@ -2,7 +2,7 @@ import prismaClient from "@prismaClient";
 
 export async function getRelativeRank(
   ladderResetId: number,
-  playerRankPoints: number
+  playerRankPoints: number,
 ) {
   const relativeRank = await prismaClient.player.count({
     where: {
@@ -20,7 +20,7 @@ export async function getRelativeRank(
 
 export async function getRelativeCharacterRank(
   playerMasteryPoints: number,
-  characterId: number
+  characterId: number,
 ) {
   const relativeRank = await prismaClient.player.count({
     where: {
@@ -37,25 +37,25 @@ export async function getRelativeCharacterRank(
 }
 
 export async function getTotalPlayers(ladderResetId: number) {
-	return await prismaClient.player.count({
-	  where: {
-		ladderRanks: {
-		  some: {
-			ladderResetId,
-		  },
-		},
-	  },
-	});
-  }
-  
-  export async function getTotalCharacterPlayers(characterId: number) {
-	return await prismaClient.player.count({
-	  where: {
-		characterMasteries: {
-		  some: {
-			characterId,
-		  },
-		},
-	  },
-	});
-  }
+  return await prismaClient.player.count({
+    where: {
+      ladderRanks: {
+        some: {
+          ladderResetId,
+        },
+      },
+    },
+  });
+}
+
+export async function getTotalCharacterPlayers(characterId: number) {
+  return await prismaClient.player.count({
+    where: {
+      characterMasteries: {
+        some: {
+          characterId,
+        },
+      },
+    },
+  });
+}

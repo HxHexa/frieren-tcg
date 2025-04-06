@@ -2,7 +2,7 @@ import { AutocompleteInteraction } from "discord.js";
 import prismaClient from "@prismaClient";
 
 export default async function handleAchievementAutocomplete(
-  interaction: AutocompleteInteraction
+  interaction: AutocompleteInteraction,
 ) {
   const focused = interaction.options.getFocused(true);
 

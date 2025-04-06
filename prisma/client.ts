@@ -7,7 +7,7 @@ import config from "@src/config";
 const prismaClient = new PrismaClient().$extends({
   ...matchExt,
   ...masteryExt,
-  ...(config.logPrismaReqs ? logReqsExt : {})
+  ...(config.logPrismaReqs ? logReqsExt : {}),
 });
 
 // these extensions may or may not be used, they're just examples

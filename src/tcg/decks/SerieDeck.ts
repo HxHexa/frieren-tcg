@@ -191,6 +191,7 @@ export const unbreakableBarrier = new Card({
           name: "Unbreakable Barrier",
           description: `ATK+${atkBuff}. DEF+${defBuff}, Opponent's SPD -${spdDebuff} for 5 turns.`,
           turnDuration: 5,
+          priority: -1,
           endOfTimedEffectAction: (_game, _characterIndex) => {
             messageCache.push("The barrier dissipated.", TCGThread.Gameroom);
             character.adjustStat(-1 * atkBuff, StatsEnum.ATK);
@@ -235,6 +236,7 @@ export const ancientBarrierMagic = new Card({
           name: "Ancient Barrier Magic",
           description: `An ominous barrier envelopes the battlefield...`,
           turnDuration: 7,
+          priority: -1,
           endOfTimedEffectAction: (_game, _characterIndex) => {
             messageCache.push("The barrier dissipated.", TCGThread.Gameroom);
 
