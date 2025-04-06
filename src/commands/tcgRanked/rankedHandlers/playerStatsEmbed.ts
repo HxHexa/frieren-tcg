@@ -7,6 +7,7 @@ import {
   getTotalCharacterPlayers,
 } from "./getRelativeRank";
 import { getRank } from "@src/commands/tcgChallenge/gameHandler/rankScoresToRankTitleMapping";
+import { CHARACTER_LIST } from "@src/tcg/characters/characterList";
 
 export default async function playerStatsEmbed(
   stats: PlayerRankedStats,
@@ -19,11 +20,13 @@ export default async function playerStatsEmbed(
         ladderRank.rankPoints
       );
       const totalPlayers = await getTotalPlayers(ladderRank.ladderReset.id);
+
+      const rankTitle = getRank(ladderRank.rankPoints).rankTitle;
+      const capitalizedRankTitle =
+        rankTitle.charAt(0).toUpperCase() + rankTitle.slice(1);
       return {
-        name: `${ladderRank.ladderReset.ladder.name}: ${
-          getRank(ladderRank.rankPoints).rankTitle
-        }`,
-        value: `Points: ${ladderRank.rankPoints} (#${relativeRank}/${totalPlayers})`,
+        name: `${ladderRank.ladderReset.ladder.name}: ${capitalizedRankTitle}`,
+        value: `Points: ${ladderRank.rankPoints} (#**${relativeRank}**/${totalPlayers})`,
       };
     })
   );
@@ -37,14 +40,18 @@ export default async function playerStatsEmbed(
       const totalCharacterPlayers = await getTotalCharacterPlayers(
         mastery.character.id
       );
-      return `${mastery.character.name} - ${mastery.masteryPoints} (#${relativeCharacterRank}/${totalCharacterPlayers})`;
+	  const characterData = CHARACTER_LIST.find(
+        (c) => c.name === mastery.character.name
+      );
+      const emoji = characterData?.cosmetic.emoji || "";
+      return `${emoji} **${mastery.character.name}** - ${mastery.masteryPoints} (#**${relativeCharacterRank}**/${totalCharacterPlayers})`;
     })
   );
 
   const embed = new EmbedBuilder()
     .setColor("Blurple")
-    .setTitle(`${user.username}'s ranked stats`)
-    .setDescription("Characters:\n" + characterLines.join("\n"))
+    .setTitle(`${user.displayName}'s ranked stats`)
+    .setDescription("Character Masteries:\n" + characterLines.join("\n"))
     .addFields(ladderRankFields);
 
   return embed;
