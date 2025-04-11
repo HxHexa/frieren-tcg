@@ -152,7 +152,7 @@ export const command: Command<ChatInputCommandInteraction> = {
           break;
         default:
           await interaction.deferReply({
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
           });
           await interaction.editReply({
             content: "Invalid subcommand.",
@@ -184,7 +184,7 @@ async function handleMaintenance(interaction: ChatInputCommandInteraction) {
     interaction.channel;
 
   await interaction.deferReply({
-    ephemeral: true,
+    flags: MessageFlags.Ephemeral,
   });
 
   const maintenance = interaction.options.getBoolean("maintenance", true);

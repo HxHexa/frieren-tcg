@@ -1,4 +1,3 @@
-import { LazyPaginatedMessage } from "@sapphire/discord.js-utilities";
 import { CharacterName } from "@src/tcg/characters/metadata/CharacterName";
 import { characterNameToEmoji } from "@src/tcg/formatting/emojis";
 import { EmbedBuilder } from "discord.js";
@@ -50,7 +49,7 @@ export default async function leaderboardEmbed(props: {
     .setColor("Blurple")
     .setTitle(leaderboardTitle)
     .addFields({
-      name: "Top 10 Players",
+      name: "Top Players",
       value: userLines.join("\n"),
     });
 }

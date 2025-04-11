@@ -3,14 +3,10 @@ import {
   ChatInputCommandInteraction,
   MessageFlags,
   InteractionContextType,
-  EmbedBuilder,
 } from "discord.js";
 import type { Command } from "../../types/command";
 import handlePlayerStats from "./rankedHandlers/playerStats";
-import {
-  GAME_SETTINGS,
-  GameMode,
-} from "../tcgChallenge/gameHandler/gameSettings";
+import { GAME_SETTINGS } from "../tcgChallenge/gameHandler/gameSettings";
 import { CHARACTER_LIST } from "@src/tcg/characters/characterList";
 import { handleGlobalStats } from "./rankedHandlers/globalStats";
 import { handleCharacterGlobalStats } from "./rankedHandlers/characterStats";
@@ -38,7 +34,7 @@ export const command: Command<ChatInputCommandInteraction> = {
       subcommand
         .setName("global-leaderboard")
         .setDescription(
-          "Get the global Top 10 leaderboard for a certain gamemode."
+          "Get the global top player leaderboard for a certain gamemode."
         )
         .addStringOption((option) =>
           option
@@ -61,7 +57,7 @@ export const command: Command<ChatInputCommandInteraction> = {
       subcommand
         .setName("character-leaderboard")
         .setDescription(
-          "Get the character Top 10 leaderboard for a certain character."
+          "Get the character leaderboard for a certain character."
         )
         .addStringOption((option) =>
           option
