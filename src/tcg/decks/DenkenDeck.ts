@@ -7,6 +7,7 @@ import { TCGThread } from "../../tcgChatInteractions/sendGameMessage";
 
 const a_jab = new Card({
   title: "Jab",
+  cardMetadata: { nature: "Attack" },
   description: ([hp, def, spd, dmg]) =>
     `HP+${hp}. DEF+${def}. SPD+${spd}. DMG ${dmg}.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -39,6 +40,7 @@ const a_jab = new Card({
 
 const a_hook = new Card({
   title: "Hook",
+  cardMetadata: { nature: "Attack" },
   description: ([hp, atk, dmg]) => `HP+${hp}. ATK+${atk}. DMG ${dmg}.`,
   emoji: CardEmoji.DENKEN_CARD,
   effects: [2, 2, 2],
@@ -66,6 +68,7 @@ const a_hook = new Card({
 
 const a_uppercut = new Card({
   title: "Uppercut",
+  cardMetadata: { nature: "Attack" },
   description: ([hp, atk, spd, dmg]) =>
     `HP+${hp}. ATK+${atk}. SPD+${spd}. DMG ${dmg}.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -99,6 +102,7 @@ const a_uppercut = new Card({
 
 const bareHandedBlock = new Card({
   title: "Bare-handed Block",
+  cardMetadata: { nature: "Attack" },
   description: ([def, tempDef]) =>
     `Priority+2. DEF+${def}. Increases DEF by an additional ${tempDef} until the end of the turn.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -133,6 +137,7 @@ const bareHandedBlock = new Card({
 
 export const a_waldgoseBase = new Card({
   title: "Tornado Winds: Waldgose",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) =>
     `HP-7. DMG ${dmg}. At the next 3 turn ends, deal ${dmg} DMG. Treat this card as "Jab" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -187,6 +192,7 @@ export const a_waldgoseBase = new Card({
 
 const a_waldgose = new Card({
   title: "Tornado Winds: Waldgose",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) =>
     `HP-7. DMG ${dmg}. At the next 3 turn ends, deal ${dmg} DMG. Treat this card as "Jab" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -212,6 +218,7 @@ const a_waldgose = new Card({
 
 export const a_daosdorgBase = new Card({
   title: "Hellfire: Daosdorg",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg, waldgoseDmgBonus]) =>
     `HP-9. DMG ${dmg}. If Waldgose is active, increase its turn end damage by ${waldgoseDmgBonus}. Treat this card as "Hook" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -258,6 +265,7 @@ export const a_daosdorgBase = new Card({
 
 const a_daosdorg = new Card({
   title: "Hellfire: Daosdorg",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg, waldgoseDmgBonus]) =>
     `HP-9. DMG ${dmg}. If Waldgose is active, increase its turn end damage by ${waldgoseDmgBonus}. Treat this card as "Hook" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -283,6 +291,7 @@ const a_daosdorg = new Card({
 
 export const a_catastraviaBase = new Card({
   title: "Lights of Judgment: Catastravia",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) =>
     `HP-15. DMG ${dmg}. At the next 5 turn ends, deal ${dmg} DMG. Treat this card as "Uppercut" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -334,6 +343,7 @@ const a_catastravia = new Card({
   description: ([dmg]) =>
     `HP-15. DMG ${dmg}. At the next 5 turn ends, deal ${dmg} DMG. Treat this card as "Uppercut" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
+  cardMetadata: { nature: "Attack", signature: true },
   effects: [4],
   cardAction: () => {},
   conditionalTreatAsEffect: function (this: Card, game, characterIndex) {
@@ -356,6 +366,7 @@ const a_catastravia = new Card({
 
 const elementaryDefensiveMagicBase = new Card({
   title: "Elementary Defensive Magic",
+  cardMetadata: { nature: "Defense" },
   description: ([def]) =>
     `Priority+2. Increases DEF by ${def} until the end of the turn. Treat this card as "Bare-handed Block" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -385,8 +396,9 @@ const elementaryDefensiveMagicBase = new Card({
   },
 });
 
-const elementaryDefensiveMagic = new Card({
+export const elementaryDefensiveMagic = new Card({
   title: "Elementary Defensive Magic",
+  cardMetadata: { nature: "Defense" },
   description: ([def]) =>
     `Priority+2. Increases DEF by ${def} until the end of the turn. Treat this card as "Bare-handed Block" if the user's HP is <= 0.`,
   emoji: CardEmoji.DENKEN_CARD,
@@ -413,6 +425,7 @@ const elementaryDefensiveMagic = new Card({
 
 export const a_concentratedOffensiveMagicZoltraak = new Card({
   title: "Concentrated Offensive Magic: Zoltraak",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) => `HP-8. DMG ${dmg}.`,
   emoji: CardEmoji.DENKEN_CARD,
   effects: [14],

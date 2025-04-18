@@ -8,6 +8,7 @@ import CommonCardAction from "../../util/commonCardActions";
 
 const madness = new Card({
   title: "Madness",
+  cardMetadata: { nature: "Util" },
   description: ([atk, def]) => `ATK+${atk}. DEF+${def}`,
   emoji: CardEmoji.HOURGLASS,
   effects: [3, 2],
@@ -29,6 +30,7 @@ const madness = new Card({
 
 const earPiercingScream = new Card({
   title: "Ear Piercing Scream",
+  cardMetadata: { nature: "Util" },
   description: ([def]) => `HP-2. Opponent's DEF-${def}.`,
   emoji: CardEmoji.ENERGY,
   effects: [3],
@@ -52,6 +54,7 @@ const earPiercingScream = new Card({
 
 export const solitude = new Card({
   title: "Solitude",
+  cardMetadata: { nature: "Util" },
   description: ([hp]) => `Heal for ${hp}.`,
   emoji: CardEmoji.HEART,
   effects: [12],
@@ -71,6 +74,7 @@ export const solitude = new Card({
 
 export const a_curse = new Card({
   title: "Curse",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) => `HP-11. DMG ${dmg} at turn end for 5 turns.`,
   emoji: CardEmoji.PUNCH,
   effects: [5],
@@ -109,6 +113,7 @@ export const a_curse = new Card({
 
 const guiltTrip = new Card({
   title: "Guilt Trip",
+  cardMetadata: { nature: "Util" },
   description: ([def, spd]) => `Opp's DEF-${def}. Opp's SPD-${spd}`,
   emoji: CardEmoji.HOURGLASS,
   effects: [3, 3],
@@ -131,6 +136,7 @@ const guiltTrip = new Card({
 
 export const a_killingMagic = new Card({
   title: "Killing Magic",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) => `HP-10. DMG ${dmg}`,
   emoji: CardEmoji.PUNCH,
   effects: [15],
@@ -158,6 +164,7 @@ export const a_solitaryPractice = new Card({
     `HP-40. At this turn's resolution, strike for DMG ${dmg}. Afterward, decreases DEF and SPD by 20. `,
   emoji: CardEmoji.ENERGY,
   effects: [30],
+  cardMetadata: { nature: "Attack", signature: true },
   cardAction: function (this: Card, game, characterIndex, messageCache) {
     const character = game.getCharacter(characterIndex);
     messageCache.push(`solitary practice`, TCGThread.Gameroom);

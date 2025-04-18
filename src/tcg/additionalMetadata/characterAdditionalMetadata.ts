@@ -1,10 +1,10 @@
-export interface CharacterAdditionalMetadataProps {
+/* export interface CharacterAdditionalMetadataProps {
   manaSuppressed: boolean;
   attackedThisTurn: boolean;
   timedEffectAttackedThisTurn: boolean;
   teaTimeStacks?: number;
   overheal?: boolean;
-}
+} */
 
 export type CharacterAdditionalMetadata = {
   manaSuppressed: boolean;
@@ -15,4 +15,6 @@ export type CharacterAdditionalMetadata = {
   overheal?: boolean;
   serieToyingNextTurn?: boolean;
   serieToyingTurn?: boolean;
+  pierceFactor?: number;
+  sureHit?: "sureHit" | "sureMiss" | "regular";
 };

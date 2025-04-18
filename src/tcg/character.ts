@@ -15,6 +15,7 @@ import { MessageCache } from "../tcgChatInteractions/messageCache";
 import { TCGThread } from "../tcgChatInteractions/sendGameMessage";
 import { User } from "discord.js";
 import Game from "./game";
+import { CharacterName } from "./characters/metadata/CharacterName";
 
 export interface CharacterProps {
   characterData: CharacterData;
@@ -24,7 +25,7 @@ export interface CharacterProps {
 }
 
 export default class Character {
-  name: string; // change to CharacterName if possible
+  name: CharacterName;
   cosmetic: CharacterCosmetic;
 
   stats: Stats;

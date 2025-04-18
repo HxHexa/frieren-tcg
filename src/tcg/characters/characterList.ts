@@ -9,6 +9,7 @@ import { Laufen } from "./characterData/characters/Laufen";
 import { CharacterData } from "./characterData/characterData";
 import { Denken } from "./characterData/characters/Denken";
 import { Himmel } from "./characterData/characters/Himmel";
+import { Ubel } from "./characterData/characters/Ubel";
 import { CharacterName } from "./metadata/CharacterName";
 
 /* export const CHARACTER_LIST: CharacterData[] = [
@@ -22,6 +23,7 @@ import { CharacterName } from "./metadata/CharacterName";
   Laufen,
   Denken,
   Himmel,
+  Ubel,
 ]; */
 
 export const CHARACTER_MAP: Record<CharacterName, CharacterData> = {
@@ -35,6 +37,7 @@ export const CHARACTER_MAP: Record<CharacterName, CharacterData> = {
   [CharacterName.Laufen]: Laufen,
   [CharacterName.Denken]: Denken,
   [CharacterName.Himmel]: Himmel,
+  [CharacterName.Ubel]: Ubel,
 } as const;
 
 export const CHARACTER_LIST: CharacterData[] = Object.values(CHARACTER_MAP);

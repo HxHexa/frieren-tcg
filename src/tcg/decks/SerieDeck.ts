@@ -11,6 +11,7 @@ import { TCGThread } from "../../tcgChatInteractions/sendGameMessage";
 
 export const a_livingGrimoireOffensive = new Card({
   title: "Living Grimoire: Offense Chapter",
+  cardMetadata: { nature: "Attack" },
   description: () => "Use a random offensive magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
@@ -44,6 +45,7 @@ export const a_livingGrimoireOffensive = new Card({
 
 export const a_livingGrimoireUtility = new Card({
   title: "Living Grimoire: Utility Chapter",
+  cardMetadata: { nature: "Util" },
   description: () => "Use a random utility magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
@@ -93,6 +95,7 @@ const a_livingGrimoireOffensive2 = new Card({
 
 export const mock = new Card({
   title: "Mock",
+  cardMetadata: { nature: "Util" },
   description: ([hp, def, spd]) =>
     `HP+${hp}. Opponent's DEF-${def}. Opponent's SPD-${spd}`,
   emoji: CardEmoji.SERIE_CARD,
@@ -126,6 +129,7 @@ export const mock = new Card({
 
 export const basicDefensiveMagic = new Card({
   title: "Basic Defensive Magic",
+  cardMetadata: { nature: "Defense" },
   description: ([def]) =>
     `Priority+2. Increases DEF by ${def} until the end of the turn.`,
   emoji: CardEmoji.SERIE_CARD,
@@ -160,6 +164,7 @@ export const basicDefensiveMagic = new Card({
 
 export const unbreakableBarrier = new Card({
   title: "Unbreakable Barrier",
+  cardMetadata: { nature: "Util" },
   description: ([atk, def, oppSpd]) =>
     `HP-10. ATK+${atk} for 5 turns. DEF+${def} for 5 turns. Opponent's SPD-${oppSpd} for 5 turns.`,
   emoji: CardEmoji.SERIE_CARD,
@@ -212,6 +217,7 @@ export const ancientBarrierMagic = new Card({
     cardImageUrl:
       "https://cdn.discordapp.com/attachments/1351391350398128159/1352873014080966718/Ancient_Barrier_Magic_1.png?ex=67df98ad&is=67de472d&hm=c0b00575790207a93d00398d3351e5cd914f371b0c2118855f8f2dc259634420&",
   },
+  cardMetadata: { nature: "Util", signature: true },
   effects: [7, 7, 7],
   cardAction: function (this: Card, game, characterIndex, messageCache) {
     const character = game.getCharacter(characterIndex);

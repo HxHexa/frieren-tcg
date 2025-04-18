@@ -7,6 +7,7 @@ import { StatsEnum } from "../../stats";
 export default class DefaultCards {
   static readonly discardCard: Card = new Card({
     title: "Discard",
+    cardMetadata: { nature: "Default" },
     description: () =>
       "Discards all of your current active cards. Draw the same number of cards you discarded. Empower all cards in your hand afterwards.",
     effects: [],
@@ -36,6 +37,7 @@ export default class DefaultCards {
 
   static readonly waitCard: Card = new Card({
     title: "Wait",
+    cardMetadata: { nature: "Default" },
     description: () => "Heals 10 HP.",
     effects: [],
     printEmpower: false,
@@ -53,6 +55,7 @@ export default class DefaultCards {
 
   static readonly forfeitCard: Card = new Card({
     title: "Forfeit",
+    cardMetadata: { nature: "Default" },
     description: () => "Forfeits the game.",
     effects: [],
     printEmpower: false,

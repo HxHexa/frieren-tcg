@@ -10,6 +10,7 @@ import { CharacterName } from "../characters/metadata/CharacterName";
 
 const a_FrierenStrikeTheirWeakpoint = new Card({
   title: "Frieren! Strike Their Weakpoint!",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) =>
     `Frieren attacks for ${dmg} DMG. At next turn's end, Frieren attacks for an additional ${dmg} DMG.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -61,6 +62,7 @@ const a_FrierenStrikeTheirWeakpoint = new Card({
 
 const a_FrierenBackMeUp = new Card({
   title: "Frieren! Back Me Up!",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) =>
     `Frieren attacks for ${dmg} DMG. For the next 3 turn ends, Frieren attacks for an additional ${dmg} DMG.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -111,6 +113,7 @@ const a_FrierenBackMeUp = new Card({
 
 const a_EisenTheEnemysOpen = new Card({
   title: "Eisen! The Enemy's Open!",
+  cardMetadata: { nature: "Util" },
   description: ([def, dmg]) =>
     `Eisen winds up. DEF+${def} for 2 turns. At next turn's end, deal ${dmg} DMG.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -167,6 +170,7 @@ const a_EisenTheEnemysOpen = new Card({
 
 const a_EisenCoverMyBack = new Card({
   title: "Eisen! Cover My Back!",
+  cardMetadata: { nature: "Util" },
   description: ([def, dmg]) =>
     `Eisen provides cover. DEF+${def} for 3 turns. When an opponent attacks, counter for ${dmg} DMG.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -238,6 +242,7 @@ const a_EisenCoverMyBack = new Card({
 
 const eisenHoldTheLine = new Card({
   title: "Eisen! Hold The Line!",
+  cardMetadata: { nature: "Util" },
   description: ([def]) => `Eisen holds the line. DEF+${def} for 5 turns.`,
   emoji: CardEmoji.HIMMEL_CARD,
   effects: [4],
@@ -289,6 +294,7 @@ const eisenHoldTheLine = new Card({
 
 const heiterEmergency = new Card({
   title: "Heiter! Emergency!",
+  cardMetadata: { nature: "Util" },
   description: ([heal]) =>
     `Heiter heals the party for ${heal}HP. At next turn's end, heal an additional ${heal} HP.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -334,6 +340,7 @@ const heiterEmergency = new Card({
 
 const a_heiterThreeSpears = new Card({
   title: "Heiter! Don't give them an opening!",
+  cardMetadata: { nature: "Attack" },
   description: ([heal]) =>
     `Heiter casts Three Spears of the Goddess! At next 3 turn's end, deal ${heal} DMG.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -380,6 +387,7 @@ const a_heiterThreeSpears = new Card({
 
 const heiterTrustYou = new Card({
   title: "I trust you, Heiter.",
+  cardMetadata: { nature: "Util" },
   description: ([atkSpd]) =>
     `Heiter supports the party. ATK+${atkSpd}, SPD+${atkSpd} for 5 turns.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -432,8 +440,9 @@ const heiterTrustYou = new Card({
   },
 });
 
-const quickBlock = new Card({
+export const quickBlock = new Card({
   title: "Quick Block",
+  cardMetadata: { nature: "Defense" },
   description: ([def]) =>
     `Priority+3. Increases DEF by ${def} until the end of the turn.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -464,6 +473,7 @@ const quickBlock = new Card({
 
 const rally = new Card({
   title: "Rally",
+  cardMetadata: { nature: "Util" },
   description: ([hp, stat]) =>
     `HP+${hp}. ATK+${stat}. DEF+${stat}. SPD+${stat}. An additional HP+${hp}, ATK+${stat}, DEF+${stat}, SPD+${stat} for each one of your active allies.`,
   emoji: CardEmoji.HIMMEL_CARD,
@@ -496,6 +506,7 @@ const rally = new Card({
 
 export const a_extremeSpeed = new Card({
   title: "Extreme Speed",
+  cardMetadata: { nature: "Attack" },
   description: ([dmg]) => `Priority+1. HP-8. DMG ${dmg}`,
   emoji: CardEmoji.HIMMEL_CARD,
   priority: 1,
@@ -516,6 +527,7 @@ export const a_realHeroSwing = new Card({
   title: "A Real Hero's Swing",
   description: ([dmg]) => `HP-12. DMG ${dmg}`,
   emoji: CardEmoji.HIMMEL_CARD,
+  cardMetadata: { nature: "Attack", signature: true },
   effects: [20],
   cardAction: function (this: Card, game, characterIndex, messageCache) {
     const character = game.getCharacter(characterIndex);

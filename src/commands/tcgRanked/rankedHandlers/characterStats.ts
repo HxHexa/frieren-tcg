@@ -1,8 +1,4 @@
-import {
-  ComponentType,
-  EmbedBuilder,
-  RepliableInteraction,
-} from "discord.js";
+import { ComponentType, EmbedBuilder, RepliableInteraction } from "discord.js";
 import prismaClient from "@prismaClient";
 import { characterNameToEmoji } from "@src/tcg/formatting/emojis";
 import { CHARACTER_MAP } from "@src/tcg/characters/characterList";
@@ -29,7 +25,7 @@ export async function handleCharacterStats(
     });
     return;
   }
-  
+
   const { charSelectActionRow } = characterSelect({
     customId: charStatSelectMenuCustomId,
     nameValues: true,

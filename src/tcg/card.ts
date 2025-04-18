@@ -9,7 +9,9 @@ export interface CardCosmetic {
 }
 
 type CardMetadata = {
+  nature: Nature;
   seriePool?: "Common" | "Rare" | "Ultra-rare";
+  signature?: boolean;
   analysis?: boolean;
   postAnalysis?: boolean;
   waldgoseDamage?: number;
@@ -17,10 +19,14 @@ type CardMetadata = {
   teaTime?: number;
   resolve?: number;
   signatureMoveOf?: CharacterName;
+  ubelFailureRate?: number;
 };
+
+type Nature = "Attack" | "Defense" | "Default" | "Util";
 
 export type CardProps = {
   title: string;
+  cardMetadata: CardMetadata;
   description: (formattedEffects: string[]) => string;
   effects: number[];
   emoji?: CardEmoji;
@@ -38,8 +44,8 @@ export type CardProps = {
   * @deprecated Use {@link Card.cardMetadata} instead
   */
   tags?: Record<string, number>;
-  cardMetadata?: CardMetadata;
   printEmpower?: boolean;
+  hpCost?: number;
 };
 
 export default class Card implements CardProps {
@@ -62,6 +68,7 @@ export default class Card implements CardProps {
   tags: Record<string, number>;
   cardMetadata: CardMetadata;
   printEmpower: boolean;
+  hpCost: number;
 
   constructor(cardProps: CardProps) {
     this.title = cardProps.title;
@@ -73,10 +80,11 @@ export default class Card implements CardProps {
     this.priority = cardProps.priority ?? 0;
     this.imitated = cardProps.imitated ?? false;
     this.tags = cardProps.tags ?? {};
-    this.cardMetadata = cardProps.cardMetadata ?? {};
+    this.cardMetadata = cardProps.cardMetadata;
     this.emoji = cardProps.emoji ?? CardEmoji.GENERIC;
     this.cosmetic = cardProps.cosmetic;
     this.printEmpower = cardProps.printEmpower ?? true;
+    this.hpCost = cardProps.hpCost ?? 0;
   }
 
   getDescription(): string {
