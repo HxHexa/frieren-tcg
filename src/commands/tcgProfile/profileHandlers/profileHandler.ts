@@ -1,11 +1,11 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import prismaClient from "@prismaClient";
-import { GameMode } from "@src/commands/tcgChallenge/gameHandler/gameSettings";
-import playerStatsEmbed from "./playerStatsEmbed";
 import { Prisma } from "@prisma/client";
+import { GameMode } from "@src/commands/tcgChallenge/gameHandler/gameSettings";
+import profileEmbed from "./profileEmbed";
 
 // validates a query, function is used for code reuse, so the type can be extracted and the discordId can be passed when it is available
-const playerRankedStats = (discordId?: string) => {
+const playerProfile = (discordId?: string) => {
   return Prisma.validator<Prisma.PlayerFindUniqueArgs>()({
     where: {
       discordId: discordId,
@@ -13,6 +13,7 @@ const playerRankedStats = (discordId?: string) => {
     select: {
       id: true,
       discordId: true,
+	  achievements: true,
       characterMasteries: {
         select: {
           character: { select: { id: true, name: true } },
@@ -47,21 +48,21 @@ const playerRankedStats = (discordId?: string) => {
 };
 
 // extract the type of the query
-export type PlayerRankedStats = Prisma.PlayerGetPayload<
-  ReturnType<typeof playerRankedStats>
+export type PlayerProfile = Prisma.PlayerGetPayload<
+  ReturnType<typeof playerProfile>
 >;
 
 export default async function handlePlayerStats(
   interaction: ChatInputCommandInteraction
 ) {
-  const targetPlayer = interaction.options.getUser("user") || interaction.user;
+  const targetPlayer = interaction.options.getUser("user") ?? interaction.user;
 
   interaction.editReply({
     content: `Fetching stats for ${targetPlayer}...`,
   });
 
-  const player: PlayerRankedStats | null = await prismaClient.player.findUnique(
-    playerRankedStats(targetPlayer.id)
+  const player: PlayerProfile | null = await prismaClient.player.findUnique(
+    playerProfile(targetPlayer.id)
   );
 
   if (!player) {
@@ -88,10 +89,10 @@ export default async function handlePlayerStats(
       .values()
   );
 
-  // yes, all that typescript earlier was just to move it to another function 😭
-  const embed = await playerStatsEmbed(player, targetPlayer);
+  const embed = await profileEmbed(player, targetPlayer);
 
   await interaction.editReply({
+	content: "",
     embeds: [embed],
   });
 }

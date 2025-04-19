@@ -84,7 +84,7 @@ export const command: Command<ChatInputCommandInteraction> = {
           option
             .setName("description")
             .setDescription("Description of the achievement")
-            .setRequired(true)
+            .setRequired(false)
         )
     )
 
@@ -137,10 +137,7 @@ export const command: Command<ChatInputCommandInteraction> = {
       switch (subcommand) {
         case "create-achievement": {
           const name = interaction.options.getString("name", true);
-          const description = interaction.options.getString(
-            "description",
-            true
-          );
+          const description = interaction.options.getString("description");
 
           try {
             await interaction.deferReply({

@@ -5,12 +5,11 @@ import {
   InteractionContextType,
 } from "discord.js";
 import type { Command } from "../../types/command";
-import handlePlayerStats from "./rankedHandlers/playerStats";
 import { GAME_SETTINGS } from "../tcgChallenge/gameHandler/gameSettings";
 import { CHARACTER_LIST } from "@src/tcg/characters/characterList";
-import { handleGlobalStats } from "./rankedHandlers/globalStats";
-import { handleCharacterGlobalStats } from "./rankedHandlers/characterLeaderboard";
-import { handleCharacterStats } from "./rankedHandlers/characterStats";
+import { handleGlobalStats } from "./statsHandlers/globalStats";
+import { handleCharacterGlobalStats } from "./statsHandlers/characterLeaderboard";
+import { handleCharacterStats } from "./statsHandlers/characterStats";
 
 const charOptions = Object.entries(CHARACTER_LIST).map(([, character]) => ({
   name: character.name,
@@ -19,23 +18,13 @@ const charOptions = Object.entries(CHARACTER_LIST).map(([, character]) => ({
 
 export const command: Command<ChatInputCommandInteraction> = {
   data: new SlashCommandBuilder()
-    .setName("tcg-ranked")
+    .setName("tcg-stats")
     .setDescription("Get stats for TCG ranked games")
     .setContexts([
       InteractionContextType.Guild,
       InteractionContextType.BotDM,
       InteractionContextType.PrivateChannel,
     ])
-    .addSubcommand((subcommand) =>
-      subcommand
-        .setName("player")
-        .setDescription("Get ranked stats for a player, defaults to yourself")
-        .addUserOption((option) =>
-          option
-            .setName("user")
-            .setDescription("The user to get ranked stats for")
-        )
-    )
     .addSubcommand((subcommand) =>
       subcommand
         .setName("global-leaderboard")
@@ -75,7 +64,7 @@ export const command: Command<ChatInputCommandInteraction> = {
     )
     .addSubcommand((subcommand) =>
       subcommand
-        .setName("character-stats")
+        .setName("character")
         .setDescription("Get match stats for a certain character.")
         .addStringOption((option) =>
           option
@@ -97,10 +86,6 @@ export const command: Command<ChatInputCommandInteraction> = {
 
     try {
       switch (subcommand) {
-        case "player": {
-          await handlePlayerStats(interaction);
-          break;
-        }
         case "global-leaderboard": {
           await handleGlobalStats(interaction);
           break;
@@ -109,7 +94,7 @@ export const command: Command<ChatInputCommandInteraction> = {
           await handleCharacterGlobalStats(interaction);
           break;
         }
-        case "character-stats": {
+        case "character": {
           const character = interaction.options.getString("character");
           await handleCharacterStats(interaction, character);
           break;

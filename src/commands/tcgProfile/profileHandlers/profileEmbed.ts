@@ -1,5 +1,5 @@
 import { EmbedBuilder, User } from "discord.js";
-import { PlayerRankedStats } from "./playerStats";
+import { PlayerProfile } from "./profileHandler";
 import {
   getRelativeRank,
   getRelativeCharacterRank,
@@ -11,16 +11,32 @@ import { CHARACTER_LIST } from "@src/tcg/characters/characterList";
 import { capitalizeFirstLetter } from "@src/util/utils";
 import prismaClient from "@prismaClient";
 
-export default async function playerStatsEmbed(
-  stats: PlayerRankedStats,
-  user: User
-) {
+export default async function profileEmbed(profile: PlayerProfile, user: User) {
+  const achievementMap = profile.achievements.map((achievement) => {
+    const { name, description } = achievement;
+    let achText = `${name}\n`;
+    if (description) {
+      achText += `${description}\n`;
+    }
+    return achText;
+  });
+
+  const achievementSection =
+    achievementMap.length > 0
+      ? achievementMap.join("\n")
+      : "This player has no achievements";
+
+  const achievementField = {
+    name: "Achievements",
+    value: achievementSection,
+  };
+
   const ladderRankFields = await Promise.all(
-    stats.ladderRanks.map(async (ladderRank) => {
+    profile.ladderRanks.map(async (ladderRank) => {
       const [relativeRank, totalPlayers, matchCounts] = await Promise.all([
         getRelativeRank(ladderRank.ladderReset.id, ladderRank.rankPoints),
         getTotalPlayers(ladderRank.ladderReset.id),
-        countPlayerMatches(stats.id, ladderRank.ladderReset.id),
+        countPlayerMatches(profile.id, ladderRank.ladderReset.id),
       ]);
 
       const ladderName = ladderRank.ladderReset.ladder.name;
@@ -36,7 +52,7 @@ export default async function playerStatsEmbed(
     })
   );
 
-  const sortedMasteries = stats.characterMasteries.sort(
+  const sortedMasteries = profile.characterMasteries.sort(
     (a, b) => b.masteryPoints - a.masteryPoints
   );
 
@@ -56,14 +72,28 @@ export default async function playerStatsEmbed(
     })
   );
 
+  const ladderFields =
+    ladderRankFields.length > 0
+      ? ladderRankFields
+      : [
+          {
+            name: "Ranked Stats",
+            value: "This player hasn't played any ranked games yet",
+          },
+        ];
+
+  const masteryField = {
+    name: "Character Masteries",
+    value:
+      characterLines.length > 0
+        ? characterLines.join("\n")
+        : "This player has no character masteries",
+  };
+
   const embed = new EmbedBuilder()
     .setColor("Blurple")
-    .setTitle(`${user.displayName}'s ranked stats`)
-    .addFields(ladderRankFields)
-    .addFields({
-      name: "Character Masteries:",
-      value: characterLines.join("\n"),
-    });
+    .setTitle(`${user.displayName}'s profile`)
+    .addFields([...ladderFields, masteryField, achievementField]);
 
   return embed;
 }
