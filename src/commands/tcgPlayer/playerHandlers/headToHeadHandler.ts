@@ -112,7 +112,7 @@ export async function handleHeadToHead(
       .join("\n\n");
 
     const embed = new EmbedBuilder()
-      .setTitle(`${player.displayName}'s Head to Head Records`)
+      .setTitle(`Head to Head Record against ${player.displayName}`)
       .setDescription(
         `**Overall Record:** ${wins} wins - ${losses} losses (${winRate.toFixed(
           2
