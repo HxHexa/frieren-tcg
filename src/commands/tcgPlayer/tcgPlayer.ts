@@ -7,6 +7,7 @@ import {
 import type { Command } from "@src/types/command";
 import handlePlayerProfile from "./playerHandlers/profileHandler";
 import handleMatchHistory from "./playerHandlers/matchHandler";
+import { handleHeadToHead } from "./playerHandlers/headToHeadHandler";
 
 export const command: Command<ChatInputCommandInteraction> = {
   data: new SlashCommandBuilder()
@@ -42,6 +43,18 @@ export const command: Command<ChatInputCommandInteraction> = {
               "The player to get the match history of, defaults to yourself"
             )
         )
+    )
+
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("head-to-head")
+        .setDescription("Get a player's head to head record")
+        .addUserOption((option) =>
+          option
+            .setName("player")
+            .setDescription("The player to get the head to head record of")
+            .setRequired(true)
+        )
     ),
 
   async execute(interaction: ChatInputCommandInteraction) {
@@ -62,6 +75,11 @@ export const command: Command<ChatInputCommandInteraction> = {
         case "match-history":
           {
             await handleMatchHistory(interaction);
+          }
+          break;
+        case "head-to-head":
+          {
+            await handleHeadToHead(interaction);
           }
           break;
       }
