@@ -8,10 +8,9 @@ import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 
 const a_axeSwipe = new Card({
   title: "Axe Swipe",
-  cardMetadata: { nature: Nature.Attack },
+  cardMetadata: { nature: Nature.Attack, resolve: 0 },
   description: ([dmg]) => `DMG ${dmg}. Uses 0 Resolve.`,
   emoji: CardEmoji.STARK_CARD,
-  tags: { Resolve: 0 },
   effects: [9],
   hpCost: 5,
   cosmetic: {
@@ -36,12 +35,11 @@ const a_axeSwipe = new Card({
 
 const offensiveStance = new Card({
   title: "Offensive Stance",
-  cardMetadata: { nature: Nature.Util },
+  cardMetadata: { nature: Nature.Util, resolve: 1 },
   description: ([atk, spd]) =>
     `ATK+${atk}. DEF-2 for 2 turns. SPD+${spd}. Gain 1 <Resolve>.`,
   emoji: CardEmoji.STARK_CARD,
   effects: [2, 1],
-  tags: { Resolve: 1 },
   cosmetic: {
     cardGif:
       "https://cdn.discordapp.com/attachments/1360969158623232300/1361122664416018593/IMG_3106.gif?ex=680827c3&is=6806d643&hm=d6fdc758cc5b780bad809f674a6d3bf88f19ff038136bd96dca94e7c09ce18ed&",
@@ -83,12 +81,11 @@ const offensiveStance = new Card({
 
 const defensiveStance = new Card({
   title: "Defensive Stance",
-  cardMetadata: { nature: Nature.Util },
+  cardMetadata: { nature: Nature.Util, resolve: 1 },
   description: ([def, spd]) =>
     `DEF+${def}. ATK-2 for 2 turns. SPD+${spd}. Gain 1 <Resolve>.`,
   emoji: CardEmoji.STARK_CARD,
   effects: [2, 1],
-  tags: { Resolve: 1 },
   cardAction: function (
     this: Card,
     { game, selfIndex: characterIndex, messageCache }
@@ -216,11 +213,10 @@ export const block = new Card({
 
 const concentration = new Card({
   title: "Concentration",
-  cardMetadata: { nature: Nature.Util },
+  cardMetadata: { nature: Nature.Util, resolve: 2 },
   description: ([spd]) => `Increases SPD by ${spd}. Gain 2 <Resolve>.`,
   emoji: CardEmoji.STARK_CARD,
   effects: [3],
-  tags: { Resolve: 2 },
   cosmetic: {
     cardGif:
       "https://cdn.discordapp.com/attachments/1360969158623232300/1360979639362781304/IMG_3087.gif?ex=68084b4f&is=6806f9cf&hm=98d20b75a63aca3116965b33fac4adac213feaefa4895cf0751976527dd483a0&",
@@ -242,10 +238,9 @@ const concentration = new Card({
 
 const a_ordensSlashTechnique = new Card({
   title: "Orden's Slash Technique",
-  cardMetadata: { nature: Nature.Attack },
+  cardMetadata: { nature: Nature.Attack, resolve: -1 },
   description: ([dmg]) => `DMG ${dmg}. Uses 1 Resolve.`,
   emoji: CardEmoji.STARK_CARD,
-  tags: { Resolve: -1 },
   effects: [14],
   hpCost: 8,
   cosmetic: {
@@ -272,12 +267,11 @@ const a_ordensSlashTechnique = new Card({
 
 const fearBroughtMeThisFar = new Card({
   title: "Fear Brought Me This Far",
-  cardMetadata: { nature: Nature.Util },
+  cardMetadata: { nature: Nature.Util, resolve: 2 },
   description: ([atkDef, atkDefAdditional]) =>
     `Increases ATK and DEF by ${atkDef}. Increases ATK and DEF by an additional ${atkDefAdditional} if HP <=60. Gain 2 <Resolve>.`,
   emoji: CardEmoji.STARK_CARD,
   effects: [2, 1],
-  tags: { Resolve: 2 },
   cosmetic: {
     cardGif:
       "https://cdn.discordapp.com/attachments/1360969158623232300/1360983005946183957/IMG_3091.gif?ex=68084e72&is=6806fcf2&hm=5e9453189ccb1c31a4def06862e8dc7d2468c471eff0f8faa63d6288c8127c6c&",
@@ -308,10 +302,9 @@ const fearBroughtMeThisFar = new Card({
 
 const a_eisensAxeCleave = new Card({
   title: "Eisen's Axe Cleave",
-  cardMetadata: { nature: Nature.Attack },
+  cardMetadata: { nature: Nature.Attack, resolve: -2 },
   description: ([dmg]) => `DMG ${dmg}. Uses up 2 Resolve stack.`,
   emoji: CardEmoji.STARK_CARD,
-  tags: { Resolve: -2 },
   effects: [19],
   hpCost: 11,
   cosmetic: {
@@ -348,8 +341,7 @@ export const a_lightningStrike = new Card({
   description: ([dmg]) =>
     `DEF-5 and SPD-5 for 2 turns. At this turn's end, strike for ${dmg} DMG. Uses up 2 Resolve stack. Stark's HP cannot drop below 1 until the end of the turn after this move is used.`,
   emoji: CardEmoji.STARK_CARD,
-  cardMetadata: { nature: Nature.Attack, signature: true },
-  tags: { Resolve: -2 },
+  cardMetadata: { nature: Nature.Attack, signature: true, resolve: -2 },
   effects: [20],
   hpCost: 14,
   cosmetic: {

@@ -39,12 +39,12 @@ export default class CommonCardAction {
   static replaceOrAddNewTimedEffect(
     game: Game,
     characterIndex: number,
-    tag: string,
+    metadata: keyof TimedEffect["metadata"],
     newTimedEffect: TimedEffect
   ) {
     const character = game.getCharacter(characterIndex);
     const timedEffectIndex = character.timedEffects.findIndex(
-      (timedEffect) => tag in timedEffect.tags
+      (timedEffect) => metadata in timedEffect.metadata
     );
     if (timedEffectIndex !== -1) {
       const previousTimedEffect = character.timedEffects.splice(

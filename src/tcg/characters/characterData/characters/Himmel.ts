@@ -4,12 +4,9 @@ import himmelDeck from "@decks/HimmelDeck";
 import { CharacterName } from "../../metadata/CharacterName";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const HIMMEL_HERO_PARTY_DAMAGE_BONUS = 0.15;
-
-const imageUrl: Record<string, string> = {
-  icon: "https://static.wikia.nocookie.net/frieren/images/9/96/Himmel_anime_portrait.png/revision/latest?cb=20231017083515",
-};
 
 const himmelStats = new Stats({
   [StatsEnum.HP]: 100.0,
@@ -25,7 +22,7 @@ const Himmel = new CharacterData({
     pronouns: Pronouns.Masculine,
     emoji: CharacterEmoji.HIMMEL,
     color: 0xb4c9e7,
-    imageUrl: imageUrl.icon,
+    imageUrl: mediaLinks.himmelPortrait,
   },
   stats: himmelStats,
   cards: himmelDeck,

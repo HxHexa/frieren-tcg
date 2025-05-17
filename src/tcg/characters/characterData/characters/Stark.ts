@@ -4,6 +4,7 @@ import starkDeck from "@decks/StarkDeck";
 import { CharacterName } from "../../metadata/CharacterName";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@src/tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const starkStats = new Stats({
   [StatsEnum.HP]: 120.0,
@@ -19,8 +20,7 @@ const Stark = new CharacterData({
     pronouns: Pronouns.Masculine,
     emoji: CharacterEmoji.STARK,
     color: 0xb30c0c,
-    imageUrl:
-      "https://cdn.discordapp.com/attachments/1346555621952192522/1346693056841388042/Stark_anime_portrait.webp?ex=67dce3a5&is=67db9225&hm=3098cd00290ea8e0d5fe1ce948f16bc4d93890d85ac5bd3e2d27e4397809af3a&",
+    imageUrl: mediaLinks.starkPortrait,
   },
   stats: starkStats,
   cards: starkDeck,
@@ -36,8 +36,8 @@ const Stark = new CharacterData({
       card
     ) {
       const character = game.getCharacter(characterIndex);
-      if ("Resolve" in card.tags) {
-        character.adjustStat(card.tags["Resolve"], StatsEnum.Ability);
+      if (card.cardMetadata.resolve) {
+        character.adjustStat(card.cardMetadata.resolve, StatsEnum.Ability);
       }
     },
     abilityAttackEffect: function (game, characterIndex) {

@@ -6,6 +6,7 @@ import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const LINIE_CHAIN_BONUS = 0.07;
 
@@ -23,8 +24,7 @@ const Linie = new CharacterData({
     pronouns: Pronouns.Feminine,
     emoji: CharacterEmoji.LINIE,
     color: 0xf7c1b1,
-    imageUrl:
-      "https://cdn.discordapp.com/attachments/1346555621952192522/1347897148330606643/Linie_anime_portrait.webp?ex=67dca7ca&is=67db564a&hm=5cf66096e541bb9495c1e5749765f31c013a3644e20e04f7fd0ce9e87dcb8b03&",
+    imageUrl: mediaLinks.liniePortrait,
   },
   stats: linieStats,
   cards: linieDeck,

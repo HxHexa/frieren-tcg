@@ -8,7 +8,6 @@ export interface TimedEffectProps {
   activateEndOfTurnActionThisTurn?: boolean;
   executeEndOfTimedEffectActionOnRemoval?: boolean;
   priority?: number;
-  tags?: Record<string, number>;
   metadata?: TimedEffectMetadata;
   // TODO: change to a GameContext arg
   endOfTurnAction?: (
@@ -34,7 +33,11 @@ type TimedEffectMetadata = {
   removableBySorganeil?: boolean;
   waldgoseDamage?: number;
   barrage?: number;
-  partyMember?: "Frieren" | "Eisen" | "Heiter";
+
+  frieren?: boolean;
+  eisen?: boolean;
+  heiter?: boolean;
+
   ubelSpeedModifiers?: number;
 };
 
@@ -50,10 +53,6 @@ export default class TimedEffect {
   activateEndOfTurnActionThisTurn: boolean;
   executeEndOfTimedEffectActionOnRemoval: boolean;
   metadata: TimedEffectMetadata;
-  /**
-   * @deprecated use {@link TimedEffect.metadata} instead
-   */
-  tags: Record<string, number>;
   // TODO: change to a GameContext arg
   endOfTurnAction?: (
     game: Game,
@@ -86,7 +85,6 @@ export default class TimedEffect {
       ...defaultMetadata,
       ...props.metadata,
     };
-    this.tags = props.tags ?? {};
     this.endOfTurnAction = props.endOfTurnAction;
     this.endOfTimedEffectAction = props.endOfTimedEffectAction;
     this.replacedAction = props.replacedAction;

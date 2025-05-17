@@ -6,6 +6,7 @@ import { CharacterEmoji } from "@tcg/formatting/emojis";
 import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 // import config from "@src/config";
 
 // config module not found for some reason
@@ -28,8 +29,7 @@ const Sense = new CharacterData({
     pronouns: Pronouns.Feminine,
     emoji: CharacterEmoji.SENSE,
     color: 0xb6a493,
-    imageUrl:
-      "https://cdn.discordapp.com/attachments/1346555621952192522/1347401422655983676/Sense_anime_portrait.webp?ex=67dcd45c&is=67db82dc&hm=ce49cf1681d25f349fa302868b4a0839e178f7c6f9153e694637e6162110fb2d&",
+    imageUrl: mediaLinks.sensePortrait,
   },
   stats: senseStats,
   cards: senseDeck,
@@ -51,10 +51,11 @@ const Sense = new CharacterData({
     ) {
       const character = game.getCharacter(characterIndex);
       const opponent = game.getCharacter(1 - characterIndex);
-      if ("TeaTime" in card.tags) {
+      if (card.cardMetadata.teaTime) {
         character.additionalMetadata.senseTeaTimeStacks ??= 0;
 
-        character.additionalMetadata.senseTeaTimeStacks += card.tags["TeaTime"];
+        character.additionalMetadata.senseTeaTimeStacks +=
+          card.cardMetadata.teaTime;
         if (
           character.additionalMetadata.senseTeaTimeStacks >=
           TEA_TIME_STACK_TURN_SKIP

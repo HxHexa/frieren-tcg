@@ -5,6 +5,7 @@ import { CharacterEmoji } from "@tcg//formatting/emojis";
 import denkenDeck from "@decks/DenkenDeck";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const DENKEN_PRESERVERANCE_COUNT = 3;
 export const DENKEN_DEATH_HP = -50;
@@ -23,8 +24,7 @@ const Denken = new CharacterData({
     pronouns: Pronouns.Masculine,
     emoji: CharacterEmoji.DENKEN,
     color: 0x82574f,
-    imageUrl:
-      "https://static.wikia.nocookie.net/frieren/images/5/5c/Denken_anime_portrait.png/revision/latest?cb=20240112114340",
+    imageUrl: mediaLinks.denkenPortrait,
   },
   stats: denkenStats,
   cards: denkenDeck,

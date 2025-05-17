@@ -180,24 +180,18 @@ export const a_waldgoseBase = new Card({
       });
 
       const multiDamage = this.calculateEffectValue(this.effects[1]);
+      const damage = this.cardMetadata?.waldgoseDamage ?? multiDamage;
+
       character.timedEffects.push(
         new TimedEffect({
           name: "Tornado Winds: Waldgose",
-          description: `Deal ${this.tags?.WaldgoseDamage ?? multiDamage} at each turn's end.`,
+          description: `Deal ${damage} at each turn's end.`,
           turnDuration: 3,
-          tags: { WaldgoseDamage: multiDamage },
           endOfTurnAction: function (this, game, characterIndex) {
             messageCache.push("The wind rages on!", TCGThread.Gameroom);
 
-            let waldgoseDmg: number;
-            if (this.tags?.WaldgoseDamage) {
-              waldgoseDmg = this.tags.WaldgoseDamage;
-            } else {
-              waldgoseDmg = multiDamage;
-            }
-
             CommonCardAction.commonAttack(game, characterIndex, {
-              damage: waldgoseDmg,
+              damage: damage,
               hpCost: 0,
               isTimedEffectAttack: true,
             });
@@ -268,8 +262,8 @@ export const a_daosdorgBase = new Card({
       let hasWaldgose: boolean = false;
 
       for (const timedEffect of character.timedEffects) {
-        if ("WaldgoseDamage" in timedEffect.tags) {
-          timedEffect.tags.WaldgoseDamage += this.calculateEffectValue(
+        if (timedEffect.metadata.waldgoseDamage) {
+          timedEffect.metadata.waldgoseDamage += this.calculateEffectValue(
             this.effects[1]
           );
           hasWaldgose = true;

@@ -7,6 +7,7 @@ import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const STILLE_REFLECT_SCALE = 0.75;
 
@@ -24,8 +25,7 @@ const Stille = new CharacterData({
     pronouns: Pronouns.Impersonal,
     emoji: CharacterEmoji.STILLE,
     color: 0xe74c3c,
-    imageUrl:
-      "https://cdn.discordapp.com/attachments/1346555621952192522/1347746124936646756/Stille_EP18.webp?ex=67dcc3e4&is=67db7264&hm=2b4045f648e23094cc5011390d138a4e350471c86533dc7ec07a1d4b34c684f2&",
+    imageUrl: mediaLinks.stillePortrait,
   },
   stats: stilleStats,
   cards: stilleDeck,

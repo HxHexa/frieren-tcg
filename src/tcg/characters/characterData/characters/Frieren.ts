@@ -14,11 +14,6 @@ import mediaLinks from "@src/tcg/formatting/mediaLinks";
 const ANALYSIS_BOOST = 0.05;
 const ANALYSIS_STACK_CAP = 20;
 
-const imageUrl: Record<string, string> = {
-  icon: mediaLinks.frierenPortrait,
-  vangerisuCardVer: mediaLinks.frierenVangerisuCard,
-};
-
 const frierenStats = new Stats({
   [StatsEnum.HP]: 100.0,
   [StatsEnum.ATK]: 12.0,
@@ -42,7 +37,7 @@ const Frieren = new CharacterData({
     pronouns: Pronouns.Feminine,
     emoji: CharacterEmoji.FRIEREN,
     color: 0xc5c3cc,
-    imageUrl: imageUrl.vangerisuCardVer,
+    imageUrl: mediaLinks.frierenVangerisuCard,
   },
   stats: frierenStats,
   cards: frierenDeck,
@@ -70,18 +65,19 @@ const Frieren = new CharacterData({
       card: Card
     ) {
       const character = game.getCharacter(characterIndex);
-      if ("Analysis" in card.tags) {
-        character.adjustStat(card.tags["Analysis"], StatsEnum.Ability);
+      if (card.cardMetadata.analysis) {
+        character.adjustStat(card.cardMetadata.analysis, StatsEnum.Ability);
         if (character.stats.stats.Ability > ANALYSIS_STACK_CAP) {
           character.setStat(ANALYSIS_STACK_CAP, StatsEnum.Ability);
         }
       }
 
-      if ("PostAnalysis" in card.tags) {
+      const postAnalysis = card.cardMetadata.postAnalysis;
+      if (postAnalysis) {
         character.timedEffects.push(
           new TimedEffect({
             name: "Post Analysis",
-            description: `At this turn's resolution, gain ${card.tags["PostAnalysis"]} Analysis stack.`,
+            description: `At this turn's resolution, gain ${postAnalysis} Analysis stack.`,
             turnDuration: 1,
             metadata: { removableBySorganeil: false },
             endOfTimedEffectAction: (_game, _characterIndex, messageCache) => {
@@ -90,7 +86,7 @@ const Frieren = new CharacterData({
                 TCGThread.Gameroom
               );
               character.adjustStat(
-                card.tags["PostAnalysis"],
+                postAnalysis,
                 StatsEnum.Ability
               );
             },

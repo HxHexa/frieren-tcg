@@ -8,6 +8,7 @@ import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Game from "@tcg/game";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const laufenStats = new Stats({
   [StatsEnum.HP]: 90.0,
@@ -23,8 +24,7 @@ const Laufen = new CharacterData({
     pronouns: Pronouns.Feminine,
     emoji: CharacterEmoji.LAUFEN,
     color: 0xcf7457,
-    imageUrl:
-      "https://cdn.discordapp.com/attachments/1346555621952192522/1346694607467184179/Laufen_anime_portrait.webp?ex=67dce516&is=67db9396&hm=c8439cdb36a948bfa707b18d46177518aac79300021391b77791d2ba30985947&",
+    imageUrl: mediaLinks.laufenPortrait
   },
   stats: laufenStats,
   cards: laufenDeck,

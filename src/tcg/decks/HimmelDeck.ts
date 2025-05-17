@@ -45,12 +45,12 @@ const a_FrierenStrikeTheirWeakpoint = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Frieren",
+      "frieren",
       new TimedEffect({
-        name: `${isHimmel ? "Frieren: " : "Mage: "}Weakpoint Analysis`,
+        name: `${isHimmel ? "Frieren" : "Mage"}: Weakpoint Analysis`,
         description: `Deal ${damage} at each turn's end.`,
         turnDuration: 2,
-        tags: { Frieren: 1 },
+        metadata: { frieren: true },
         activateEndOfTurnActionThisTurn: false,
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTurnAction: function (this, game, characterIndex) {
@@ -108,12 +108,12 @@ const a_FrierenBackMeUp = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Frieren",
+      "frieren",
       new TimedEffect({
         name: `${isHimmel ? "Frieren: " : "Mage: "}Backing Fire`,
         description: `Deal ${damage} at each turn's end.`,
         turnDuration: 3,
-        tags: { Frieren: 1 },
+        metadata: { frieren: true },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTurnAction: function (this, game, characterIndex) {
           const otherCharacter = game.characters[characterIndex];
@@ -170,12 +170,12 @@ export const a_FrierenNow = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Frieren",
+      "frieren",
       new TimedEffect({
         name: `${isHimmel ? "Frieren: " : "Mage: "}Strike`,
         description: `Deal ${damage}.`,
         turnDuration: 1,
-        tags: { Frieren: 1 },
+        metadata: { frieren: true },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: function (this, game, characterIndex) {
           const otherCharacter = game.characters[characterIndex];
@@ -232,12 +232,12 @@ const a_EisenTheEnemysOpen = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Eisen",
+      "eisen",
       new TimedEffect({
         name: `${isHimmel ? "Eisen: " : "Warrior: "}Winding Up`,
         description: `DEF+${def}. Deal ${damage} at end of timed effect.`,
         turnDuration: 2,
-        tags: { Eisen: 1 },
+        metadata: { eisen: true },
         activateEndOfTurnActionThisTurn: false,
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTurnAction: function (this, game, characterIndex) {
@@ -327,13 +327,13 @@ const a_EisenCoverMyBack = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Eisen",
+      "eisen",
       new TimedEffect({
         name: `${isHimmel ? "Eisen: " : "Warrior: "}On the Lookout`,
         description: `DEF+${def}. When an opponent attacks, counter for ${counterDmg} DMG`,
         turnDuration: 3,
         priority: -99,
-        tags: { Eisen: 1 },
+        metadata: { eisen: true },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTurnAction: function (this, _game, _characterIndex) {
           // priority -99 means it would always go after everything else, to make a pseudo-start-of-turn effect
@@ -388,12 +388,12 @@ const eisenHoldTheLine = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Eisen",
+      "eisen",
       new TimedEffect({
         name: `${isHimmel ? "Eisen: " : "Warrior: "}Hold the Line`,
         description: `DEF+${def}.`,
         turnDuration: 4,
-        tags: { Eisen: 1 },
+        metadata: { eisen: true },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: endOfTimedEffectAction,
         replacedAction: endOfTimedEffectAction,
@@ -432,12 +432,12 @@ const heiterEmergency = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Heiter",
+      "heiter",
       new TimedEffect({
         name: `${isHimmel ? "Heiter" : "Priest"}: First-Aid`,
         description: `Heal ${heal} at end of timed effect.`,
         turnDuration: 2,
-        tags: { Heiter: 1 },
+        metadata: { heiter: true },
         executeEndOfTimedEffectActionOnRemoval: false,
         endOfTimedEffectAction: function (this, game, characterIndex) {
           const otherCharacter = game.characters[characterIndex];
@@ -480,12 +480,12 @@ const a_heiterThreeSpears = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Heiter",
+      "heiter",
       new TimedEffect({
         name: `${isHimmel ? "Heiter" : "Priest"}: Three Spears of the Goddess`,
         description: `Deal ${damage} at each turn's end.`,
         turnDuration: 3,
-        tags: { Heiter: 1 },
+        metadata: { heiter: true },
         executeEndOfTimedEffectActionOnRemoval: false,
         endOfTurnAction: (game, characterIndex) => {
           messageCache.push(
@@ -534,12 +534,12 @@ const heiterTrustYou = new Card({
     CommonCardAction.replaceOrAddNewTimedEffect(
       game,
       characterIndex,
-      "Heiter",
+      "heiter",
       new TimedEffect({
         name: `${isHimmel ? "Heiter" : "Priest"}: Awakening`,
         description: `ATK+${atkSpd}. SPD+${atkSpd}.`,
         turnDuration: 4,
-        tags: { Heiter: 1 },
+        metadata: { heiter: true },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: function (this, _game, _characterIndex) {
           messageCache.push(

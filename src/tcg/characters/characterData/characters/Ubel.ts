@@ -12,6 +12,7 @@ import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import { GameMessageContext } from "@tcg/gameContextProvider";
 import Pronouns from "@tcg/pronoun";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 const PIERCE_FACTOR = 1.0;
 
@@ -122,8 +123,7 @@ const Ubel = new CharacterData({
     pronouns: Pronouns.Feminine,
     emoji: CharacterEmoji.UBEL,
     color: 0x3c5502,
-    imageUrl:
-      "https://images-ext-1.discordapp.net/external/T8sKlCzZxYVznbr_nMT7c2GR556S5JQs-2NGeGiSm9Q/%3Fcb%3D20240112114604/https/static.wikia.nocookie.net/frieren/images/4/43/%25C3%259Cbel_anime_portrait.png/revision/latest?format=webp&width=375&height=375",
+    imageUrl: mediaLinks.ubelPortrait,
   },
   stats: ubelStats,
   cards: ubelDeck,

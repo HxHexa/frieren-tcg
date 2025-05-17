@@ -134,7 +134,7 @@ export const rushdown = new Card({
         name: "Rushdown",
         description: `Increases SPD by ${spdIncrease} for ${turnCount} turns. Attacks will not miss`,
         turnDuration: turnCount,
-        tags: { ubelSpeedModifiers: 1 },
+        metadata: { ubelSpeedModifiers: 1 },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTurnAction: (_game, _characterIndex, _messageCache) => {
           messageCache.push(
@@ -191,7 +191,7 @@ const slowdown = new Card({
         name: "Recompose",
         description: `Decreases SPD by 10 for ${turnCount} turns. Attacks will not hit. Heal ${endOfTurnHpIncrease} at turn end.`,
         turnDuration: turnCount,
-        tags: { ubelSpeedModifiers: 1 },
+        metadata: { ubelSpeedModifiers: 1 },
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTurnAction: (_game, _characterIndex, _messageCache) => {
           messageCache.push(

@@ -7,7 +7,7 @@ import mediaLinks from "@tcg/formatting/mediaLinks";
 
 export const a_zoltraak = new Card({
   title: "Offensive Magic Analysis: Zoltraak",
-  cardMetadata: { nature: Nature.Attack },
+  cardMetadata: { nature: Nature.Attack, postAnalysis: 1 },
   description: ([dmg]) =>
     `DMG ${dmg}. 1 Analysis stacks will be gained after attack.`,
   emoji: CardEmoji.FRIEREN_CARD,
@@ -15,8 +15,6 @@ export const a_zoltraak = new Card({
     cardImageUrl: mediaLinks.zoltraak_image,
     cardGif: mediaLinks.zoltraak_gif,
   },
-  hpCost: 5,
-  tags: { PostAnalysis: 1 },
   effects: [8],
   cardAction: function (this: Card, { sendToGameroom, name, basicAttack }) {
     sendToGameroom(`${name} fired Zoltraak!`);
@@ -105,7 +103,7 @@ export const a_vollzanbel = new Card({
 
 export const barrierMagicAnalysis = new Card({
   title: "Barrier Magic Analysis",
-  cardMetadata: { nature: Nature.Util },
+  cardMetadata: { nature: Nature.Util, analysis: 2 },
   description: ([atk, spd, def]) =>
     `ATK+${atk}. SPD+${spd}. Opponent's DEF-${def}`,
   emoji: CardEmoji.FRIEREN_CARD,
@@ -114,7 +112,6 @@ export const barrierMagicAnalysis = new Card({
     cardGif: mediaLinks.barrierAnalysis_gif,
   },
   effects: [2, 1, 1],
-  tags: { Analysis: 2 },
   cardAction: function (
     this: Card,
     { name, sendToGameroom, selfStat, opponentStat }
@@ -128,7 +125,7 @@ export const barrierMagicAnalysis = new Card({
 
 export const demonMagicAnalysis = new Card({
   title: "Demon Magic Analysis",
-  cardMetadata: { nature: Nature.Util },
+  cardMetadata: { nature: Nature.Util, analysis: 2 },
   description: ([atk, spd, def]) => `ATK+${atk}. SPD+${spd}. DEF+${def}.`,
   emoji: CardEmoji.FRIEREN_CARD,
   cosmetic: {
@@ -136,7 +133,6 @@ export const demonMagicAnalysis = new Card({
     cardGif: mediaLinks.demonAnalysis_gif,
   },
   effects: [2, 2, 1],
-  tags: { Analysis: 2 },
   cardAction: function (this: Card, { name, sendToGameroom, selfStat }) {
     sendToGameroom(`${name} analyzed ancient demon's magic!`);
     selfStat(0, StatsEnum.ATK);
