@@ -22,7 +22,7 @@ export type LadderRankWithPlayer = Prisma.LadderRankGetPayload<{
   include: { player: true };
 }>;
 
-const getTopNPlayersInGamemode = async function (
+export const getTopNPlayersInGamemode = async function (
   gamemode: GameMode,
   count: number
 ): Promise<LadderRankWithPlayer[] | null> {

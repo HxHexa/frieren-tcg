@@ -21,6 +21,7 @@ import {
   deleteAchievement,
 } from "./achievementHandler/handleManageAchievement";
 import handleLadderReset from "./handleLadderReset/handleLadderReset";
+import { removeAllRankRoles } from "../tcgChallenge/gameHandler/rankScoresToRankTitleMapping";
 
 const CONFIRM_LADDER_RESET_BUTTON_ID = "ladder-reset-confirm";
 
@@ -269,6 +270,7 @@ export const command: Command<ChatInputCommandInteraction> = {
           });
           collector.on("collect", async (i: ButtonInteraction) => {
             try {
+              await removeAllRankRoles(i.client);
               await handleLadderReset(i);
             } catch (error) {
               console.error("Error in ladder reset:", error);

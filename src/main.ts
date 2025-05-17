@@ -13,7 +13,12 @@ const guildId =
 const commandsDir = path.join(__dirname, "commands");
 
 const client = new Client({
-  intents: [GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages],
+  intents: [
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.Guilds,
+  ],
   partials: [Partials.Channel, Partials.Message],
 });
 
