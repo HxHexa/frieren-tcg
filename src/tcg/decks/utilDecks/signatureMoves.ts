@@ -24,6 +24,7 @@ export const signatureMoves: Record<CharacterName, Card> = {
   [CharacterName.Himmel]: a_realHeroSwing,
   [CharacterName.Laufen]: a_supersonicStrike,
   [CharacterName.Linie]: imitate,
+  [CharacterName.Methode]: telekinesis, // default
   [CharacterName.Sein]: a_threeSpearsOfTheGoddess,
   [CharacterName.Sense]: a_piercingDrill,
   [CharacterName.Stark]: a_lastStand,

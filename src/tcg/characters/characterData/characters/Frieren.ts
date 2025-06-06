@@ -126,6 +126,7 @@ const Frieren = new CharacterData({
     manaSuppressed: true,
     ignoreManaSuppressed: true,
     defenderDamageScaling: 1,
+    methodeFindsCute: true,
   },
 });
 

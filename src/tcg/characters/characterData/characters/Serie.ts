@@ -93,6 +93,7 @@ const Serie = new CharacterData({
     ignoreManaSuppressed: true,
     serieToyingNextTurn: false,
     serieToyingTurn: false,
+    methodeFindsCute: true,
   },
 });
 

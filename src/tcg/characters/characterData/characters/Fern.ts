@@ -62,6 +62,7 @@ const Fern = new CharacterData({
     manaSuppressed: true,
     ignoreManaSuppressed: true,
     fernBarrage: 0,
+    methodeFindsCute: true,
   },
 });
 
