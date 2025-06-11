@@ -32,6 +32,7 @@ model PlayerPreferences {
   player   Player @relation(fields: [playerId], references: [id])
 
   tcgTextSpeed        Int         @default(1500)
+  tcgLiteMode         Boolean     @default(false)
   favouriteCharacters Character[] @relation("PlayerFavouriteCharacters")
 }
 

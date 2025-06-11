@@ -41,6 +41,19 @@ export const command: Command<ChatInputCommandInteraction> = {
     )
     .addSubcommand((subcommand) =>
       subcommand
+        .setName("lite-mode")
+        .setDescription(
+          "Enable or disable TCG lite mode (gifs will be disabled)"
+        )
+        .addBooleanOption((option) =>
+          option
+            .setName("enabled")
+            .setDescription("Enable or disable TCG lite mode")
+            .setRequired(true)
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
         .setName("view")
         .setDescription("View your current player preferences")
     ),

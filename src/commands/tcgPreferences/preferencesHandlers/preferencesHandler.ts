@@ -7,6 +7,7 @@ import {
   getOrCreatePlayerPreferences,
   getPlayerPreferences,
   setFavouriteCharacters,
+  updateTcgLiteMode,
   updateTcgTextSpeed,
 } from "@src/util/db/preferences";
 import {
@@ -38,6 +39,7 @@ export async function handlePlayerPreferences(
         );
         let response = "";
         response += `Text Speed: \`${preferences.tcgTextSpeed} ms\`\n`;
+        response += `Lite Mode: \`${preferences.tcgLiteMode ? "Enabled" : "Disabled"}\`\n`;
 
         if (preferences.favouriteCharacters.length > 0) {
           response += `Favourite Characters: ${favouriteCharacterData.map((char) => `${char.cosmetic.emoji} ${char.characterName}`).join(", ")}\n`;
@@ -61,6 +63,15 @@ export async function handlePlayerPreferences(
         await updateTcgTextSpeed(playerId, speed);
         await interaction.editReply({
           content: `Your TCG text speed preference has been set to \`${speed} ms\`.`,
+        });
+        break;
+      }
+
+      case "lite-mode": {
+        const enabled = interaction.options.getBoolean("enabled", true);
+        await updateTcgLiteMode(playerId, enabled);
+        await interaction.editReply({
+          content: `Your TCG lite mode preference has been set to \`${enabled}\`.`,
         });
         break;
       }

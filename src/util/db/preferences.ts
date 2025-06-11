@@ -61,6 +61,33 @@ export async function getOrCreatePlayerPreferences(
 }
 
 /**
+ * Updates the TCG lite mode preference for a player.
+ * @param playerId The ID of the player.
+ * @param speed The new TCG text speed value.
+ * @returns The updated PlayerPreferences object.
+ */
+export async function updateTcgLiteMode(
+  playerId: number,
+  enabled: boolean
+): Promise<PlayerPreferences> {
+  try {
+    const preferences = await getOrCreatePlayerPreferences(playerId);
+    preferences.tcgLiteMode = enabled;
+    await prismaClient.playerPreferences.update({
+      where: { id: preferences.id },
+      data: { tcgLiteMode: enabled },
+    });
+    return preferences;
+  } catch (error) {
+    console.error(
+      `Error updating TCG lite mode for player ${playerId}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+/**
  * Updates the TCG text speed preference for a player.
  * Creates a preferences record if one doesn't exist.
  * @param playerId The ID of the player.

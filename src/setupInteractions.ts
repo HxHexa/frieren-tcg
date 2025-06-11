@@ -4,14 +4,17 @@ import { Middleware, NextMiddleware } from "@src/types/middleware";
 
 import logInteractionMiddleware from "./middlewares/logInteractionMiddleware";
 import textSpeedMiddleware from "./middlewares/textSpeedMiddleware";
+import liteModeMiddleware from "./middlewares/liteModeMiddleware";
 
 const middlewares: Middleware[] = [
   logInteractionMiddleware,
   textSpeedMiddleware,
+  liteModeMiddleware,
 ];
 
 export const setupInteractions = async (
   client: Client,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   commands: Record<string, Command<CommandInteraction | any>>
 ) => {
   client.on(Events.InteractionCreate, async (interaction) => {
