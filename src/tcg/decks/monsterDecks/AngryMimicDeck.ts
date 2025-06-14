@@ -4,7 +4,7 @@
 // import { StatsEnum } from "../../stats";
 // import CommonCardAction from "../../util/commonCardActions";
 // import { serie_offensiveMagic } from "../utilDecks/serieMagic";
-// import { GameMessageContext } from "@src/tcg/gameContextProvider";
+// import { GameMessageContext } from "@tcg/gameContextProvider";
 
 // // Regurgitate (x5) : use any offensive magic spell you stole from the mages you digested
 // // Oh nom nom nom (x3) : 15 DMG, -2 DEF : restores an equal amount of HP compared to the damage

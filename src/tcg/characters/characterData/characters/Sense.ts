@@ -6,7 +6,7 @@ import { CharacterEmoji } from "@tcg/formatting/emojis";
 import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 // import config from "@src/config";
 
 // config module not found for some reason

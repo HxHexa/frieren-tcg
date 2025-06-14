@@ -226,7 +226,7 @@ export const tcgMain = async (
     if (game.turnCount === TURN_LIMIT) {
       game.gameOver = true;
       messageCache.push(
-        `## 50 Turn Limit Reached - Game Over!`,
+        `## ${TURN_LIMIT} Turn Limit Reached - Game Over!`,
         TCGThread.Gameroom
       );
     }

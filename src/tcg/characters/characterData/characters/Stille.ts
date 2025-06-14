@@ -7,7 +7,7 @@ import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const STILLE_REFLECT_SCALE = 0.8;
 

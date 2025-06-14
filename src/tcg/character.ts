@@ -163,14 +163,17 @@ export default class Character {
   ): Record<string, Card> {
     const defaultCardOptions: Record<string, Card> = {};
     if (this.additionalMetadata.accessToDefaultCardOptions) {
-      defaultCardOptions["7"] = DefaultCards.discardCard.clone();
-      defaultCardOptions["8"] = DefaultCards.waitCard.clone();
-    } else {
-      if (this.skipTurn) {
-        defaultCardOptions["9"] = DefaultCards.doNothing.clone();
-      }
+      defaultCardOptions["10"] = DefaultCards.discardCard.clone(); // starting at 10 to avoid getting out of order with extra dice
+      defaultCardOptions["11"] = DefaultCards.waitCard.clone();
+    } else if (this.skipTurn) {
+      defaultCardOptions["12"] = DefaultCards.doNothing.clone();
     }
-    defaultCardOptions["10"] = DefaultCards.forfeitCard.clone();
+    const nextCard = this.additionalMetadata.nextCardToPlay;
+    if (nextCard) {
+      defaultCardOptions["13"] = nextCard.clone();
+      this.additionalMetadata.nextCardToPlay = undefined;
+    }
+    defaultCardOptions["14"] = DefaultCards.forfeitCard.clone();
 
     if (this.skipTurn) {
       return defaultCardOptions;
@@ -190,7 +193,7 @@ export default class Character {
         rolls.push(5);
       }
     } else {
-      let rollCount = 4;
+      let rollCount = this.additionalMetadata.rollsCount;
       if (
         game.additionalMetadata.flammeResearch[characterIndex][
           FlammeResearch.TreeOfLife
@@ -199,7 +202,7 @@ export default class Character {
         rollCount += 1;
       }
       for (let i = 0; i < rollCount; i++) {
-        rolls.push(Rolls.rollD6());
+        rolls.push(Rolls.rollDAny(this.additionalMetadata.rollsCount));
       }
     }
 

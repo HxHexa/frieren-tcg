@@ -4,7 +4,7 @@ import himmelDeck from "@decks/HimmelDeck";
 import { CharacterName } from "../../metadata/CharacterName";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const HIMMEL_HERO_PARTY_DAMAGE_BONUS = 0.15;
 
