@@ -18,7 +18,7 @@ import {
   type StringSelectMenuInteraction,
 } from "discord.js";
 import { getPlayer } from "@src/util/db/getPlayer";
-import { charWithEmoji } from "@src/tcg/formatting/emojis";
+import { charWithEmoji } from "@tcg/formatting/emojis";
 import prismaClient from "@prismaClient";
 
 export async function handlePlayerPreferences(

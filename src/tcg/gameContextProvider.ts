@@ -49,6 +49,7 @@ function characterBasedContext(game: Game, characterIndex: number) {
     personal: self.cosmetic.pronouns.personal,
     reflexive: self.cosmetic.pronouns.reflexive,
     possessive: self.cosmetic.pronouns.possessive,
+    lastCard: game.additionalMetadata.lastUsedCards[characterIndex],
 
     // Self stat
     flatSelfStat: changeStat.bind(null, self),
@@ -61,6 +62,7 @@ function characterBasedContext(game: Game, characterIndex: number) {
     opponentName: opponent.name,
     opponentIndex: 1 - characterIndex,
     opponentStats: opponent.stats.stats,
+    opponentLastCard: game.additionalMetadata.lastUsedCards[1 - characterIndex],
 
     // Opponent stat
     flatOpponentStat: changeStat.bind(null, opponent),

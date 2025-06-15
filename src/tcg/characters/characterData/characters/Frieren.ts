@@ -9,7 +9,7 @@ import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const ANALYSIS_BOOST = 0.05;
 const ANALYSIS_STACK_CAP = 20;
@@ -126,6 +126,7 @@ const Frieren = new CharacterData({
     manaSuppressed: true,
     ignoreManaSuppressed: true,
     defenderDamageScaling: 1,
+    methodeFindsCute: true,
   },
 });
 

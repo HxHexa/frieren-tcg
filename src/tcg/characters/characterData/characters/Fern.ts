@@ -4,7 +4,7 @@ import { CharacterName } from "../../metadata/CharacterName";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import fernDeck from "@decks/FernDeck";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const fernStats = new Stats({
   [StatsEnum.HP]: 100.0,
@@ -62,6 +62,7 @@ const Fern = new CharacterData({
     manaSuppressed: true,
     ignoreManaSuppressed: true,
     fernBarrage: 0,
+    methodeFindsCute: true,
   },
 });
 

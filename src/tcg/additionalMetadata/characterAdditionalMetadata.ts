@@ -18,6 +18,7 @@ export type CharacterAdditionalMetadata = {
   minimumPossibleHp?: number | undefined; // if undefined, there is no minimum hp cap
   overheal?: boolean;
   selectedCard?: Card;
+  nextCardToPlay?: Card;
 
   senseTeaTimeStacks?: number;
   serieToyingNextTurn?: boolean;
@@ -29,6 +30,8 @@ export type CharacterAdditionalMetadata = {
   flammeSigil?: number;
   opponentMilleniumBarrierActive?: boolean;
   forcedDiscards: number;
+  rollsCount: number;
+  methodeFindsCute: boolean;
 
   hidden?: boolean;
   publicDiscards: boolean;

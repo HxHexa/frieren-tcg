@@ -12,7 +12,7 @@ import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import { GameMessageContext } from "@tcg/gameContextProvider";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const PIERCE_FACTOR = 1.0;
 

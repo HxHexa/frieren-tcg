@@ -5,7 +5,7 @@ import { CharacterEmoji } from "@tcg//formatting/emojis";
 import denkenDeck from "@decks/DenkenDeck";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const DENKEN_PRESERVERANCE_COUNT = 3;
 export const DENKEN_DEATH_HP = -50;

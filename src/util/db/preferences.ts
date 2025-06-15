@@ -1,7 +1,7 @@
 import { PlayerPreferences, Character } from "@prisma/client";
 import prismaClient from "@prismaClient";
-import { CharacterData } from "@src/tcg/characters/characterData/characterData";
-import { VISIBLE_CHARACTERS } from "@src/tcg/characters/characterList";
+import { CharacterData } from "@tcg/characters/characterData/characterData";
+import { VISIBLE_CHARACTERS } from "@tcg/characters/characterList";
 
 /**
  * Gets a player's preferences, including their favourite characters.

@@ -1,6 +1,6 @@
 import { User, type ThreadChannel } from "discord.js";
 import { GameMode } from "./gameSettings";
-import prismaClient from "../../../../prisma/client";
+import prismaClient from "@prismaClient";
 import { getOrCreatePlayers } from "@src/util/db/getPlayer";
 import { getOrCreateCharacters } from "@src/util/db/getCharacter";
 import { getCharacterMasteries } from "@src/util/db/getCharacterMastery";

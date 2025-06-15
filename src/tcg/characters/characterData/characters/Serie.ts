@@ -7,7 +7,7 @@ import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import Game from "@tcg/game";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const SERIE_TOYING_DAMAGE_BONUS = 0.3;
 
@@ -93,6 +93,7 @@ const Serie = new CharacterData({
     ignoreManaSuppressed: true,
     serieToyingNextTurn: false,
     serieToyingTurn: false,
+    methodeFindsCute: true,
   },
 });
 

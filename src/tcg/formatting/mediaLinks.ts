@@ -14,6 +14,8 @@ const characterPortraits = {
     "https://cdn.discordapp.com/attachments/1346555621952192522/1346694607467184179/Laufen_anime_portrait.webp?ex=67dce516&is=67db9396&hm=c8439cdb36a948bfa707b18d46177518aac79300021391b77791d2ba30985947&",
   liniePortrait:
     "https://cdn.discordapp.com/attachments/1346555621952192522/1347897148330606643/Linie_anime_portrait.webp?ex=67dca7ca&is=67db564a&hm=5cf66096e541bb9495c1e5749765f31c013a3644e20e04f7fd0ce9e87dcb8b03&",
+  methodePortrait:
+    "https://static.wikia.nocookie.net/frieren/images/f/f5/Methode_anime_portrait.png/revision/latest?cb=20240213200512",
   seinPortrait:
     "https://cdn.discordapp.com/attachments/1346555621952192522/1347898000717910057/Sein_anime_portrait.webp?ex=67dca896&is=67db5716&hm=ce78236ebb64724705c48a5221039f22e546cd1c9f940aa0036003b8bc74e49b&",
   sensePortrait:
@@ -141,10 +143,10 @@ const mediaLinks = {
   ...vangerisuCards,
 
   ...edelCardLinks,
+  ...flammeCardLinks,
   ...frierenCardLinks,
   ...stilleCardLinks,
   ...wirbelCardLinks,
-  ...flammeCardLinks,
 } as const;
 
 export default mediaLinks;

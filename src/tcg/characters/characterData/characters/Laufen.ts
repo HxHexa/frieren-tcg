@@ -8,7 +8,7 @@ import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import Game from "@tcg/game";
 import Pronouns from "@tcg/pronoun";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
+import mediaLinks from "@tcg/formatting/mediaLinks";
 
 const laufenStats = new Stats({
   [StatsEnum.HP]: 90.0,
