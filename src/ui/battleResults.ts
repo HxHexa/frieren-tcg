@@ -9,11 +9,11 @@ import {
 } from "discord.js";
 
 import { buildMessageLink, buildThreadLink } from "@src/util/formatting/links";
-import { CharacterName } from "@src/tcg/characters/metadata/CharacterName";
+import { CharacterName } from "@tcg/characters/metadata/CharacterName";
 import { TCGResult } from "@src/tcgMain";
 import { DatabaseOperationResult } from "@src/commands/tcgChallenge/gameHandler/handleDatabaseOperations";
-import { charWithEmoji } from "@src/tcg/formatting/emojis";
-import { CHARACTER_MAP } from "@src/tcg/characters/characterList";
+import { charWithEmoji } from "@tcg/formatting/emojis";
+import { CHARACTER_MAP } from "@tcg/characters/characterList";
 import { Rank } from "@src/commands/tcgChallenge/gameHandler/rankScoresToRankTitleMapping";
 
 type BattleResultsOptions = {

@@ -1,6 +1,6 @@
-import type { CharacterData } from "@src/tcg/characters/characterData/characterData";
-import { CHARACTER_MAP } from "@src/tcg/characters/characterList";
-import type { CharacterName } from "@src/tcg/characters/metadata/CharacterName";
+import type { CharacterData } from "@tcg/characters/characterData/characterData";
+import { CHARACTER_MAP } from "@tcg/characters/characterList";
+import type { CharacterName } from "@tcg/characters/metadata/CharacterName";
 import { getPlayerPreferences } from "@src/util/db/preferences";
 import type { StringSelectMenuInteraction } from "discord.js";
 

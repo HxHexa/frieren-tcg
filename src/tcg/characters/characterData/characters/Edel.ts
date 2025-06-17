@@ -3,12 +3,12 @@ import { CharacterName } from "@tcg/characters/metadata/CharacterName";
 import { CharacterData } from "@tcg/characters/characterData/characterData";
 import { CharacterEmoji } from "@tcg/formatting/emojis";
 import edelDeck from "@tcg/decks/EdelDeck";
-import Pronouns from "@src/tcg/pronoun";
+import Pronouns from "@tcg/pronoun";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
-import Game from "@src/tcg/game";
+import mediaLinks from "@tcg/formatting/mediaLinks";
+import Game from "@tcg/game";
 import { MessageCache } from "@src/tcgChatInteractions/messageCache";
-import Card from "@src/tcg/card";
+import Card from "@tcg/card";
 
 const edelStats = new Stats({
   [StatsEnum.HP]: 80,
@@ -81,6 +81,9 @@ const Edel = new CharacterData({
         );
       }
     },
+  },
+  additionalMetadata: {
+    methodeFindsCute: true,
   },
 });
 

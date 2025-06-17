@@ -1,9 +1,9 @@
-import Card, { Nature } from "@src/tcg/card";
-import { CardEmoji } from "@src/tcg/formatting/emojis";
-import mediaLinks from "@src/tcg/formatting/mediaLinks";
-import { StatsEnum } from "@src/tcg/stats";
+import Card, { Nature } from "@tcg/card";
+import { CardEmoji } from "@tcg/formatting/emojis";
+import mediaLinks from "@tcg/formatting/mediaLinks";
+import { StatsEnum } from "@tcg/stats";
 import { incantationIncreaseSigil } from "../FlammeDeck";
-import TimedEffect from "@src/tcg/timedEffect";
+import TimedEffect from "@tcg/timedEffect";
 
 const incantationFieldOfFlowers = new Card({
   title: "Incantation: Field of Flowers",

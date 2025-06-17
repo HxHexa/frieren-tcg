@@ -1,6 +1,6 @@
-import { StatsEnum } from "@src/tcg/stats";
-import TimedEffect from "@src/tcg/timedEffect";
-import CommonCardAction from "@src/tcg/util/commonCardActions";
+import { StatsEnum } from "@tcg/stats";
+import TimedEffect from "@tcg/timedEffect";
+import CommonCardAction from "@tcg/util/commonCardActions";
 import Card, { Nature } from "@tcg/card";
 import { CardEmoji } from "@tcg/formatting/emojis";
 

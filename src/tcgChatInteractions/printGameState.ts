@@ -3,7 +3,7 @@ import Game from "@tcg/game";
 import { MessageCache } from "./messageCache";
 import { printCharacter } from "./printCharacter";
 import { TCGThread } from "./sendGameMessage";
-import { FlammeTheory } from "@src/tcg/additionalMetadata/gameAdditionalMetadata";
+import { FlammeTheory } from "@tcg/additionalMetadata/gameAdditionalMetadata";
 
 // only print game state. do not update state
 export const printGameState = (

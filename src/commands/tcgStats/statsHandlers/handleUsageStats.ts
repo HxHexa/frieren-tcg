@@ -6,8 +6,8 @@ import {
 } from "discord.js";
 import { CHARACTER_MAP } from "@tcg/characters/characterList";
 import prismaClient from "@prismaClient";
-import { CharacterName } from "@src/tcg/characters/metadata/CharacterName";
-import { charWithEmoji } from "@src/tcg/formatting/emojis";
+import { CharacterName } from "@tcg/characters/metadata/CharacterName";
+import { charWithEmoji } from "@tcg/formatting/emojis";
 import querySeason from "@src/util/db/querySeason";
 
 export default async function handleUsageStats(

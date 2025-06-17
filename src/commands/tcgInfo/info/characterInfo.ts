@@ -14,10 +14,10 @@ import Card from "@tcg/card";
 import { handleCharacterSelection } from "@src/tcgChatInteractions/handleCharacterSelection";
 import { getPlayer } from "@src/util/db/getPlayer";
 import { getPlayerPreferences } from "@src/util/db/preferences";
-import { formatAbility } from "@src/tcg/ability";
-import { CharacterName } from "@src/tcg/characters/metadata/CharacterName";
-import { edelStatusCards } from "@src/tcg/decks/utilDecks/edelStatuses";
-import { flammeFoundationStage } from "@src/tcg/decks/utilDecks/flammeFoundationStage";
+import { formatAbility } from "@tcg/ability";
+import { CharacterName } from "@tcg/characters/metadata/CharacterName";
+import { edelStatusCards } from "@tcg/decks/utilDecks/edelStatuses";
+import { flammeFoundationStage } from "@tcg/decks/utilDecks/flammeFoundationStage";
 
 export async function showCharacterInfo(
   interaction: ChatInputCommandInteraction

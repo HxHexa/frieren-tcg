@@ -7,6 +7,7 @@ export enum CharacterName {
   Himmel = "Himmel",
   Laufen = "Laufen",
   Linie = "Linie",
+  Methode = "Methode",
   Sein = "Sein",
   Sense = "Sense",
   Serie = "Serie",

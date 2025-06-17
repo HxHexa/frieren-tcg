@@ -17,14 +17,17 @@ export const defenseMoves: Record<CharacterName, Card[]> = {
   [CharacterName.Denken]: [elementaryDefensiveMagic, bareHandedBlock],
   [CharacterName.Edel]: [one_step_ahead],
   [CharacterName.Fern]: [commonDefensiveMagic],
+  [CharacterName.Flamme]: [], // default
   [CharacterName.Frieren]: [ordinaryDefensiveMagic],
   [CharacterName.Himmel]: [quickBlock],
   [CharacterName.Laufen]: [parry],
   [CharacterName.Linie]: [parry],
+  [CharacterName.Methode]: [], // default
   [CharacterName.Sein]: [braceYourself],
   [CharacterName.Sense]: [hairBarrier],
   [CharacterName.Serie]: [basicDefensiveMagic],
   [CharacterName.Stark]: [block],
   [CharacterName.Stille]: [deflect],
   [CharacterName.Ubel]: [defend],
+  [CharacterName.Wirbel]: [], // default
 } as const;
