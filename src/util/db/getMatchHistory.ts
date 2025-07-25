@@ -106,3 +106,55 @@ export async function getMatchHistoryAgainstPlayer(
 
   return headToHeadMatches;
 }
+
+export async function getMatchHistoryAgainstCharacter(
+  playerId: string,
+  characterId: string
+) {
+  const matches = await prismaClient.match.findMany({
+    where: {
+      ladderReset: {
+        endDate: null,
+      },
+      OR: [
+        {
+          winner: {
+            discordId: playerId,
+          },
+        },
+        {
+          loser: {
+            discordId: characterId,
+          },
+        },
+      ],
+    },
+    include: {
+      winnerCharacter: {
+        select: {
+          name: true,
+        },
+      },
+      loserCharacter: {
+        select: {
+          name: true,
+        },
+      },
+      winner: {
+        select: {
+          discordId: true,
+        },
+      },
+      loser: {
+        select: {
+          discordId: true,
+        },
+      },
+    },
+    orderBy: {
+      finishedAt: "desc",
+    },
+  });
+
+  return matches;
+}

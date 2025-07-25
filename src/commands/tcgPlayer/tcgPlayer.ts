@@ -8,6 +8,9 @@ import type { Command } from "@src/types/command";
 import handlePlayerProfile from "./playerHandlers/profileHandler";
 import handleMatchHistory from "./playerHandlers/matchHandler";
 import { handleHeadToHead } from "./playerHandlers/headToHeadHandler";
+import { handleVsCharacter } from "./playerHandlers/vsCharactersHandler";
+import { CHAR_OPTIONS } from "@src/constants";
+
 
 export const command: Command<ChatInputCommandInteraction> = {
   data: new SlashCommandBuilder()
@@ -51,7 +54,6 @@ export const command: Command<ChatInputCommandInteraction> = {
             .setMinValue(1)
         )
     )
-
     .addSubcommand((subcommand) =>
       subcommand
         .setName("head-to-head")
@@ -71,7 +73,27 @@ export const command: Command<ChatInputCommandInteraction> = {
               "The first player whose head-to-head record you want to see, defaults to yourself"
             )
         )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("vs-characters")
+        .setDescription("Get the record against a character")
+        .addStringOption((option) =>
+          option
+            .setName("character")
+            .setDescription("Select the character to get stats for.")
+            .setRequired(true)
+            .addChoices(CHAR_OPTIONS)
+        )
+        .addUserOption((option) =>
+          option
+            .setName("player")
+            .setDescription(
+              "The first player whose record you want to see, defaults to yourself"
+            )
+        )
     ),
+
 
   async execute(interaction: ChatInputCommandInteraction) {
     const subcommand = interaction.options.getSubcommand();
@@ -96,6 +118,11 @@ export const command: Command<ChatInputCommandInteraction> = {
         case "head-to-head":
           {
             await handleHeadToHead(interaction);
+          }
+          break;
+        case "vs-characters":
+          {
+            await handleVsCharacter(interaction);
           }
           break;
       }
