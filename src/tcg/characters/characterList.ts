@@ -16,8 +16,10 @@ import Stark from "@characters/Stark";
 import Stille from "@characters/Stille";
 import Ubel from "@characters/Ubel";
 import Wirbel from "@characters/Wirbel";
+import Aura from "./characterData/characters/Aura";
 
 export const CHARACTER_MAP: Record<CharacterName, CharacterData> = {
+  [CharacterName.Aura]: Aura,
   [CharacterName.Denken]: Denken,
   [CharacterName.Edel]: Edel,
   [CharacterName.Fern]: Fern,

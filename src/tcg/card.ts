@@ -52,6 +52,8 @@ type CardMetadata = {
   isPinnacle?: boolean;
 
   edelEyeContact?: number;
+
+  armyStrength?: number;
 };
 
 export type CardProps = {

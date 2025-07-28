@@ -11,6 +11,7 @@ import { CharacterName } from "@tcg/characters/metadata/CharacterName";
 import type { GamePlugin } from "@tcg/gamePlugin";
 import { DENKEN_DEATH_HP } from "@tcg/characters/characterData/characters/Denken";
 import { GameSettings } from "@src/commands/tcgChallenge/gameHandler/gameSettings";
+import { StatsEnum } from "./stats";
 
 export default class Game {
   characters: [Character, Character];
@@ -70,6 +71,10 @@ export default class Game {
           [FlammeResearch.ThousandYearSanctuary]: false,
           [FlammeResearch.TreeOfLife]: false,
         },
+      },
+      auserleseContextReversal: {
+        0: false,
+        1: false,
       },
     };
     this.turnCount = 0;
@@ -132,14 +137,6 @@ export default class Game {
     } else {
       let baseDamage = modifiedAttackDamage;
 
-      baseDamage = this.calculateDamage(
-        baseDamage,
-        attacker.stats.stats.ATK,
-        defender.stats.stats.DEF,
-        defender.stats.stats.TrueDEF,
-        defender.additionalMetadata.defenderDamageScaling
-      );
-
       // allow plugins to modify damage before applying
       this.plugins.forEach((plugin) => {
         baseDamage =
@@ -151,11 +148,41 @@ export default class Game {
           ) ?? baseDamage;
       });
 
-      actualDamage = baseDamage;
+      actualDamage = this.calculateDamage(
+        baseDamage,
+        attacker.stats.stats.ATK,
+        defender.stats.stats.DEF,
+        defender.stats.stats.TrueDEF,
+        defender.additionalMetadata.defenderDamageScaling
+      );
 
+      // hp deduction
       const minimumDefenderHp =
         defender.additionalMetadata.minimumPossibleHp ??
         Number.MIN_SAFE_INTEGER;
+      if (defender.additionalMetadata.auraArmyDamageAbsorbed) {
+        // calculate how much damage would aura's army absorbed
+        if (defender.additionalMetadata.auraArmyDamageAbsorbtion === 0.5) {
+          defender.adjustStat(
+            -1 * Math.min(actualDamage, defender.stats.stats.Ability),
+            StatsEnum.Ability,
+            this
+          );
+        } else {
+          const armyAbsorbedDamage = this.calculateDamage(
+            baseDamage,
+            attacker.stats.stats.ATK,
+            defender.stats.stats.DEF,
+            defender.stats.stats.TrueDEF,
+            defender.additionalMetadata.auraArmyDamageAbsorbtion
+          );
+          defender.adjustStat(
+            -1 * Math.min(armyAbsorbedDamage, defender.stats.stats.Ability),
+            StatsEnum.Ability,
+            this
+          );
+        }
+      }
       const defenderRemainingHp = Math.max(
         Number((defender.stats.stats.HP - actualDamage).toFixed(2)),
         minimumDefenderHp
@@ -183,8 +210,6 @@ export default class Game {
       }
     }
 
-    // there should only be 1 counter trigger per attack step
-    // essentially, if attacker not countered this attack step, perform the counter
     if (
       !this.additionalMetadata.attackCountered[attackProps.attackerIndex] &&
       defender.ability.abilityCounterEffect

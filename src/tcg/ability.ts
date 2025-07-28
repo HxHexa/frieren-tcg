@@ -62,6 +62,12 @@ export type Ability = {
     messageCache: MessageCache,
     card: Card
   ) => void;
+  abilityStartOfEndPhaseEffect?: (
+    game: Game,
+    characterIndex: number,
+    messageCache: MessageCache,
+    additionalParam?: Record<any, any>
+  ) => void;
   abilityEndOfTurnEffect?: (
     game: Game,
     characterIndex: number,

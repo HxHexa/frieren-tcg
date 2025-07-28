@@ -180,6 +180,7 @@ const disapprovingPout = new Card({
       sendToGameroom,
       selfStat,
       opponentStat,
+      flatOpponentStat,
       opponentName,
       opponentCharacterName,
     }
@@ -190,7 +191,7 @@ const disapprovingPout = new Card({
     opponentStat(2, StatsEnum.ATK, -1);
     if (opponentCharacterName === CharacterName.Stark) {
       sendToGameroom(`${opponentName} felt hurt...`);
-      opponentStat(0.01, StatsEnum.HP, -1);
+      flatOpponentStat(0.01, StatsEnum.HP, -1);
     }
   },
 });

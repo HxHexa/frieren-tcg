@@ -1,4 +1,6 @@
 const characterPortraits = {
+  auraPortrait:
+    "https://static.wikia.nocookie.net/frieren/images/a/ac/Aura_anime_portrait.png/revision/latest?cb=20231017083323",
   denkenPortrait:
     "https://static.wikia.nocookie.net/frieren/images/5/5c/Denken_anime_portrait.png/revision/latest?cb=20240112114340",
   edelPortrait:
@@ -41,6 +43,40 @@ const vangerisuCards = {
     "https://cdn.discordapp.com/attachments/1351391350398128159/1353035306840096848/Sein_Card.png?ex=67e02fd3&is=67dede53&hm=53829f9cd04a268eb8b6f9dba932220e814be02c9c6f6e76f61ab83e6c20c24d&",
   serieVangerisuCard:
     "https://cdn.discordapp.com/attachments/1351391350398128159/1352873013695086602/Serie_Card.png?ex=67df98ad&is=67de472d&hm=fb33f3e38ac8fe90be812b86b7f85ab8a9e95f0303eed56c18f362f6a981fe4c&",
+} as const;
+
+const auraCardLinks = {
+  aura_rustedBlades_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981297963270236/IMG_7417.gif?ex=6887565d&is=688604dd&hm=65e62c78f01767b7fde87129fc98439c7a3e2d299473f3033c88ac26038ac61f&",
+  aura_weatheredShields_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981307265974323/IMG_7422.gif?ex=6887565f&is=688604df&hm=f5593737109073d03acd1bd94b870d52d00557605fa62c8d34c5af3929a6c4f5&",
+  aura_brokenArrows_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981294951759882/IMG_7409.gif?ex=6887565c&is=688604dc&hm=a6036e3d9f81ef1f86ed65ca36cd5e51f8d6b2223dac83648a99051084846220&",
+  aura_fallenEmpire_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981295413137458/IMG_7410.gif?ex=6887565c&is=688604dc&hm=01ae7326b65b9a9c56fb2354b6e41db6e6229e66fa823fcb38b4b3e515fed488&",
+  aura_rot_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981299309379634/IMG_7420.gif?ex=6887565d&is=688604dd&hm=9f78a0a0d00252a5b2d040eacea1932f4c0e48f7d3e49e6e0af43bd5062b75dd&",
+  aura_loyalty_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981298420187268/IMG_7418.gif?ex=6887565d&is=688604dd&hm=f48e459064a30993ac6a53aedc773e5c768f2352f755da1fe6f01ae372f074ed&",
+  aura_retreat_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981296499200021/IMG_7414.gif?ex=6887565c&is=688604dc&hm=b1e225b447f0527033dae643b6ec209f3be1df358cc45f2277dce4f2632f5962&",
+  aura_decapitate_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981298806329374/IMG_7419.gif?ex=6887565d&is=688604dd&hm=5f1b3cbd20d2e8f364ecbac56568574c6382c0b2bedd03151ae4b5f4a2b771b9&",
+  aura_heartbreaker_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981295954198528/GIF_2958617706.gif?ex=6887565c&is=688604dc&hm=75109ae5672c22f1db8c12818423fb59dc29aa7374a9d25b96c1e7a1ccc9519b&",
+
+  aura_auserlese_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981297501638747/IMG_7416.gif?ex=6887565d&is=688604dd&hm=47c2979272400a9a2a170b5deaa219994faf2bb28759e237a1130a04b9f1efc1&",
+  aura_auserleseContextShifted_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398981297065558026/IMG_7415.gif?ex=6887565d&is=688604dd&hm=695bc83bfa99fe8c57cd470363e87e78c02729fa3a550d910493c2216ecd1a83&",
+
+  // update these later
+  aura_stolenValor_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398992141392547840/IMG_7424-ezgif.com-optimize1.gif?ex=68876076&is=68860ef6&hm=db79eb23db02cafb113e710076ae724920da397deab12631b1bbd50fb192b0bb&",
+  aura_auserleseSucceeded_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398992140578590780/IMG_7424-ezgif.com-optimize.gif?ex=68876076&is=68860ef6&hm=9ce48209b8825756ca48c38b6b0bfa04dcb4c65e5bdc5eccc4f4d9591ff1d1dc&",
+  aura_auserleseFailed_gif:
+    "https://cdn.discordapp.com/attachments/1360969158623232300/1398989032825815040/IMG_7427.gif?ex=68875d91&is=68860c11&hm=3568234b9eabaa5a06ea25a70b0baa412e3113633f4b774271db70d8a5f8a73c&",
 } as const;
 
 const edelCardLinks = {
@@ -193,6 +229,7 @@ const mediaLinks = {
   ...characterPortraits,
   ...vangerisuCards,
 
+  ...auraCardLinks,
   ...edelCardLinks,
   ...flammeCardLinks,
   ...frierenCardLinks,

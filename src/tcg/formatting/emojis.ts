@@ -15,6 +15,7 @@ export const statDetails: Record<StatsEnum, StatInfo> = {
 };
 
 export enum CharacterEmoji {
+  AURA = "<:AuraSmug:1211325441755979806>",
   DENKEN = "<:DenkenOld:1198339325436371074>",
   EDEL = "<:EdelMad:1258499320504914003>",
   FERN = "<:FernThink:1179413599739986012>",
@@ -46,6 +47,7 @@ export enum CharacterEmoji {
 }
 
 export const characterNameToEmoji: Record<CharacterName, CharacterEmoji> = {
+  [CharacterName.Aura]: CharacterEmoji.AURA,
   [CharacterName.Denken]: CharacterEmoji.DENKEN,
   [CharacterName.Edel]: CharacterEmoji.EDEL,
   [CharacterName.Fern]: CharacterEmoji.FERN,
@@ -76,6 +78,7 @@ export enum CardEmoji {
   WAIT = "🕙",
   RECYCLE = "<:recycleCard:1347336609829490739>",
 
+  AURA_CARD = "<:AuraCard:1398828308589969519>",
   DENKEN_CARD = "<:DenkenCard:1358052686418673725>",
   EDEL_CARD = "<:EdelCard:1373076891749322802>",
   FLAMME_CARD = "<:FlammeCard:1378048592912056540>",

@@ -16,8 +16,10 @@ import { a_lastStand } from "@decks/StarkDeck";
 import { a_malevolentShrine } from "./ubelSignature";
 import { perfectSorganeil } from "@decks/WirbelDeck";
 import { reversePolarity } from "@decks/MethodeDeck";
+import { auserlese } from "../AuraDeck";
 
 export const signatureMoves: Record<CharacterName, Card> = {
+  [CharacterName.Aura]: auserlese,
   [CharacterName.Denken]: bareHandedBlock,
   [CharacterName.Edel]: a_kneel,
   [CharacterName.Fern]: spellToCreateManaButterflies,

@@ -10,6 +10,7 @@ import DefaultCards from "@decks/utilDecks/defaultCard";
 import {
   CharacterCosmetic,
   CharacterData,
+  DEFAULT_ROLLS_COUNT,
 } from "./characters/characterData/characterData";
 import { MessageCache } from "@src/tcgChatInteractions/messageCache";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
@@ -165,7 +166,10 @@ export default class Character {
 
     const defaultCardOptions: Record<string, Card> = {};
     if (this.additionalMetadata.accessToDefaultCardOptions) {
-      defaultCardOptions["10"] = DefaultCards.discardCard.clone(); // starting at 10 to avoid getting out of order with extra dice
+      if (!game.gameSettings.prescienceMode) {
+        // no discard in prescience mode
+        defaultCardOptions["10"] = DefaultCards.discardCard.clone(); // starting at 10 to avoid getting out of order with extra dice
+      }
       defaultCardOptions["11"] = DefaultCards.waitCard.clone();
     } else if (this.skipTurn && !nextCard) {
       defaultCardOptions["12"] = DefaultCards.doNothing.clone();
@@ -185,6 +189,15 @@ export default class Character {
 
     // roll 4d6
     let rolls = [];
+    let rollCount = this.additionalMetadata.rollsCount;
+    if (
+      game.additionalMetadata.flammeResearch[characterIndex][
+        FlammeResearch.TreeOfLife
+      ]
+    ) {
+      rollCount += 1;
+    }
+
     if (game.additionalMetadata.flammeTheory.Prescience) {
       rolls = [0, 1, 2, 3];
       if (
@@ -194,15 +207,14 @@ export default class Character {
       ) {
         rolls.push(5);
       }
-    } else {
-      let rollCount = this.additionalMetadata.rollsCount;
-      if (
-        game.additionalMetadata.flammeResearch[characterIndex][
-          FlammeResearch.TreeOfLife
-        ]
-      ) {
-        rollCount += 1;
+    } else if (game.gameSettings.prescienceMode) {
+      rolls = [0, 1, 2, 3, 4, 5];
+
+      // more rolls for those characters - methode/flamme
+      for (let i = 0; i < rollCount - DEFAULT_ROLLS_COUNT; i++) {
+        rolls.push(Rolls.rollD6());
       }
+    } else {
       for (let i = 0; i < rollCount; i++) {
         rolls.push(Rolls.rollD6());
       }

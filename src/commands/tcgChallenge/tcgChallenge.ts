@@ -40,6 +40,13 @@ export const command: Command<ChatInputCommandInteraction> = {
     )
     .addBooleanOption((option) =>
       option
+        .setName("prescience-mode")
+        .setDescription(
+          "Play with all cards available to use, with no Discard."
+        )
+    )
+    .addBooleanOption((option) =>
+      option
         .setName("lite-mode")
         .setDescription("Disable printing of media (GIFs/character portraits).")
     )
@@ -61,6 +68,12 @@ export const command: Command<ChatInputCommandInteraction> = {
         GameMode.CLASSIC;
       const gameSettings = { ...GAME_SETTINGS[gamemode] };
       const textSpeedMs = interaction.options.getInteger("text_speed_ms");
+
+      if (!gameSettings.prescienceMode) {
+        gameSettings.prescienceMode =
+          interaction.options.getBoolean("prescience-mode") ?? false;
+      }
+
       gameSettings.goddessMode =
         interaction.options.getBoolean("goddess-mode") ?? false;
       gameSettings.liteMode =

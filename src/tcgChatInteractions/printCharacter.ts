@@ -5,6 +5,7 @@ import { ProgressBarBuilder } from "@tcg/formatting/percentBar";
 import { StatsEnum } from "@tcg/stats";
 import { printTheory } from "./printGameState";
 import Game from "@tcg/game";
+import { auraPlatoonToEmoji } from "@tcg/characters/characterData/characterUtil/auraPlatoon";
 
 export const printCharacter = (
   game: Game,
@@ -84,6 +85,14 @@ export const printCharacter = (
   }
   if (meta.forcedDiscards > 0) {
     printStack.push(`**Forced Discards**: ${meta.forcedDiscards}`);
+  }
+  if (meta.auraPlatoonQueue.length > 0) {
+    const queueEmojis = meta.auraPlatoonQueue
+      .map((platoon) => auraPlatoonToEmoji[platoon])
+      .join("");
+    printStack.push(
+      `**${character.characterName}'s Undead Army**: ${queueEmojis}`
+    );
   }
   if (character.timedEffects.length > 0) {
     printStack.push(`**Timed effects:**`);

@@ -53,6 +53,13 @@ export const command: Command<ChatInputCommandInteraction> = {
     )
     .addBooleanOption((option) =>
       option
+        .setName("prescience-mode")
+        .setDescription(
+          "Play with all cards available to use, with no Discard."
+        )
+    )
+    .addBooleanOption((option) =>
+      option
         .setName("lite-mode")
         .setDescription("Disable printing of media (GIFs/character portraits).")
     ),
@@ -72,6 +79,8 @@ export const command: Command<ChatInputCommandInteraction> = {
       const textSpeedMs = interaction.options.getInteger("text_speed_ms");
       const goddessMode =
         interaction.options.getBoolean("goddess-mode") ?? false;
+      const prescienceMode =
+        interaction.options.getBoolean("prescience-mode") ?? false;
       const liteMode = interaction.options.getBoolean("lite-mode") ?? undefined;
 
       initiateChallengeRequest({
@@ -81,6 +90,7 @@ export const command: Command<ChatInputCommandInteraction> = {
           revealHand,
           revealDraw,
           goddessMode,
+          prescienceMode,
           liteMode,
         },
         ranked: false,

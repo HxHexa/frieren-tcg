@@ -26,19 +26,22 @@ async function main() {
       )
     );
 
-    // upsert ladder resets
-    await Promise.all(
-      createdLadders.map((ladder) =>
-        tx.ladderReset.upsert({
-          where: { id: ladder.id },
-          update: {},
-          create: {
+    // Create ladder resets for new ladders only
+    const resetPromises = createdLadders.map(async (ladder) => {
+      const existingReset = await tx.ladderReset.findFirst({
+        where: { ladderId: ladder.id, endDate: null },
+      });
+
+      if (!existingReset) {
+        return tx.ladderReset.create({
+          data: {
             ladderId: ladder.id,
-            startDate: new Date(),
           },
-        })
-      )
-    );
+        });
+      }
+    });
+
+    await Promise.all(resetPromises);
   });
 }
 

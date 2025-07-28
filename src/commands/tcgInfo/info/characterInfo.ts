@@ -18,6 +18,15 @@ import { formatAbility } from "@tcg/ability";
 import { CharacterName } from "@tcg/characters/metadata/CharacterName";
 import { edelStatusCards } from "@tcg/decks/utilDecks/edelStatuses";
 import { flammeFoundationStage } from "@tcg/decks/utilDecks/flammeFoundationStage";
+import {
+  AuraPlatoon,
+  auraPlatoonToEmoji,
+} from "@/src/tcg/characters/characterData/characterUtil/auraPlatoon";
+import {
+  ARCHERS_DAMAGE,
+  SHIELDBEARERS_STRENGTH_RECOVERY,
+  SWORDSMEN_DAMAGE,
+} from "@/src/tcg/characters/characterData/characters/Aura";
 
 export async function showCharacterInfo(
   interaction: ChatInputCommandInteraction
@@ -106,6 +115,28 @@ export async function showCharacterInfo(
                 };
               })
             );
+
+          if (char.characterName === CharacterName.Aura) {
+            characterEmbed
+              .addFields({
+                name: "Aura's Undead Platoons",
+                value: "",
+              })
+              .addFields(
+                {
+                  name: `${auraPlatoonToEmoji[AuraPlatoon.Swordsmen]} Swordsmen`,
+                  value: `If the turn is not skipped, at turn end, deal ${SWORDSMEN_DAMAGE} x #Swordsmen DMG. When this platoon falls, ATK-2.`,
+                },
+                {
+                  name: `${auraPlatoonToEmoji[AuraPlatoon.Shieldbearers]} Shieldbearers`,
+                  value: `If the turn is not skipped, at turn end, gain ${SHIELDBEARERS_STRENGTH_RECOVERY} Army Strength x #Shieldbearers. When this platoon falls, DEF-2.`,
+                },
+                {
+                  name: `${auraPlatoonToEmoji[AuraPlatoon.Archers]} Archers`,
+                  value: `If the turn is not skipped, at turn end, deal ${ARCHERS_DAMAGE} DMG x #Archers times. When this platoon falls, SPD-2.`,
+                }
+              );
+          }
 
           if (char.characterName === CharacterName.Edel) {
             characterEmbed

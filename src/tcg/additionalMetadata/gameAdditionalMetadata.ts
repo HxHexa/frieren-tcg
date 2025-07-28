@@ -22,4 +22,5 @@ export type GameAdditionalMetadata = {
   forfeited: Record<number, boolean>;
   flammeTheory: Record<FlammeTheory, boolean>;
   flammeResearch: Record<number, Record<FlammeResearch, boolean>>;
+  auserleseContextReversal: Record<number, boolean>;
 };
