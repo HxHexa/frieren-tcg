@@ -23,6 +23,7 @@ import {
 import handleLadderReset from "./handleLadderReset/handleLadderReset";
 import { removeAllServerRankRoles } from "../tcgChallenge/gameHandler/rankScoresToRankTitleMapping";
 import { FRIEREN_DISCORD_SERVER } from "@src/constants";
+import prismaClient from "@prismaClient";
 
 const CONFIRM_LADDER_RESET_BUTTON_ID = "ladder-reset-confirm";
 
@@ -142,6 +143,27 @@ export const command: Command<ChatInputCommandInteraction> = {
       subcommand
         .setName("ladder-reset")
         .setDescription("Reset all active ladders for a new season")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("disliked-characters")
+        .setDescription("Manage disliked characters")
+        .addBooleanOption((option) =>
+          option
+            .setName("enabled")
+            .setDescription("Enable or disable disliked characters")
+            .setRequired(false)
+        )
+        .addIntegerOption((option) =>
+          option
+            .setName("max-characters")
+            .setDescription(
+              "Maximum number of characters players can dislike (0 = no limits)"
+            )
+            .setMinValue(0)
+            .setMaxValue(10)
+            .setRequired(false)
+        )
     ),
 
   async execute(interaction: ChatInputCommandInteraction) {
@@ -284,6 +306,10 @@ export const command: Command<ChatInputCommandInteraction> = {
           });
           break;
         }
+        case "disliked-characters": {
+          await handleDislikedCharactersSettings(interaction);
+          break;
+        }
         default: {
           await interaction.deferReply({
             flags: MessageFlags.Ephemeral,
@@ -349,6 +375,75 @@ async function handleMaintenance(interaction: ChatInputCommandInteraction) {
     console.error("Error in maintenance mode:", error);
     await interaction.editReply({
       content: "Failed to set maintenance mode.",
+    });
+  }
+}
+
+async function handleDislikedCharactersSettings(
+  interaction: ChatInputCommandInteraction
+) {
+  const enabled = interaction.options.getBoolean("enabled");
+  const maxCharacters = interaction.options.getInteger("max-characters");
+
+  await interaction.deferReply({
+    flags: MessageFlags.Ephemeral,
+  });
+
+  try {
+    let settings = await prismaClient.adminSettings.findFirst();
+
+    if (!settings) {
+      settings = await prismaClient.adminSettings.create({
+        data: {},
+      });
+    }
+
+    const updateData: {
+      dislikedCharactersEnabled?: boolean;
+      maxDislikedCharacters?: number;
+    } = {};
+
+    if (enabled !== null) {
+      updateData.dislikedCharactersEnabled = enabled;
+    }
+
+    if (maxCharacters !== null) {
+      updateData.maxDislikedCharacters = maxCharacters;
+    }
+
+    if (Object.keys(updateData).length > 0) {
+      settings = await prismaClient.adminSettings.update({
+        where: { id: settings.id },
+        data: updateData,
+      });
+    }
+
+    const statusEmbed = new EmbedBuilder()
+      .setColor("Blurple")
+      .setTitle("Disliked Characters Settings")
+      .addFields(
+        {
+          name: "Status",
+          value: settings.dislikedCharactersEnabled ? "Enabled" : "Disabled",
+          inline: true,
+        },
+        {
+          name: "Max Characters",
+          value:
+            settings.maxDislikedCharacters === 0
+              ? "No limit"
+              : settings.maxDislikedCharacters.toString(),
+          inline: true,
+        }
+      );
+
+    await interaction.editReply({
+      embeds: [statusEmbed],
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    await interaction.editReply({
+      content: "Failed to update disliked characters settings.",
     });
   }
 }

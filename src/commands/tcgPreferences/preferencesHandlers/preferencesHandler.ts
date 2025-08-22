@@ -7,6 +7,7 @@ import {
   getOrCreatePlayerPreferences,
   getPlayerPreferences,
   setFavouriteCharacters,
+  setDislikedCharacters,
   updateTcgLiteMode,
   updateTcgTextSpeed,
 } from "@src/util/db/preferences";
@@ -37,6 +38,9 @@ export async function handlePlayerPreferences(
         const favouriteCharacterData = preferences.favouriteCharacters.map(
           (char) => CHARACTER_MAP[char.name as CharacterName]
         );
+        const dislikedCharacterData = preferences.dislikedCharacters.map(
+          (char) => CHARACTER_MAP[char.name as CharacterName]
+        );
         let response = "";
         response += `Text Speed: \`${preferences.tcgTextSpeed} ms\`\n`;
         response += `Lite Mode: \`${preferences.tcgLiteMode ? "Enabled" : "Disabled"}\`\n`;
@@ -45,6 +49,12 @@ export async function handlePlayerPreferences(
           response += `Favourite Characters: ${favouriteCharacterData.map((char) => `${char.cosmetic.emoji} ${char.characterName}`).join(", ")}\n`;
         } else {
           response += `Favourite Characters: None\n`;
+        }
+
+        if (preferences.dislikedCharacters.length > 0) {
+          response += `Disliked Characters: ${dislikedCharacterData.map((char) => `${char.cosmetic.emoji} ${char.characterName}`).join(", ")}\n`;
+        } else {
+          response += `Disliked Characters: None\n`;
         }
 
         await interaction.editReply({
@@ -155,6 +165,127 @@ export async function handlePlayerPreferences(
             });
           } catch (error) {
             console.error("Error in favourite character select menu:", error);
+          }
+        });
+
+        break;
+      }
+
+      case "disliked-character": {
+        const preferences = await getPlayerPreferences(playerId);
+        const adminSettings = await prismaClient.adminSettings.findFirst();
+        const isEnabled = adminSettings?.dislikedCharactersEnabled ?? true;
+        const maxCharacters = adminSettings?.maxDislikedCharacters ?? 3;
+
+        if (!isEnabled) {
+          await interaction.editReply({
+            content:
+              "Disliked characters is currently disabled by administrators.",
+          });
+          return;
+        }
+
+        const currentDislikedCount =
+          preferences?.dislikedCharacters?.length ?? 0;
+        const effectiveMaxValues =
+          maxCharacters === 0
+            ? VISIBLE_CHARACTERS.length
+            : Math.max(currentDislikedCount, maxCharacters);
+
+        const options: SelectMenuComponentOptionData[] = VISIBLE_CHARACTERS.map(
+          (char) => {
+            return {
+              label: char.characterName,
+              value: char.characterName,
+              emoji: char.cosmetic.emoji,
+              default: preferences?.dislikedCharacters.some(
+                (disliked) => disliked.name === char.characterName
+              ),
+            };
+          }
+        );
+
+        const CUSTOM_ID = "disliked-character-select";
+        const dislikedCharactersSelectMenu = new StringSelectMenuBuilder()
+          .setCustomId(CUSTOM_ID)
+          .setPlaceholder("Select characters you dislike playing against")
+          .setMaxValues(effectiveMaxValues)
+          .setMinValues(0)
+          .setOptions(options);
+
+        const description = `Select characters you dislike playing against${maxCharacters === 0 ? "" : ` (max ${maxCharacters})`}.`;
+
+        const embed = new EmbedBuilder()
+          .setColor("Blurple")
+          .setTitle("Disliked Characters")
+          .setDescription(description)
+          .addFields({
+            name: "Currently Disliked Characters",
+            value:
+              preferences?.dislikedCharacters
+                .map((char) => charWithEmoji(char.name as CharacterName))
+                .join(", ") || "None",
+          });
+
+        const actionRow =
+          new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+            dislikedCharactersSelectMenu
+          );
+
+        const reply = await interaction.editReply({
+          embeds: [embed],
+          components: [actionRow],
+        });
+
+        const collector = reply.createMessageComponentCollector({
+          time: 60_000, // 1 minute
+        });
+        collector.on("collect", async (i: StringSelectMenuInteraction) => {
+          try {
+            await i.deferUpdate();
+            const newDislikedCharacterNames = i.values;
+
+            if (
+              maxCharacters > 0 &&
+              newDislikedCharacterNames.length > maxCharacters
+            ) {
+              await i.editReply({
+                content: `You can only dislike up to ${maxCharacters} characters.`,
+                embeds: [],
+                components: [],
+              });
+              return;
+            }
+
+            const dbCharacters = await prismaClient.character.findMany({
+              where: {
+                name: { in: newDislikedCharacterNames },
+              },
+            });
+
+            const validDbCharacters = dbCharacters.filter(
+              (dbChar) => dbChar !== null
+            );
+
+            await setDislikedCharacters(playerId, validDbCharacters);
+
+            const updatedEmbed = new EmbedBuilder(embed.data).setFields({
+              name: "Currently Disliked Characters",
+              value:
+                newDislikedCharacterNames
+                  .map((name) => charWithEmoji(name as CharacterName))
+                  .join(", ") || "None",
+            });
+
+            i.editReply({
+              embeds: [updatedEmbed],
+              components: [],
+            });
+          } catch (error) {
+            console.error(
+              "Error with disliked character selection menu:",
+              error
+            );
           }
         });
 

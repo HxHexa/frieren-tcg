@@ -8,6 +8,7 @@ import type { Command } from "@src/types/command";
 import { initiateChallengeRequest } from "./gameHandler/initiateChallengeRequest";
 import { GAME_SETTINGS, GameMode } from "./gameHandler/gameSettings";
 import { MAX_TEXT_SPEED, MIN_TEXT_SPEED } from "@src/constants";
+import { playerExceedsDislikedLimit } from "@src/util/db/preferences";
 
 export const command: Command<ChatInputCommandInteraction> = {
   data: new SlashCommandBuilder()
@@ -63,6 +64,16 @@ export const command: Command<ChatInputCommandInteraction> = {
 
   async execute(interaction: ChatInputCommandInteraction) {
     try {
+      // check if player exceeds disliked character limit
+      if (await playerExceedsDislikedLimit(interaction.user.id)) {
+        await interaction.reply({
+          content:
+            "Cannot start game: Too many disliked characters selected. Update your preferences with `/tcg-preferences disliked-character`.",
+          flags: MessageFlags.Ephemeral,
+        });
+        return;
+      }
+
       const gamemode =
         (interaction.options.getString("gamemode") as GameMode) ??
         GameMode.CLASSIC;

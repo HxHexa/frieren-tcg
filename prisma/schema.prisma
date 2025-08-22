@@ -34,6 +34,7 @@ model PlayerPreferences {
   tcgTextSpeed        Int         @default(1500)
   tcgLiteMode         Boolean     @default(false)
   favouriteCharacters Character[] @relation("PlayerFavouriteCharacters")
+  dislikedCharacters  Character[] @relation("PlayerDislikedCharacters")
 }
 
 model LadderRank {
@@ -103,6 +104,7 @@ model Character {
   loserMatches       Match[]            @relation("LoserCharacter")
 
   favouritedByPlayers PlayerPreferences[] @relation("PlayerFavouriteCharacters")
+  dislikedByPlayers   PlayerPreferences[] @relation("PlayerDislikedCharacters")
 }
 
 model CharacterMastery {
@@ -117,4 +119,10 @@ model CharacterMastery {
   losses        Int @default(0)
 
   @@unique([playerId, characterId])
+}
+
+model AdminSettings {
+  id                         Int     @id @default(autoincrement())
+  dislikedCharactersEnabled  Boolean @default(true)
+  maxDislikedCharacters      Int     @default(3)
 }

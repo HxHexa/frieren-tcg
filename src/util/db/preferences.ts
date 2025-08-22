@@ -11,7 +11,13 @@ import { VISIBLE_CHARACTERS } from "@tcg/characters/characterList";
  */
 export async function getPlayerPreferences(
   playerId: number
-): Promise<(PlayerPreferences & { favouriteCharacters: Character[] }) | null> {
+): Promise<
+  | (PlayerPreferences & {
+      favouriteCharacters: Character[];
+      dislikedCharacters: Character[];
+    })
+  | null
+> {
   try {
     const preferences = await prismaClient.playerPreferences.findUnique({
       where: {
@@ -19,6 +25,7 @@ export async function getPlayerPreferences(
       },
       include: {
         favouriteCharacters: true,
+        dislikedCharacters: true,
       },
     });
     return preferences;
@@ -36,7 +43,12 @@ export async function getPlayerPreferences(
  */
 export async function getOrCreatePlayerPreferences(
   playerId: number
-): Promise<PlayerPreferences & { favouriteCharacters: Character[] }> {
+): Promise<
+  PlayerPreferences & {
+    favouriteCharacters: Character[];
+    dislikedCharacters: Character[];
+  }
+> {
   try {
     const preferences = await prismaClient.playerPreferences.upsert({
       where: {
@@ -48,6 +60,7 @@ export async function getOrCreatePlayerPreferences(
       },
       include: {
         favouriteCharacters: true,
+        dislikedCharacters: true,
       },
     });
     return preferences;
@@ -273,5 +286,85 @@ export async function getSortedCharactersForPlayer(playerId: number): Promise<{
       favouritedCharacter: [],
       nonFavouritedCharacter: VISIBLE_CHARACTERS,
     };
+  }
+}
+
+export async function setDislikedCharacters(
+  playerId: number,
+  dislikedCharacters: Character[]
+) {
+  try {
+    const updatedPreferences = await prismaClient.playerPreferences.upsert({
+      where: { playerId: playerId },
+      create: {
+        playerId: playerId,
+        dislikedCharacters: {
+          connect: dislikedCharacters,
+        },
+      },
+      update: {
+        dislikedCharacters: {
+          set: dislikedCharacters,
+        },
+      },
+      select: {
+        dislikedCharacters: true,
+      },
+    });
+
+    return updatedPreferences;
+  } catch (error) {
+    console.error(
+      `Error setting disliked characters for player ${playerId}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+export async function getDislikedCharactersForPlayer(
+  discordId: string
+): Promise<string[]> {
+  try {
+    const player = await prismaClient.player.findUnique({
+      where: { discordId },
+      include: {
+        preferences: {
+          include: {
+            dislikedCharacters: true,
+          },
+        },
+      },
+    });
+
+    if (!player?.preferences?.dislikedCharacters) {
+      return [];
+    }
+
+    return player.preferences.dislikedCharacters.map((char) => char.name);
+  } catch (error) {
+    console.error(
+      `Error getting disliked characters for player ${discordId}:`,
+      error
+    );
+    return [];
+  }
+}
+
+export async function playerExceedsDislikedLimit(
+  discordId: string
+): Promise<boolean> {
+  try {
+    const adminSettings = await prismaClient.adminSettings.findFirst();
+    const isEnabled = adminSettings?.dislikedCharactersEnabled ?? true;
+    const maxCharacters = adminSettings?.maxDislikedCharacters ?? 3;
+
+    if (!isEnabled || maxCharacters === 0) return false;
+
+    const dislikedCharacters = await getDislikedCharactersForPlayer(discordId);
+    return dislikedCharacters.length > maxCharacters;
+  } catch (error) {
+    console.error("Error checking disliked character limit:", error);
+    return false; // default to allowing game
   }
 }

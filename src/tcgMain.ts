@@ -28,6 +28,9 @@ import { CharacterSelectionType } from "./tcgChatInteractions/handleCharacterSel
 import goddessDeck from "@decks/utilDecks/goddessDeck";
 import { StatsEnum } from "@tcg/stats";
 import { FlammeResearch } from "./tcg/additionalMetadata/gameAdditionalMetadata";
+import { getDislikedCharactersForPlayer } from "@src/util/db/preferences";
+import { CHARACTER_MAP } from "@tcg/characters/characterList";
+import prismaClient from "@prismaClient";
 
 const TURN_LIMIT = 50;
 
@@ -85,6 +88,76 @@ export const tcgMain = async (
 
     result = { ...result, ...newResultInfo };
   };
+
+  // check if disliked characters is enabled and announce disliked characters
+  const adminSettings = await prismaClient.adminSettings.findFirst();
+  const isDislikedCharactersEnabled =
+    adminSettings?.dislikedCharactersEnabled ?? true;
+
+  if (isDislikedCharactersEnabled) {
+    // fetch disliked characters for both players
+    const challengerDislikedCharacters = await getDislikedCharactersForPlayer(
+      challenger.id
+    );
+    const opponentDislikedCharacters = await getDislikedCharactersForPlayer(
+      opponent.id
+    );
+
+    // announce disliked characters before character selection phase
+    const messageCache = new MessageCache();
+    const threadsMapping: TCGThreads = {
+      [TCGThread.Gameroom]: gameThread,
+      [TCGThread.ChallengerThread]: challengerThread,
+      [TCGThread.OpponentThread]: opponentThread,
+    };
+
+    if (challengerDislikedCharacters.length > 0) {
+      const dislikedCharactersList = challengerDislikedCharacters
+        .map((charName) => {
+          const char = CHARACTER_MAP[charName as CharacterName];
+          return char
+            ? `${char.cosmetic.emoji} ${char.characterName}`
+            : charName;
+        })
+        .join(", ");
+      messageCache.push(
+        `## ${challenger.displayName} dislikes playing against: ${dislikedCharactersList}`,
+        TCGThread.Gameroom
+      );
+    } else {
+      messageCache.push(
+        `## ${challenger.displayName} doesn't dislike playing against any character.`,
+        TCGThread.Gameroom
+      );
+    }
+
+    if (opponentDislikedCharacters.length > 0) {
+      const dislikedCharactersList = opponentDislikedCharacters
+        .map((charName) => {
+          const char = CHARACTER_MAP[charName as CharacterName];
+          return char
+            ? `${char.cosmetic.emoji} ${char.characterName}`
+            : charName;
+        })
+        .join(", ");
+      messageCache.push(
+        `## ${opponent.displayName} dislikes playing against: ${dislikedCharactersList}`,
+        TCGThread.Gameroom
+      );
+    } else {
+      messageCache.push(
+        `## ${opponent.displayName} doesn't dislike playing against any character.`,
+        TCGThread.Gameroom
+      );
+    }
+
+    await sendToThread(
+      messageCache.flush(TCGThread.Gameroom),
+      TCGThread.Gameroom,
+      threadsMapping,
+      textSpeedMs
+    );
+  }
 
   // game start - ask for character selection
   const challengerCharacterResponsePromise = getPlayerCharacter(
