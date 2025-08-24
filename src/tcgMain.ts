@@ -96,12 +96,11 @@ export const tcgMain = async (
 
   if (isDislikedCharactersEnabled) {
     // fetch disliked characters for both players
-    const challengerDislikedCharacters = await getDislikedCharactersForPlayer(
-      challenger.id
-    );
-    const opponentDislikedCharacters = await getDislikedCharactersForPlayer(
-      opponent.id
-    );
+    const [challengerDislikedCharacters, opponentDislikedCharacters] =
+      await Promise.all([
+        getDislikedCharactersForPlayer(challenger.id),
+        getDislikedCharactersForPlayer(opponent.id),
+      ]);
 
     // announce disliked characters before character selection phase
     const messageCache = new MessageCache();
