@@ -9,9 +9,7 @@ import { VISIBLE_CHARACTERS } from "@tcg/characters/characterList";
  * @param playerId The ID of the player.
  * @returns The PlayerPreferences object with favourite characters, or null.
  */
-export async function getPlayerPreferences(
-  playerId: number
-): Promise<
+export async function getPlayerPreferences(playerId: number): Promise<
   | (PlayerPreferences & {
       favouriteCharacters: Character[];
       dislikedCharacters: Character[];
@@ -41,9 +39,7 @@ export async function getPlayerPreferences(
  * @param playerId The ID of the player.
  * @returns The PlayerPreferences object with favourite characters.
  */
-export async function getOrCreatePlayerPreferences(
-  playerId: number
-): Promise<
+export async function getOrCreatePlayerPreferences(playerId: number): Promise<
   PlayerPreferences & {
     favouriteCharacters: Character[];
     dislikedCharacters: Character[];
