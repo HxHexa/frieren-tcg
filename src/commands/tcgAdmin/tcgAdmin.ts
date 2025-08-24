@@ -444,6 +444,7 @@ async function handleDislikedCharactersSettings(
     console.error("Error:", error);
     await interaction.editReply({
       content: "Failed to update disliked characters settings.",
+      embeds: [],
     });
   }
 }
