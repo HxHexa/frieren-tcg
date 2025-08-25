@@ -435,7 +435,7 @@ const spotWeakness = new Card({
   emoji: CardEmoji.METHODE_CARD,
   description: ([spd, atk, bonusAtk]) =>
     `SPD+${spd} ATK+${atk}. ATK+${bonusAtk} if the opponent's next move is an attack. Will overwrite the effect of Goddess' Healing Magic.`,
-  effects: [2, 2, 3],
+  effects: [3, 3, 2],
   cardAction: ({ self, name, opponent, selfStat, sendToGameroom }) => {
     sendToGameroom(
       `${name} is on the lookout for ${opponent.name}'s weaknesses.`

@@ -12,7 +12,7 @@ const SEIN_BASE_HEALING = 2;
 const SEIN_HEALING_RAMP = 0.1;
 
 const seinStats = new Stats({
-  [StatsEnum.HP]: 100.0,
+  [StatsEnum.HP]: 90.0,
   [StatsEnum.ATK]: 11.0,
   [StatsEnum.DEF]: 11.0,
   [StatsEnum.TrueDEF]: 0.0,

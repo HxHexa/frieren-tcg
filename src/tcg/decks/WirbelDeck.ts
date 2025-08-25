@@ -11,7 +11,7 @@ export const tacticalRetreat = new Card({
   title: "Tactical Retreat",
   cardMetadata: { nature: Nature.Util },
   description: ([trueDef]) =>
-    `TrueDEF+${trueDef} for 2 turns. Using an attack aside from "Ehre: Hailstorm - Doragate" will cost an additional 10HP while the effect is active, and will end the effect.`,
+    `TrueDEF+${trueDef} for 2 turns. Using an attack aside from "Ehre: Bulletstorm - Doragate" will cost an additional 10HP while the effect is active, and will end the effect.`,
   effects: [10],
   emoji: CardEmoji.WIRBEL_CARD,
   cosmetic: {
@@ -64,7 +64,7 @@ export const tacticalRetreat = new Card({
     self.timedEffects.push(
       new TimedEffect({
         name: "Tactical Retreat",
-        description: `Increases TrueDEF by ${trueDef}. Using an attack aside from "Ehre: Hailstorm - Doragate" will cost an additional 10HP while the effect is active, and will end the effect.`,
+        description: `Increases TrueDEF by ${trueDef}. Using an attack aside from "Ehre: Bulletstorm - Doragate" will cost an additional 10HP while the effect is active, and will end the effect.`,
         priority: -1,
         turnDuration: 2,
         metadata: { removableBySorganeil: true, wirbelIsTacticalRetreat: true },
