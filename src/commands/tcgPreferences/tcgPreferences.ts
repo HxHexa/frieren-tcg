@@ -54,6 +54,13 @@ export const command: Command<ChatInputCommandInteraction> = {
     )
     .addSubcommand((subcommand) =>
       subcommand
+        .setName("disliked-character")
+        .setDescription(
+          "Add or remove a character from your list of disliked characters"
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
         .setName("view")
         .setDescription("View your current player preferences")
     ),

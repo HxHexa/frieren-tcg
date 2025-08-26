@@ -7,6 +7,7 @@ import {
 import type { Command } from "@src/types/command";
 import { initiateChallengeRequest } from "./gameHandler/initiateChallengeRequest";
 import { MAX_TEXT_SPEED, MIN_TEXT_SPEED } from "@src/constants";
+import { validateDislikedCharacterLimit } from "./gameHandler/utils/validateDislikedCharacterLimit";
 
 export const command: Command<ChatInputCommandInteraction> = {
   data: new SlashCommandBuilder()
@@ -66,6 +67,11 @@ export const command: Command<ChatInputCommandInteraction> = {
 
   async execute(interaction: ChatInputCommandInteraction) {
     try {
+      // check if player exceeds dusliked character limit
+      if (!(await validateDislikedCharacterLimit(interaction))) {
+        return;
+      }
+
       const turnDurationSeconds = Math.max(
         Math.min(
           interaction.options.getInteger("turn-duration-seconds") ?? 45,
