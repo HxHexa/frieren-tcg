@@ -9,6 +9,7 @@ import {
   setFavouriteCharacters,
   updateTcgLiteMode,
   updateTcgTextSpeed,
+  updateTcgInviteLength,
 } from "@src/util/db/preferences";
 import {
   ActionRowBuilder,
@@ -39,6 +40,7 @@ export async function handlePlayerPreferences(
         );
         let response = "";
         response += `Text Speed: \`${preferences.tcgTextSpeed} ms\`\n`;
+        response += `Invite Length: \`${preferences.tcgInviteLength} mins\`\n`;
         response += `Lite Mode: \`${preferences.tcgLiteMode ? "Enabled" : "Disabled"}\`\n`;
 
         if (preferences.favouriteCharacters.length > 0) {
@@ -63,6 +65,15 @@ export async function handlePlayerPreferences(
         await updateTcgTextSpeed(playerId, speed);
         await interaction.editReply({
           content: `Your TCG text speed preference has been set to \`${speed} ms\`.`,
+        });
+        break;
+      }
+
+      case "set-invite-length": {
+        const length = interaction.options.getInteger("length", true);
+        await updateTcgInviteLength(playerId, length);
+        await interaction.editReply({
+          content: `Your TCG invite length preference has been set to \`${length} mins\`.`,
         });
         break;
       }

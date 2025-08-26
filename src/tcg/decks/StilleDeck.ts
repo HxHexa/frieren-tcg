@@ -190,8 +190,7 @@ export const a_geisel = new Card({
   cardMetadata: { nature: Nature.Attack, signature: true },
   effects: [15],
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364971079096995840/GIF_0867566819.gif?ex=680b9be1&is=680a4a61&hm=af689691d54884d9f7df5a639c214146c59d7b3a9a6b0e8547fb41cf6b914c6c&",
+    cardGif: mediaLinks.stille_geisel_gif,
   },
   cardAction: function (
     this: Card,

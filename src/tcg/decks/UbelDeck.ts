@@ -6,6 +6,7 @@ import { CardEmoji } from "@tcg/formatting/emojis";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { signatureMoves } from "./utilDecks/signatureMoves";
 import { a_malevolentShrine } from "./utilDecks/ubelSignature";
+import mediaLinks from "../formatting/mediaLinks";
 
 export const empathyFailureName = "Stalking";
 
@@ -18,8 +19,7 @@ export const a_shallowSlash = new Card({
   cardMetadata: { nature: Nature.Attack, ubelFailureRate: 20 },
   hpCost: 4,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1406952351620665464/Untitled_video_7.gif?ex=68a6503c&is=68a4febc&hm=ccb3c85e6cca4b1287835360a5fa8421e4e2cf8fef095918270e2c1e8ea05081",
+    cardGif: mediaLinks.ubel_shallowSlash_gif,
   },
   cardAction: function (
     this: Card,
@@ -49,8 +49,7 @@ export const a_cleave = new Card({
   cardMetadata: { nature: Nature.Attack, ubelFailureRate: 40 },
   hpCost: 6,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364386420554203196/GIF_3999614558.gif?ex=680a241f&is=6808d29f&hm=ed397e2ab4a3166d3e6975560d40d37d928ff1a6df755fabb56425cf283d0f89&",
+    cardGif: mediaLinks.ubel_cleave_gif,
   },
   cardAction: function (
     this: Card,
@@ -76,8 +75,7 @@ export const a_dismantle = new Card({
   cardMetadata: { nature: Nature.Attack, ubelFailureRate: 60 },
   hpCost: 8,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364758389111918673/GIF_1476107048.gif?ex=680b7e8b&is=680a2d0b&hm=28e6e00072ec765df91914cdea3090c0c582b5079a9ec977ca21a3f70be5aea0&",
+    cardGif: mediaLinks.ubel_dismantle_gif,
   },
   cardAction: function (
     this: Card,
@@ -106,8 +104,7 @@ export const rushdown = new Card({
   emoji: CardEmoji.UBEL_CARD,
   effects: [10],
   cosmetic: {
-    cardGif:
-      "https://media.discordapp.net/attachments/1360969158623232300/1364216562600509570/GIF_2060261812.gif?ex=6808dd2e&is=68078bae&hm=120ce38d9abf8a42357d0bd650f0e5c63da9ea2232bd5ceae2716ee67a2fb67f&=&width=1440&height=820",
+    cardGif: mediaLinks.ubel_rushdown_gif,
   },
   cardAction: function (
     this: Card,
@@ -161,8 +158,7 @@ const slowdown = new Card({
   emoji: CardEmoji.UBEL_CARD,
   effects: [5, 10, 5],
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364216703541837844/GIF_2189012353.gif?ex=6808dd50&is=68078bd0&hm=644b405b52a67b684bda6bfff12ce2ffa99d091de554b967213e07aa87883a8d&",
+    cardGif: mediaLinks.ubel_slowDown_gif,
   },
   cardAction: function (
     this: Card,
@@ -228,8 +224,7 @@ export const defend = new Card({
   effects: [20],
   priority: 2,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364384151616094239/GIF_3928500915.gif?ex=680a2202&is=6808d082&hm=09e4cc493604c6e0be6f9a04263c49d93dd9a7d20bb18c78f6b58d1fd303c9b6&",
+    cardGif: mediaLinks.ubel_defend_gif,
   },
   cardAction: function (
     this: Card,
@@ -267,8 +262,7 @@ export const sorganeil = new Card({
   priority: -2,
   effects: [],
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364748769165447188/GIF_3534737554.gif?ex=680b7596&is=680a2416&hm=97e22820e064efed4dc8688572fffad891c01cdaac28df0e7a8e0ca77661521c&",
+    cardGif: mediaLinks.ubel_sorganeil_gif,
   },
   cardAction: function (
     this: Card,
@@ -329,8 +323,7 @@ export const empathy = new Card({
   effects: [],
   cardAction: () => {},
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364937614494535711/GIF_3999726425.gif?ex=680b7cb6&is=680a2b36&hm=8e54664c9778ca6cc49807519b9e0afd09dffa377209d98eb3c92f78c4ce1d1b&",
+    cardGif: mediaLinks.ubel_empathy_gif,
   },
   conditionalTreatAsEffect: function (this: Card, game, characterIndex) {
     if (game.turnCount < 5) {

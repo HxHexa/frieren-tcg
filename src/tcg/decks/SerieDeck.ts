@@ -12,6 +12,7 @@ import { fieldOfFlower } from "./FrierenDeck";
 import { CardEmoji } from "@tcg/formatting/emojis";
 import { ancientBarrierMagic } from "./utilDecks/serieSignature";
 import CommonCardAction from "../util/commonCardActions";
+import mediaLinks from "../formatting/mediaLinks";
 
 export const a_livingGrimoireOffenseCommon = new Card({
   title: "Living Grimoire: Offense Chapter. 3rd Class Magic Section.",
@@ -19,8 +20,7 @@ export const a_livingGrimoireOffenseCommon = new Card({
   description: () => "Use a random common offensive magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873014785740800/Living_Grimoire_1.png?ex=6808772d&is=680725ad&hm=96a1d24a30264ade70debfc8ffe00506330d2b9ed559386e1a69a1c19bc647e9&",
+    cardImageUrl: mediaLinks.serie_livingGrimoireOffenseCommon_image,
   },
   effects: [],
   cardAction: function (this: Card, context) {
@@ -39,8 +39,7 @@ export const a_livingGrimoireOffenseRare = new Card({
   description: () => "Use a random rare offensive magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873015121150022/Living_Grimoire1_1.png?ex=6808772d&is=680725ad&hm=903c0f575a5857d8527c631c5b4ef5fbf6ff9140ea44ea0a4f5ad7c6433a92a6&",
+    cardImageUrl: mediaLinks.serie_livingGrimoireOffenseRare_image,
   },
   effects: [],
   cardAction: function (this: Card, context) {
@@ -59,8 +58,7 @@ export const a_livingGrimoireOffenseUnusual = new Card({
   description: () => "Use a random unusual offensive magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873015825924147/Living_Grimoire2_1.png?ex=6808772e&is=680725ae&hm=63b0595c68a10b5d7c4246e4747f43fc61b292a95577b3c00b479ef11320ac58&",
+    cardImageUrl: mediaLinks.serie_livingGrimoireOffenseUnusual_image,
   },
   effects: [],
   cardAction: function (this: Card, context) {
@@ -79,8 +77,7 @@ export const a_livingGrimoireUtilityTactics = new Card({
   description: () => "Use a random stats adjusting utility magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873014785740800/Living_Grimoire_1.png?ex=6808772d&is=680725ad&hm=96a1d24a30264ade70debfc8ffe00506330d2b9ed559386e1a69a1c19bc647e9&",
+    cardImageUrl: mediaLinks.serie_livingGrimoireUtilityTactics_image,
   },
   effects: [],
   cardAction: function (this: Card, context) {
@@ -99,8 +96,7 @@ export const a_livingGrimoireUtilityRecovery = new Card({
   description: () => "Use a random HP recovery utility magic.",
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873014785740800/Living_Grimoire_1.png?ex=6808772d&is=680725ad&hm=96a1d24a30264ade70debfc8ffe00506330d2b9ed559386e1a69a1c19bc647e9&",
+    cardImageUrl: mediaLinks.serie_livingGrimoireUtilityRecovery_image,
   },
   effects: [],
   cardAction: function (this: Card, context) {
@@ -120,8 +116,7 @@ export const mock = new Card({
     `HP+${hp}. SPD+${spd}. Opponent's DEF-${def}.`,
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873015502966825/Mock_1.png?ex=67df98ae&is=67de472e&hm=b4bfad8c4a548745a18660e2fcb39e7927661f269b17f9f8c73b66fa780f3d04&",
+    cardImageUrl: mediaLinks.serie_mock_image,
   },
   effects: [3, 2, 1],
   cardAction: function (
@@ -143,8 +138,7 @@ export const basicDefensiveMagic = new Card({
     `Increases TrueDEF by ${def} until the end of the turn.`,
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873014416506932/Basic_Defense_Magic.png?ex=67df98ad&is=67de472d&hm=79bab34bdef07e7fa529c5ac67ed093e7bfa2b69914f644ac434e4a564c47396&",
+    cardImageUrl: mediaLinks.serie_basicDefensiveMagic_image,
   },
   effects: [20],
   priority: 2,
@@ -179,8 +173,7 @@ export const unbreakableBarrier = new Card({
     `HP-2 at the end of the next 5 turns. ATK+${atk}, DEF+${def} and Opponent's SPD-${oppSpd} for 5 turns.`,
   emoji: CardEmoji.SERIE_CARD,
   cosmetic: {
-    cardImageUrl:
-      "https://cdn.discordapp.com/attachments/1351391350398128159/1352873016182177984/Unbreakable_Barrier.png?ex=67df98ae&is=67de472e&hm=ecaf6053851a3bb12e9d9b0ba65dc932f11a6e97c3efe3c4af20126fc8407ba3&",
+    cardImageUrl: mediaLinks.serie_unbreakableBarrier_image,
   },
   effects: [5, 5, 5],
   hpCost: 5,

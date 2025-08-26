@@ -6,6 +6,7 @@ import { CardEmoji } from "@tcg/formatting/emojis";
 import { TCGThread } from "@src/tcgChatInteractions/sendGameMessage";
 import { manaDetection } from "./LinieDeck";
 import { CharacterName } from "../characters/metadata/CharacterName";
+import mediaLinks from "@src/tcg/formatting/mediaLinks";
 
 export const a_fernZoltraak = new Card({
   title: "Zoltraak",
@@ -15,8 +16,7 @@ export const a_fernZoltraak = new Card({
   effects: [7],
   hpCost: 4,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364355690780557404/GIF_4110295150.gif?ex=680a0781&is=6808b601&hm=4aa279af5d5b3ae167099775570328a51c55d8572aac6369a9748565b950f8a1&",
+    cardGif: mediaLinks.fern_zoltraak_gif,
   },
   cardAction: function (
     this: Card,
@@ -48,7 +48,7 @@ export const a_fernBarrage = new Card({
   effects: [5],
   hpCost: 4,
   cosmetic: {
-    cardGif: "https://c.tenor.com/2RAJbNpiLI4AAAAd/tenor.gif",
+    cardGif: mediaLinks.fern_barrage_gif,
   },
   cardAction: function (
     this: Card,
@@ -133,8 +133,7 @@ const a_fernConcentratedZoltraakSnipe = new Card({
   effects: [7, 3],
   hpCost: 8,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364357151111385098/GIF_1619936813.gif?ex=6809601d&is=68080e9d&hm=d315925c27f678c96ed238bcc826abd1c209e5e1dae651b445b7fa4760e0cf09&",
+    cardGif: mediaLinks.fern_concentratedZoltraakSnipe_gif,
   },
   cardAction: function (
     this: Card,
@@ -171,7 +170,7 @@ const disapprovingPout = new Card({
   emoji: CardEmoji.FERN_CARD,
   effects: [3, 1, 2],
   cosmetic: {
-    cardGif: "https://c.tenor.com/V1ad9v260E8AAAAd/tenor.gif",
+    cardGif: mediaLinks.fern_disapproving_pout_gif,
   },
   cardAction: function (
     this: Card,
@@ -286,7 +285,7 @@ export const spellToCreateManaButterflies = new Card({
   description: ([hp, endHp]) =>
     `Heal ${hp} HP. At the next 4 turn ends, heal ${endHp} and gain 0.5 Barrage count.`,
   cosmetic: {
-    cardGif: "https://c.tenor.com/B93aR7oWJ4IAAAAC/tenor.gif",
+    cardGif: mediaLinks.fern_spellToCreateManaButterflies_gif,
   },
   emoji: CardEmoji.FERN_CARD,
   effects: [6, 2],
@@ -332,8 +331,7 @@ export const commonDefensiveMagic = new Card({
   effects: [20],
   priority: 2,
   cosmetic: {
-    cardGif:
-      "https://cdn.discordapp.com/attachments/1360969158623232300/1364255159529767005/GIF_2894655091.gif?ex=68090120&is=6807afa0&hm=e81b702e207fea882babeffd4b376e8db66a1afac7b19191892b3e6e29a9772c&",
+    cardGif: mediaLinks.fern_commonDefensiveMagic_gif,
   },
   cardAction: function (
     this: Card,

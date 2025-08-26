@@ -20,6 +20,7 @@ export const buildChallengeButtonRespond = async (
   gameSettings: GameSettings,
   ranked: boolean,
   textSpeedMs: number,
+  inviteLength: number,
   gameMode?: GameMode
 ) => {
   const containerOpts = {
@@ -28,6 +29,7 @@ export const buildChallengeButtonRespond = async (
     ranked,
     gameOptions: gameSettings,
     textSpeedMs,
+    inviteLength,
   };
 
   const container = buildChallengeRequest(containerOpts);
@@ -74,7 +76,7 @@ export const buildChallengeButtonRespond = async (
   if (response) {
     const collector = response.createMessageComponentCollector({
       max: 1,
-      time: 300_000, // 5 minutes
+      time: inviteLength * 60_000,
       filter: async (i) =>
         validateMatchButtonInteractions(i, challenger, opponent, ranked),
     });

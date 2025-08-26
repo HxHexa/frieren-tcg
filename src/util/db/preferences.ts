@@ -122,6 +122,40 @@ export async function updateTcgTextSpeed(
 }
 
 /**
+ * Updates the TCG invite length preference for a player.
+ * Creates a preferences record if one doesn't exist.
+ * @param playerId The ID of the player.
+ * @param length The new TCG invite length value.
+ * @returns The updated PlayerPreferences object.
+ */
+export async function updateTcgInviteLength(
+  playerId: number,
+  length: number
+): Promise<PlayerPreferences> {
+  try {
+    const updatedPreferences = await prismaClient.playerPreferences.upsert({
+      where: {
+        playerId: playerId,
+      },
+      update: {
+        tcgInviteLength: length,
+      },
+      create: {
+        playerId: playerId,
+        tcgInviteLength: length,
+      },
+    });
+    return updatedPreferences;
+  } catch (error) {
+    console.error(
+      `Error updating TCG invite length for player ${playerId}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+/**
  * Adds a character to a player's list of favourite characters.
  * Creates a preferences record if one doesn't exist.
  * @param playerId The ID of the player.

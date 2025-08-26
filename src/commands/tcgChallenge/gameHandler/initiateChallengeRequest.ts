@@ -5,6 +5,7 @@ import { buildChallengeButtonRespond } from "./utils/buildChallengeButtonRespond
 import config from "@src/config";
 import { getPlayerPreferences } from "@src/util/db/preferences";
 import { DEFAULT_TEXT_SPEED } from "@src/constants";
+import { DEFAULT_INVITE_LENGTH } from "@src/constants";
 import { getPlayer } from "@src/util/db/getPlayer";
 
 export async function initiateChallengeRequest(prop: {
@@ -12,9 +13,17 @@ export async function initiateChallengeRequest(prop: {
   gameSettings: GameSettings;
   ranked: boolean;
   textSpeedMs: number | null;
+  inviteLength: number | null;
   gamemode?: GameMode;
 }): Promise<void> {
-  const { interaction, gameSettings, ranked, gamemode, textSpeedMs } = prop;
+  const {
+    interaction,
+    gameSettings,
+    ranked,
+    gamemode,
+    textSpeedMs,
+    inviteLength,
+  } = prop;
   if (config.maintenance) {
     await interaction.reply({
       content:
@@ -39,6 +48,13 @@ export async function initiateChallengeRequest(prop: {
       : DEFAULT_TEXT_SPEED;
   }
 
+  let preferredInviteLength = inviteLength;
+  if (!preferredInviteLength) {
+    preferredInviteLength = playerPreferences
+      ? playerPreferences.tcgInviteLength
+      : DEFAULT_INVITE_LENGTH;
+  }
+
   await interaction.deferReply();
 
   const challenger = interaction.user;
@@ -55,6 +71,7 @@ export async function initiateChallengeRequest(prop: {
     gameSettings,
     ranked,
     preferredTextSpeed,
+    preferredInviteLength,
     gamemode
   );
 }

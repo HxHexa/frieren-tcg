@@ -9,6 +9,10 @@ export const MAX_TEXT_SPEED = 3000;
 export const DEFAULT_TEXT_SPEED = 1500;
 export const MIN_TEXT_SPEED = 100;
 
+export const MAX_INVITE_LENGTH = 15;
+export const DEFAULT_INVITE_LENGTH = 5;
+export const MIN_INVITE_LENGTH = 1;
+
 export const CHAR_OPTIONS = Object.entries(VISIBLE_CHARACTERS)
   .filter(([, character]) => character.additionalMetadata.hidden !== true)
   .map(([, character]) => ({

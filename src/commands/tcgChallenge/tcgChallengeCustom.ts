@@ -7,6 +7,7 @@ import {
 import type { Command } from "@src/types/command";
 import { initiateChallengeRequest } from "./gameHandler/initiateChallengeRequest";
 import { MAX_TEXT_SPEED, MIN_TEXT_SPEED } from "@src/constants";
+import { MAX_INVITE_LENGTH, MIN_INVITE_LENGTH } from "@src/constants";
 
 export const command: Command<ChatInputCommandInteraction> = {
   data: new SlashCommandBuilder()
@@ -46,6 +47,16 @@ export const command: Command<ChatInputCommandInteraction> = {
         .setMaxValue(MAX_TEXT_SPEED)
         .setRequired(false)
     )
+    .addIntegerOption((option) =>
+      option
+        .setName("invite_length_mins")
+        .setDescription(
+          "How long you want your challenge invite to last in minutes. Defaults to 5mins."
+        )
+        .setMinValue(MIN_INVITE_LENGTH)
+        .setMaxValue(MAX_INVITE_LENGTH)
+        .setRequired(false)
+    )
     .addBooleanOption((option) =>
       option
         .setName("goddess-mode")
@@ -77,6 +88,7 @@ export const command: Command<ChatInputCommandInteraction> = {
       const revealDraw =
         interaction.options.getBoolean("reveal-active-card") ?? false;
       const textSpeedMs = interaction.options.getInteger("text_speed_ms");
+      const inviteLength = interaction.options.getInteger("invite_length_mins");
       const goddessMode =
         interaction.options.getBoolean("goddess-mode") ?? false;
       const prescienceMode =
@@ -96,6 +108,7 @@ export const command: Command<ChatInputCommandInteraction> = {
         ranked: false,
         gamemode: undefined,
         textSpeedMs,
+        inviteLength,
       });
     } catch (error) {
       console.log(error);
