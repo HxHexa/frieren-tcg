@@ -76,7 +76,7 @@ export const buildChallengeButtonRespond = async (
   if (response) {
     const collector = response.createMessageComponentCollector({
       max: 1,
-      time: inviteLength * 60_000,
+      time: inviteLength * 60_000 - 1_000,
       filter: async (i) =>
         validateMatchButtonInteractions(i, challenger, opponent, ranked),
     });
