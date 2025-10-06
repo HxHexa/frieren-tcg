@@ -7,6 +7,7 @@ import Fern from "@characters/Fern";
 import Flamme from "@characters/Flamme";
 import Frieren from "@characters/Frieren";
 import Himmel from "@characters/Himmel";
+import KanneLawine from "@characters/KanneLawine";
 import Laufen from "@characters/Laufen";
 import Linie from "@characters/Linie";
 import Methode from "@characters/Methode";
@@ -26,6 +27,7 @@ export const CHARACTER_MAP: Record<CharacterName, CharacterData> = {
   [CharacterName.Flamme]: Flamme,
   [CharacterName.Frieren]: Frieren,
   [CharacterName.Himmel]: Himmel,
+  [CharacterName.KanneLawine]: KanneLawine,
   [CharacterName.Laufen]: Laufen,
   [CharacterName.Linie]: Linie,
   [CharacterName.Methode]: Methode,

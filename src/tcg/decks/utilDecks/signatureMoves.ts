@@ -26,6 +26,7 @@ export const signatureMoves: Record<CharacterName, Card> = {
   [CharacterName.Flamme]: incantationFieldOfFlowers,
   [CharacterName.Frieren]: a_theHeightOfMagic,
   [CharacterName.Himmel]: a_realHeroSwing,
+  [CharacterName.KanneLawine]: a_supersonicStrike,
   [CharacterName.Laufen]: a_supersonicStrike,
   [CharacterName.Linie]: imitate,
   [CharacterName.Methode]: reversePolarity,

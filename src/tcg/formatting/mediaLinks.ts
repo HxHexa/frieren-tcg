@@ -13,6 +13,8 @@ const characterPortraits = {
     "https://media.discordapp.net/attachments/1346555621952192522/1347399695521026109/Frieren_anime_portrait.webp?ex=67dcd2c0&is=67db8140&hm=0b5f32d66153c8b41d2817170b41b7562e6ef607e9efb1abc220fe5905b7bd77&=&format=webp&width=600&height=600",
   himmelPortrait:
     "https://static.wikia.nocookie.net/frieren/images/9/96/Himmel_anime_portrait.png/revision/latest?cb=20231017083515",
+  kanneLawineImage:
+    "https://cdn.discordapp.com/attachments/1051154628336681021/1424616313447256144/Screenshot202025-10-0620at2012.png?ex=68e498d5&is=68e34755&hm=bb50d51444375674c6e3e9cf98c7751daec78847b3b717e3ed6b19a14b687b77",
   laufenPortrait:
     "https://cdn.discordapp.com/attachments/1346555621952192522/1346694607467184179/Laufen_anime_portrait.webp?ex=67dce516&is=67db9396&hm=c8439cdb36a948bfa707b18d46177518aac79300021391b77791d2ba30985947&",
   liniePortrait:

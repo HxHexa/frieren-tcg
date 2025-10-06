@@ -6,6 +6,7 @@ export enum CharacterName {
   Flamme = "Flamme",
   Frieren = "Frieren",
   Himmel = "Himmel",
+  KanneLawine = "Kanne & Lawine",
   Laufen = "Laufen",
   Linie = "Linie",
   Methode = "Methode",
