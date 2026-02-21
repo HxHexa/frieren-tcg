@@ -8,6 +8,8 @@ type Config = {
   };
 
   logPrismaReqs?: boolean;
+
+  matchfindingPingId: string;
 };
 
 const config: Config = {
@@ -20,6 +22,8 @@ const config: Config = {
   },
 
   logPrismaReqs: true,
+
+  matchfindingPingId: "1359352321955336336",
 } satisfies Config;
 
 export default config;
