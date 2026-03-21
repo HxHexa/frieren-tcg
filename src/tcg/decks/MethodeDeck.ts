@@ -311,7 +311,7 @@ export const restraintMagic = new Card({
         priority: -2,
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: () => {
-          sendToGameroom(`${opponent.name} is free from ${name}'s retraint.`);
+          sendToGameroom(`${opponent.name} is free from ${name}'s restraint.`);
           opponentStat(0, StatsEnum.ATK);
           opponentStat(0, StatsEnum.DEF);
           opponentStat(0, StatsEnum.SPD);
@@ -327,7 +327,7 @@ export const restraintMagic = new Card({
         priority: -2,
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: () => {
-          sendToGameroom(`${name} cannot sustain the retraint magic.`);
+          sendToGameroom(`${name} cannot sustain the restraint magic.`);
           flatSelfStat(restraintMagicSelfDefDebuff, StatsEnum.DEF);
         },
       })

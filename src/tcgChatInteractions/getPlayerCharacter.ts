@@ -1,9 +1,9 @@
 import {
   ComponentType,
   EmbedBuilder,
+  GuildTextBasedChannel,
   MessageFlags,
   StringSelectMenuInteraction,
-  ThreadChannel,
   User,
 } from "discord.js";
 import { createCharacterDropdown } from "@src/util/createCharacterDropdown";
@@ -18,7 +18,7 @@ import { CharacterName } from "@tcg/characters/metadata/CharacterName";
 
 export const getPlayerCharacter = async (
   player: User,
-  playerThread: ThreadChannel<false>,
+  playerThread: GuildTextBasedChannel,
   bannedCharacters?: Set<CharacterName>
 ): Promise<{
   char: CharacterData;

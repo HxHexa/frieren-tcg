@@ -54,13 +54,13 @@ export const buildChallengeButtonRespond = async (
   const editReply = async (
     interaction: ChatInputCommandInteraction,
     statusMessage: string,
-    threadId?: string
+    channelId?: string
   ) => {
     const newContainer = buildChallengeRequest({
       ...containerOpts,
       statusMessage,
       includeButtons: false,
-      threadId,
+      channelId,
     });
     return await interaction.editReply({
       flags: MessageFlags.IsComponentsV2,

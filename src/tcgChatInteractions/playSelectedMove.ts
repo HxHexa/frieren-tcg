@@ -2,7 +2,7 @@ import {
   ActionRowBuilder,
   ComponentType,
   StringSelectMenuBuilder,
-  ThreadChannel,
+  GuildTextBasedChannel,
   User,
 } from "discord.js";
 import Character from "@tcg/character";
@@ -13,7 +13,7 @@ import { createCountdownTimestamp } from "@src/util/utils";
 // returns the card played
 export const playSelectedMove = async (
   player: User,
-  playerThread: ThreadChannel<false>,
+  playerThread: GuildTextBasedChannel,
   character: Character,
   playerPossibleMove: Record<string, Card>,
   turnDurationSeconds: number

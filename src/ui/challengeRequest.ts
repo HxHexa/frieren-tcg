@@ -18,7 +18,7 @@ export type ChallengeRequestOptions = {
   textSpeedMs: number;
   statusMessage?: string;
   includeButtons?: boolean;
-  threadId?: string;
+  channelId?: string;
   showBanCount?: boolean;
 };
 
@@ -34,7 +34,7 @@ export default function buildChallengeRequest({
   requesterId,
   opponentId,
   includeButtons = true,
-  threadId,
+  channelId,
   showBanCount = false,
 }: ChallengeRequestOptions) {
   const {
@@ -97,7 +97,7 @@ export default function buildChallengeRequest({
     .addSeparatorComponents(new SeparatorBuilder().setDivider(true))
     .setAccentColor(0xffffff);
 
-  if (threadId) {
+  if (channelId) {
     container.addSectionComponents(
       new SectionBuilder()
         .addTextDisplayComponents(optsDisplay)
@@ -105,7 +105,7 @@ export default function buildChallengeRequest({
           new ButtonBuilder()
             .setStyle(ButtonStyle.Link)
             .setLabel("Thread")
-            .setURL(buildThreadLink(threadId))
+            .setURL(buildThreadLink(channelId))
         )
     );
   } else {

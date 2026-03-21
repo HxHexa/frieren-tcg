@@ -11,9 +11,8 @@ import {
 import { StatsEnum } from "@tcg/stats";
 import TimedEffect from "@tcg/timedEffect";
 import {
-  PrivateThreadChannel,
+	GuildTextBasedChannel,
   PublicThreadChannel,
-  ThreadChannel,
   User,
 } from "discord.js";
 import { GameSettings } from "./commands/tcgChallenge/gameHandler/gameSettings";
@@ -61,8 +60,8 @@ export const tcgMain = async (
   challenger: User,
   opponent: User,
   gameThread: PublicThreadChannel<false>,
-  challengerThread: PrivateThreadChannel | PublicThreadChannel<false>,
-  opponentThread: ThreadChannel<false>,
+  challengerThread: GuildTextBasedChannel,
+  opponentThread: GuildTextBasedChannel,
   gameSettings: GameSettings,
   textSpeedMs: number
 ): Promise<TCGResult> => {

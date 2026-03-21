@@ -104,6 +104,7 @@ const Sense = new CharacterData({
   },
   additionalMetadata: {
     senseTeaTimeStacks: 0,
+    methodeFindsCute: true,
   },
 });
 

@@ -17,10 +17,12 @@ import {
 } from "./handleDatabaseOperations";
 import buildBattleResults from "@src/ui/battleResults";
 import sendMoveThreadMessage from "./utils/sendMoveThreadMessage";
+import config from "@/src/config";
+import { isGuildBasedChannel } from "@sapphire/discord.js-utilities";
 
 export const initiateGame = async (
   interaction: ChatInputCommandInteraction,
-  addThreadFunc: (threadId?: string | undefined) => Promise<Message<boolean>>,
+  addThreadFunc: (channelId?: string | undefined) => Promise<Message<boolean>>,
   gameId: string,
   challenger: User,
   opponent: User,
@@ -68,22 +70,31 @@ export const initiateGame = async (
         }
       })();
 
-	  const publicThread = gameSettings.pollCards;
+      const publicThread = gameSettings.pollCards;
 
-      const [challengerThread, opponentThread] = await Promise.all([
-        buildThread(
-          channel,
-          challenger,
-          gameId,
-		  publicThread,
-        ),
-        buildThread(
-          channel,
-          opponent,
-          gameId,
-          publicThread ?? gameSettings.publicChallengedThread
-        ),
-      ]);
+      const [challengerThread, opponentThread] = gameSettings.pollCards
+        ? await Promise.all([
+            interaction.client.channels.fetch(
+              config.teamVote.challengerChannel
+            ),
+            interaction.client.channels.fetch(config.teamVote.opponentChannel),
+          ])
+        : await Promise.all([
+            buildThread(channel, challenger, gameId, publicThread),
+            buildThread(
+              channel,
+              opponent,
+              gameId,
+              publicThread ?? gameSettings.publicChallengedThread
+            ),
+          ]);
+
+      if (
+        !isGuildBasedChannel(challengerThread) ||
+        !isGuildBasedChannel(opponentThread)
+      ) {
+        throw new Error("Failed to create or fetch move selection threads.");
+      }
 
       sendMoveThreadMessage(gameThread, challenger, challengerThread);
       sendMoveThreadMessage(gameThread, opponent, opponentThread);
@@ -100,16 +111,18 @@ export const initiateGame = async (
 
       const { winner, loser, winnerCharacter, loserCharacter } = gameRes;
 
-      // thread cleanup
-      await Promise.all([
-        gameThread.setArchived(true, "Game completed."),
-        gameThread.members.remove(challenger.id),
-        gameThread.members.remove(opponent.id),
-        challengerThread.setArchived(true, "Game completed."),
-        challengerThread.members.remove(challenger.id),
-        opponentThread.setArchived(true, "Game completed."),
-        opponentThread.members.remove(opponent.id),
-      ]);
+      if (challengerThread.isThread() && opponentThread.isThread()) {
+        // thread cleanup
+        await Promise.all([
+          gameThread.setArchived(true, "Game completed."),
+          gameThread.members.remove(challenger.id),
+          gameThread.members.remove(opponent.id),
+          challengerThread.setArchived(true, "Game completed."),
+          challengerThread.members.remove(challenger.id),
+          opponentThread.setArchived(true, "Game completed."),
+          opponentThread.members.remove(opponent.id),
+        ]);
+      }
 
       let dbRes: DatabaseOperationResult | null = null;
 

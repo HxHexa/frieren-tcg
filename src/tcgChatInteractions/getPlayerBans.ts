@@ -9,10 +9,10 @@ import {
   ButtonStyle,
   ComponentType,
   EmbedBuilder,
+  GuildTextBasedChannel,
   MessageFlags,
   StringSelectMenuBuilder,
   StringSelectMenuInteraction,
-  ThreadChannel,
   User,
 } from "discord.js";
 
@@ -20,7 +20,7 @@ const BAN_TIME_LIMIT_SECONDS = 60;
 
 export const getPlayerBans = async (
   player: User,
-  playerThread: ThreadChannel<false>,
+  playerThread: GuildTextBasedChannel,
   banCount: number
 ): Promise<CharacterName[]> => {
   if (banCount <= 0) {

@@ -1,4 +1,4 @@
-import { ThreadChannel } from "discord.js";
+import { ThreadChannel, GuildTextBasedChannel } from "discord.js";
 
 export enum TCGThread {
   Gameroom = "gameroom",
@@ -7,7 +7,7 @@ export enum TCGThread {
 }
 
 export type TCGThreads = {
-  [key in TCGThread]: ThreadChannel;
+  [key in TCGThread]: GuildTextBasedChannel | ThreadChannel;
 };
 
 /**
@@ -26,7 +26,7 @@ export async function sendToThread(
 ): Promise<boolean> {
   const targetThread = threadsMapping[thread];
 
-  if (targetThread && targetThread instanceof ThreadChannel) {
+  if (targetThread) {
     for (const message of messages) {
       // send message
       await targetThread.send(message);

@@ -6,17 +6,17 @@ import {
   TextDisplayBuilder,
   ButtonBuilder,
   ButtonStyle,
-  ThreadChannel,
   User,
   MessageFlags,
+  GuildTextBasedChannel,
 } from "discord.js";
 
 const sendMoveThreadMessage = (
-  thread: ThreadChannel,
+  channel: GuildTextBasedChannel,
   user: User,
-  selectionThread: ThreadChannel
+  selectionThread: GuildTextBasedChannel
 ) => {
-  thread.send({
+  channel.send({
     components: [
       new ContainerBuilder().addSectionComponents(
         new SectionBuilder()
