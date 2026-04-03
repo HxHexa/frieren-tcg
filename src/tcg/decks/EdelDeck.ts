@@ -172,6 +172,7 @@ export const mental_fog = new Card({
         turnDuration: 6,
         metadata: { mentalFog: true },
         activateEndOfTurnActionThisTurn: false,
+		executeEndOfTimedEffectActionOnRemoval: true,
         executeAfterCardRolls: ({ game, selfIndex }) => {
           const highestEmpoweredCard = getHighestEmpowerFromCurrentDraws(
             game,
