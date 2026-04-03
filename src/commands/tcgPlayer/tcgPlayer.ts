@@ -7,7 +7,9 @@ import {
 import type { Command } from "@src/types/command";
 import handlePlayerProfile from "./playerHandlers/profileHandler";
 import handleMatchHistory from "./playerHandlers/matchHandler";
+import { handleVsCharacter } from "./playerHandlers/vsCharactersHandler";
 import { handleVsRecord } from "./playerHandlers/handleVsRecord";
+import { CHAR_OPTIONS } from "@src/constants";
 import seasonAutocomplete, {
   seasonOption,
 } from "../tcgStats/statsHandlers/seasonAutocomplete";
@@ -73,6 +75,35 @@ export const command: Command<ChatInputCommandInteraction> = {
             )
         )
         .addIntegerOption(seasonOption)
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("vs-character-record")
+        .setDescription("Get a player's record against a character")
+        .addUserOption((option) =>
+          option
+            .setName("player")
+            .setDescription(
+              "The player whose vs record you want to see, defaults to yourself"
+            )
+        )
+        .addStringOption((option) =>
+          option
+            .setName("player-character")
+            .setDescription(
+              "Select the character to get stats for, defaults to an overview."
+            )
+            .addChoices(CHAR_OPTIONS)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("opponent-character")
+            .setDescription(
+              "Select the character to get stats against, defaults to an overview."
+            )
+            .addChoices(CHAR_OPTIONS)
+        )
+        .addIntegerOption(seasonOption)
     ),
 
   async execute(interaction: ChatInputCommandInteraction) {
@@ -98,6 +129,11 @@ export const command: Command<ChatInputCommandInteraction> = {
         case "vs-record":
           {
             await handleVsRecord(interaction);
+          }
+          break;
+        case "vs-character-record":
+          {
+            await handleVsCharacter(interaction);
           }
           break;
       }
