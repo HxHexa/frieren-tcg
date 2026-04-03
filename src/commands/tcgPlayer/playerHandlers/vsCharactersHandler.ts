@@ -2,6 +2,8 @@ import { ChatInputCommandInteraction } from "discord.js";
 import { formatMatchHistoryPages } from "./formatMatchHistoryPages";
 import { getWinrate } from "@src/util/utils";
 import { getMatchHistoryAgainstCharacter } from "@src/util/db/getMatchHistory";
+import handleVsCharacterRecordOverview from "./handleVsCharacterOverview";
+import querySeason from "@src/util/db/querySeason";
 import { charWithEmoji } from "@tcg/formatting/emojis";
 import { CharacterName } from "@tcg/characters/metadata/CharacterName";
 
@@ -9,21 +11,30 @@ export async function handleVsCharacter(
   interaction: ChatInputCommandInteraction
 ) {
   const player = interaction.options.getUser("player") ?? interaction.user;
-  const playerCharacter: CharacterName =
-    (interaction.options.getString("character") as CharacterName) ??
-    CharacterName.Frieren;
-  const oppCharacter: CharacterName =
-    (interaction.options.getString("character") as CharacterName) ??
-    CharacterName.Frieren;
+  const playerCharacter = interaction.options.getString("player-character");
+  const oppCharacter = interaction.options.getString("opponent-character");
+  const seasonId = interaction.options.getInteger("season");
+  const seasonQuery = seasonId ? await querySeason(seasonId) : null;
+
+  if (!oppCharacter) {
+    return handleVsCharacterRecordOverview(
+      player,
+      playerCharacter,
+      interaction,
+      seasonQuery
+    );
+  }
+
   const vsCharacterMatches = await getMatchHistoryAgainstCharacter(
     player.id,
     playerCharacter,
-    oppCharacter
+    oppCharacter,
+    seasonQuery
   );
 
   if (vsCharacterMatches.length === 0) {
     await interaction.editReply({
-      content: `There are no records of ${player.id} against ${oppCharacter} in the current ladder.`,
+      content: `There are no records of this matchup in the selected ladder.`,
     });
     return;
   }
