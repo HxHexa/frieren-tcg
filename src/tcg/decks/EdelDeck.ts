@@ -172,7 +172,7 @@ export const mental_fog = new Card({
         turnDuration: 6,
         metadata: { mentalFog: true },
         activateEndOfTurnActionThisTurn: false,
-		executeEndOfTimedEffectActionOnRemoval: true,
+        executeEndOfTimedEffectActionOnRemoval: true,
         executeAfterCardRolls: ({ game, selfIndex }) => {
           const highestEmpoweredCard = getHighestEmpowerFromCurrentDraws(
             game,
@@ -208,7 +208,7 @@ export const clear_mind = new Card({
   emoji: CardEmoji.EDEL_CARD,
   description: ([hp, spd]) =>
     `Heal ${hp} + Forced Discard x 2 HP. SPD+${spd}. Reset your Eye Contact count to 0.`,
-  effects: [10, 2],
+  effects: [5, 2],
   cosmetic: {
     cardGif: mediaLinks.edel_clear_mind_gif,
   },

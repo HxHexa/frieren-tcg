@@ -253,7 +253,6 @@ const immortalWall = new Card({
           sendToGameroom("The army falls apart.");
           flatSelfStat(def, StatsEnum.DEF, -1);
           self.additionalMetadata.auraCounterAttacksDamage.shift();
-          
         },
       })
     );

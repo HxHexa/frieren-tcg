@@ -31,10 +31,14 @@ export const command: Command<ChatInputCommandInteraction> = {
       !interaction.member.roles.cache.has(config.matchfindingPingId)
     ) {
       await interaction.member.roles.add(config.matchfindingPingId);
-	  await interaction.editReply(`Added the <@&${config.matchfindingPingId}> role! Run the command again to remove it.`);
+      await interaction.editReply(
+        `Added the <@&${config.matchfindingPingId}> role! Run the command again to remove it.`
+      );
     } else {
       await interaction.member.roles.remove(config.matchfindingPingId);
-      await interaction.editReply(`Removed the <@&${config.matchfindingPingId}> role`);
+      await interaction.editReply(
+        `Removed the <@&${config.matchfindingPingId}> role`
+      );
     }
   },
 };

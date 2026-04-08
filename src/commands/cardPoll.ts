@@ -2,7 +2,7 @@ import {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
   ThreadChannel,
-  SendableChannels
+  SendableChannels,
 } from "discord.js";
 import type { Command } from "@src/types/command";
 import { CardEmoji } from "@tcg/formatting/emojis";
@@ -20,10 +20,10 @@ export const command: Command<ChatInputCommandInteraction> = {
         .setRequired(true)
     ),
   async execute(interaction: ChatInputCommandInteraction) {
-	if (!interaction.channel?.isSendable()) return;
+    if (!interaction.channel?.isSendable()) return;
     const cardInput = interaction.options.getString("cards", true);
     const cards = parseCardInput(cardInput);
-	await sendCardPoll(interaction.channel, cards);
+    await sendCardPoll(interaction.channel, cards);
   },
 };
 

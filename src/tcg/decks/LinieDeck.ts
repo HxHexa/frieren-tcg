@@ -160,7 +160,7 @@ export const a_erfassenJavelin = new Card({
   description: ([dmg]) => `DMG ${dmg}. Deal ${dmg} at the end of next turn.`,
   emoji: CardEmoji.LINIE_CARD,
   cardMetadata: { nature: Nature.Attack },
-  effects: [5],
+  effects: [6],
   hpCost: 3,
   cosmetic: {
     cardGif: mediaLinks.linie_erfassenJavelin_gif,
@@ -193,8 +193,8 @@ export const a_erfassenJavelin = new Card({
 
 export const a_erfassenSword = new Card({
   title: "Erfassen: Sword",
-  cardMetadata: { nature: Nature.Attack },
-  description: ([dmg]) => `DMG ${dmg}`,
+  cardMetadata: { nature: Nature.Attack, chain: 1 },
+  description: ([dmg]) => `DMG ${dmg}. Gain 1 Chain stack.`,
   emoji: CardEmoji.LINIE_CARD,
   effects: [8],
   hpCost: 2,
@@ -216,7 +216,7 @@ export const a_erfassenKnife = new Card({
   cosmetic: {
     cardGif: mediaLinks.linie_erfassenKnife_gif,
   },
-  effects: [2],
+  effects: [3],
   hpCost: 1,
   cardAction: ({
     name,
