@@ -114,7 +114,11 @@ export const command: Command<ChatInputCommandInteraction> = {
         interaction.options.getBoolean("prescience-mode") ?? false;
       const liteMode = interaction.options.getBoolean("lite-mode") ?? undefined;
       const banCount = interaction.options.getInteger("bans", true);
-	  const pollCards = interaction.options.getBoolean("poll-cards") && interaction.user.id === "1206295979918106705" ? true : false;
+      const pollCards =
+        interaction.options.getBoolean("poll-cards") &&
+        interaction.user.id === "1206295979918106705"
+          ? true
+          : false;
 
       initiateChallengeRequest({
         interaction,
@@ -126,7 +130,7 @@ export const command: Command<ChatInputCommandInteraction> = {
           prescienceMode,
           liteMode,
           banCount,
-		  pollCards,
+          pollCards,
         },
         ranked: false,
         gamemode: undefined,

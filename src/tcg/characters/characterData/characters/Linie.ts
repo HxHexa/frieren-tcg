@@ -41,6 +41,17 @@ const Linie = new CharacterData({
       game.additionalMetadata.attackModifier[characterIndex] =
         1 + character.stats.stats[StatsEnum.Ability] * LINIE_CHAIN_BONUS;
     },
+    abilityAfterOwnCardUse: function (
+      game,
+      characterIndex,
+      _messageCache,
+      card
+    ) {
+      const character = game.getCharacter(characterIndex);
+      if (card.cardMetadata.chain) {
+        character.adjustStat(card.cardMetadata.chain, StatsEnum.Ability, game);
+      }
+    },
     abilityEndOfTurnEffect: (
       game,
       characterIndex,

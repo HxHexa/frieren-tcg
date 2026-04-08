@@ -54,6 +54,8 @@ type CardMetadata = {
   edelEyeContact?: number;
 
   armyStrength?: number;
+
+  chain?: number;
 };
 
 export type CardProps = {

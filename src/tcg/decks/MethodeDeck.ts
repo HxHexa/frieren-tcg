@@ -11,7 +11,7 @@ export const a_scatterShot = new Card({
   cardMetadata: { nature: Nature.Attack },
   emoji: CardEmoji.METHODE_CARD,
   cosmetic: {
-	cardGif: mediaLinks.methode_scatterShot_gif,
+    cardGif: mediaLinks.methode_scatterShot_gif,
   },
   description: ([dmg]) =>
     `${dmg} DMG. Deal DMG ${dmg} x2 at the end of next turn`,
@@ -283,7 +283,7 @@ export const restraintMagic = new Card({
     cardGif: mediaLinks.methode_restraintMagic_gif,
   },
   description: ([debuff]) =>
-    `Your DEF-${restraintMagicSelfDefDebuff} for the next 4 turns. Opp's ATK-${debuff}, DEF-${debuff}, SPD-${debuff} for the next 4 turns.`,
+    `Your DEF-${restraintMagicSelfDefDebuff} for 3 turns. Opp's ATK-${debuff}, DEF-${debuff}, SPD-${debuff} for the next 3 turns.`,
   effects: [4],
   priority: 1,
   cardAction: ({
@@ -307,7 +307,7 @@ export const restraintMagic = new Card({
       new TimedEffect({
         name: "Restrained",
         description: `ATK-${restraint}, DEF-${restraint}, SPD-${restraint}.`,
-        turnDuration: 4,
+        turnDuration: 3,
         priority: -2,
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: () => {
@@ -323,7 +323,7 @@ export const restraintMagic = new Card({
       new TimedEffect({
         name: "Restraint Magic",
         description: `DEF-${restraintMagicSelfDefDebuff}`,
-        turnDuration: 4,
+        turnDuration: 3,
         priority: -2,
         executeEndOfTimedEffectActionOnRemoval: true,
         endOfTimedEffectAction: () => {
@@ -343,7 +343,7 @@ export const hypnoticCompulsion = new Card({
     cardGif: mediaLinks.methode_hypnoticCompulsion_gif,
   },
   description: ([atkDebuff]) =>
-    `Opponent's ATK-${atkDebuff}. Your opponent can only use the move they used last turn in the next turn at Priority-2.`,
+    `Opponent's ATK-${atkDebuff}. Your opponent can only use the move they used last turn in the next turn at Priority-1.`,
   effects: [2],
   cardAction: ({
     name,
@@ -361,12 +361,12 @@ export const hypnoticCompulsion = new Card({
     if (opponentLastCard) {
       opponent.additionalMetadata.nextCardToPlay = new Card({
         ...opponentLastCard,
-        priority: -2,
+        priority: -1,
       });
     } else {
       opponent.additionalMetadata.nextCardToPlay = new Card({
         ...DefaultCards.waitCard,
-        priority: -2,
+        priority: -1,
       });
     }
 

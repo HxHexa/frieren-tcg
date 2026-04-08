@@ -10,11 +10,7 @@ import {
 } from "@tcg/gameContextProvider";
 import { StatsEnum } from "@tcg/stats";
 import TimedEffect from "@tcg/timedEffect";
-import {
-	GuildTextBasedChannel,
-  PublicThreadChannel,
-  User,
-} from "discord.js";
+import { GuildTextBasedChannel, PublicThreadChannel, User } from "discord.js";
 import { GameSettings } from "./commands/tcgChallenge/gameHandler/gameSettings";
 import { FlammeResearch } from "./tcg/additionalMetadata/gameAdditionalMetadata";
 import { getPlayerBans } from "./tcgChatInteractions/getPlayerBans";

@@ -206,7 +206,7 @@ export const a_theHeightOfMagicBase = new Card({
       return;
     }
 
-	self.setStat(1, StatsEnum.HP);
+    self.setStat(1, StatsEnum.HP);
 
     sendToGameroom("The Height of Magic is on display.");
     basicAttack(0);
