@@ -194,7 +194,7 @@ export const a_erfassenJavelin = new Card({
 export const a_erfassenSword = new Card({
   title: "Erfassen: Sword",
   cardMetadata: { nature: Nature.Attack, chain: 1 },
-  description: ([dmg]) => `DMG ${dmg}. Gain 1 Chain stack.`,
+  description: ([dmg]) => `DMG ${dmg}. Gain a bonus Chain stack.`,
   emoji: CardEmoji.LINIE_CARD,
   effects: [8],
   hpCost: 2,

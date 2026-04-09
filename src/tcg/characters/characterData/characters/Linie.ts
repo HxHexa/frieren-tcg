@@ -68,8 +68,7 @@ const Linie = new CharacterData({
           messageCache.push("Linie continued her chain", TCGThread.Gameroom);
         }
         character.adjustStat(1, StatsEnum.Ability, game);
-        character.additionalMetadata.linieEmptyTurnCount ??=
-          LINIE_CHAIN_RESET_TURN_COUNT;
+        character.additionalMetadata.linieEmptyTurnCount = LINIE_CHAIN_RESET_TURN_COUNT;
       } else {
         character.additionalMetadata.linieEmptyTurnCount ??=
           LINIE_CHAIN_RESET_TURN_COUNT;
