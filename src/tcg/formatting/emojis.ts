@@ -46,7 +46,7 @@ export enum CharacterEmoji {
   SENSE = "<:SenseStare:1204637493077610546>",
   SERIE = "<:SerieHowCute:1357814502023758205>",
   STARK = "<:StarkPoint:1165025263747342386>",
-  STILLE = "<:StilleStare:1495953748235649044>",
+  STILLE = "<:StilleStare:1495954510521040986>",
   UBEL = "<:UbelSnipsnip:1140592823243112468>",
   WIRBEL = "<:WirbelSmug:1208067233411240068>",
 
