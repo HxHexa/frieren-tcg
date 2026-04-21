@@ -120,9 +120,11 @@ const polymath = new Card({
     selfStat(0, StatsEnum.DEF);
     selfStat(0, StatsEnum.SPD);
 
-    for (let i = 0; i < self.hand.length; i++) {
+    const redrawCount = self.hand.length - 1;
+
+    for (let i = 0; i < redrawCount; i++) {
       self.discardCard(0);
-      self.drawCard();
+	  self.drawCard();
     }
 
     self.additionalMetadata.rollsCount += 1;
