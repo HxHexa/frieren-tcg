@@ -165,6 +165,8 @@ export const mental_fog = new Card({
 
     const cost = calcEffect(1);
 
+    let mentalFogAffectedCard: Card | null = null;
+
     opponent.timedEffects.push(
       new TimedEffect({
         name: "Mental Fog",
@@ -180,15 +182,13 @@ export const mental_fog = new Card({
           );
           if (highestEmpoweredCard) {
             highestEmpoweredCard.hpCost += cost;
+            mentalFogAffectedCard = highestEmpoweredCard;
           }
         },
-        endOfTurnAction: (game, characterIndex) => {
-          const highestEmpoweredCard = getHighestEmpowerFromCurrentDraws(
-            game,
-            characterIndex
-          );
-          if (highestEmpoweredCard) {
-            highestEmpoweredCard.hpCost -= cost;
+        endOfTurnAction: (_game, _characterIndex) => {
+          if (mentalFogAffectedCard) {
+            mentalFogAffectedCard.hpCost -= cost;
+            mentalFogAffectedCard = null;
           }
         },
         endOfTimedEffectAction: (game, _characterIndex) => {
