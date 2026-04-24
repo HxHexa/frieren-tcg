@@ -283,7 +283,7 @@ export const spellToCreateManaButterflies = new Card({
     cardGif: mediaLinks.fern_spellToCreateManaButterflies_gif,
   },
   emoji: CardEmoji.FERN_CARD,
-  effects: [6, 2],
+  effects: [4, 2],
   cardAction: function (
     this: Card,
     { self, name, sendToGameroom, selfStat, calcEffect, flatSelfStat }
