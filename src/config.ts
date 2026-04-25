@@ -33,8 +33,8 @@ const config: Config = {
   matchfindingPingId: "1359352321955336336",
 
   teamVote: {
-    challengerChannel: env_dev ? "1344400530314629170" : "1482775274499346522",
-    opponentChannel: env_dev ? "1344400506658881566" : "1482775131859452046",
+    challengerChannel: env_dev ? "1344400530314629170" : "1482775131859452046",
+    opponentChannel: env_dev ? "1344400506658881566" : "1482775274499346522",
   },
 };
 
