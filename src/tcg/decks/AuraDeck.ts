@@ -393,7 +393,7 @@ export const auserlese = new Card({
 
     const roll = Rolls.rollD100();
     const hpDiff = opponentStats.HP - selfStats.HP;
-    sendToGameroom(`## **HP diff**: ${hpDiff}`);
+    sendToGameroom(`## **HP diff**: ${hpDiff.toFixed(1)}`);
     sendToGameroom(`# Roll: ${roll}`);
 
     if (roll > hpDiff) {
@@ -422,7 +422,7 @@ export const auserlese = new Card({
           // end of turn
           sendToGameroom(`The scale measures the oppositions' mana...`);
           const hpDiffAfter = opponentStats.HP - selfStats.HP;
-          sendToGameroom(`## **HP diff**: ${hpDiffAfter}`);
+          sendToGameroom(`## **HP diff**: ${hpDiffAfter.toFixed(1)}`);
 
           if (hpDiffAfter <= -50) {
             if (!game.gameSettings.liteMode) {
