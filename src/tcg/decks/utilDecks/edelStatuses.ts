@@ -26,7 +26,10 @@ export const sleepy = new Card({
   },
 });
 
-const getMesmerizedEffectDescription = (hp: number) => `Your opponent heals ${hp}HP and you lose ${hp}HP at each turn's end.`;
+const getMesmerizedEffectDescription = (hp: number) => {
+	const rounded = hp.toFixed(1);
+	return `At each turn's end, lose ${rounded}HP and your opponent heals ${rounded}HP. This card cannot be removed from your deck.`;
+}
 
 export const mesmerized = new Card({
   title: "Mesmerized",
