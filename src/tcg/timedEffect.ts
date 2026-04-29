@@ -46,6 +46,7 @@ type TimedEffectMetadata = {
 
   manaConcealment?: boolean;
   mentalFog?: boolean;
+  mesmerizedAmount?: number;
   hypnoticCompulsion?: boolean;
   treeOfLife?: boolean;
 };
