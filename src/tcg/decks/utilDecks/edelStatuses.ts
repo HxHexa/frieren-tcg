@@ -27,7 +27,7 @@ export const sleepy = new Card({
 });
 
 const getMesmerizedEffectDescription = (hp: number) => {
-	const rounded = Math.round(hp * 10) / 10;
+	const rounded = hp.toFixed(1);
 	return `At each turn's end, lose ${rounded}HP and your opponent heals ${rounded}HP. This card cannot be removed from your deck.`;
 }
 
