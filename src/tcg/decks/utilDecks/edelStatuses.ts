@@ -26,6 +26,8 @@ export const sleepy = new Card({
   },
 });
 
+const getMesmerizedEffectDescription = (hp: number) => `Your opponent heals ${hp}HP and you lose ${hp}HP at each turn's end.`;
+
 export const mesmerized = new Card({
   title: "Mesmerized",
   cardMetadata: { nature: Nature.Status, temporary: true },
@@ -53,18 +55,28 @@ export const mesmerized = new Card({
       ` This card cannot be removed from your deck. If it's not played, until the end of the game, at each turn's end, lose ${hp}HP, your opponent heals ${hp}HP.`;
 
     const hp = calcEffect(0);
+
+    const existing = self.timedEffects.find(effect => effect.metadata?.mesmerizedAmount);
+    if (existing && existing.metadata?.mesmerizedAmount) {
+      existing.metadata.mesmerizedAmount += hp;
+      existing.description = getMesmerizedEffectDescription(existing.metadata.mesmerizedAmount);
+      return;
+    }
+
     self.timedEffects.push(
       new TimedEffect({
         name: "Mesmerized",
-        description: `Your opponent heals ${hp}HP and you lose ${hp}HP at each turn's end.`,
+        description: getMesmerizedEffectDescription(hp),
         turnDuration: game.turnCount + 1,
-        metadata: { removableBySorganeil: false },
+        metadata: { removableBySorganeil: false, mesmerizedAmount: hp },
         endOfTurnAction: function (this, game, characterIndex, _messageCache) {
+          const amount = this.metadata?.mesmerizedAmount;
+          if (!amount) return;
           const character = game.getCharacter(characterIndex);
           const opponent = game.getCharacter(1 - characterIndex);
 
-          opponent.adjustStat(hp, StatsEnum.HP, game);
-          character.adjustStat(-hp, StatsEnum.HP, game);
+          opponent.adjustStat(amount, StatsEnum.HP, game);
+          character.adjustStat(-amount, StatsEnum.HP, game);
 
           this.turnDuration = game.turnCount + 1;
         },
