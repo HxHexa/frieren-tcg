@@ -66,7 +66,7 @@ const Stille = new CharacterData({
 
       const roll = Rolls.rollD100();
       const spdDiff = character.stats.stats.SPD - opponent.stats.stats.SPD;
-      messageCache.push(`## **SPD diff**: ${spdDiff}`, TCGThread.Gameroom);
+      messageCache.push(`## **SPD diff**: ${spdDiff.toFixed(1)}`, TCGThread.Gameroom);
       messageCache.push(`# Roll: ${roll}`, TCGThread.Gameroom);
 
       if (roll < spdDiff) {
